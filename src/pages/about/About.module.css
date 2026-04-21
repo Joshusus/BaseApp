@@ -1,0 +1,28 @@
+@reference "tailwindcss";
+
+.tabsList {
+  @apply w-[50vw] flex flex-row gap-2 justify-evenly mx-auto p-3;
+}
+
+.fullRow {
+  @apply w-full flex justify-center my-3;
+}
+
+.largeRow {
+  @apply w-[75%] mx-auto flex justify-center my-3;
+}
+
+.profilePic {
+  @apply size-48 rounded-lg;
+}
+
+.bigPanel {
+  @apply w-full h-48;
+}
+
+.tabOfTabs {
+  @apply flex flex-row gap-2;
+}
+.compactTabsList {
+  @apply flex flex-row gap-2 justify-evenly p-3 m-4;
+}

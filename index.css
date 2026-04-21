@@ -1,0 +1,24 @@
+@import "tailwindcss";
+/* 
+TODO only defines it as a variable, won't let you use TW properties in normal style
+EG "text-primary" will not work. You will need to do text-[var(--primary)] 
+TW4 suggests this notation, but I couldnt get it to work with @theme utilities
+@theme {
+  --color-primary: #777722;
+}
+*/
+
+:root {
+  --primary: #BB0000;
+  --primaryDark: #990000;
+  --background: #FFFFFF;
+  --background-200: #DDDDDD;
+}
+
+#root {
+  @apply flex w-full h-full justify-center overflow-hidden;
+}
+
+html {
+  @apply bg-gray-400;
+}

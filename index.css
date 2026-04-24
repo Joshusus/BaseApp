@@ -11,8 +11,8 @@ TW4 suggests this notation, but I couldnt get it to work with @theme utilities
 :root {
   --primary: #BB0000;
   --primaryDark: #990000;
-  --background: #FFFFFF;
-  --background-200: #DDDDDD;
+  --background: #AAAABB;
+  --background-200: #DDDDEE;
 }
 
 #root {

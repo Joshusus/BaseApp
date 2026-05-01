@@ -4,8 +4,9 @@ import styles from './About.module.css';
 import Button from '~/components/button/Button';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Parallax } from 'react-parallax';
+import { Background, Parallax } from 'react-parallax';
 import PageContent from '~/components/pageContent/PageContent';
+import PortfolioImage from '~/integrations/components/PortfolioImage';
 
 export default function About() {
   document.title = 'About';
@@ -18,7 +19,18 @@ export default function About() {
       <div> {t('About.ExampleDisclaimer')}</div>
 
       <div className={styles.fullRow}>
-        <img className={styles.profilePic} src='./photos/ProfilePic.png' />
+        <PortfolioImage publicId='Goggins.webp' className={styles.profilePic} />
+      </div>
+
+      <div className={styles.fullRow}>
+        <Parallax blur={0} strength={300} className={styles.profilePic}>
+          <Background className={styles.customParallaxBg}>
+            <PortfolioImage
+              publicId='Goggins.webp'
+              className={styles.profilePic}
+            />
+          </Background>
+        </Parallax>
       </div>
 
       <div className={styles.fullRow}>

@@ -83,3 +83,10 @@ This template comes with [Tailwind CSS](https://tailwindcss.com/) already config
 ---
 
 Built with ❤️ using React Router.
+
+
+---
+
+
+- Cloudinary Integration for images
+- React Parallax for.. well what do you think?

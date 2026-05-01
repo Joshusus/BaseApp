@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+.testImage {
+  @apply size-[50%] mx-auto;
+}

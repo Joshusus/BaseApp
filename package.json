@@ -7,6 +7,8 @@
     "dev": "vite"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.14.4",
+    "@cloudinary/url-gen": "^1.22.0",
     "@react-router/node": "7.12.0",
     "@react-router/serve": "7.12.0",
     "@vitejs/plugin-react": "^5.1.4",

@@ -23,6 +23,13 @@
 .tabOfTabs {
   @apply flex flex-row gap-2;
 }
+
 .compactTabsList {
   @apply flex flex-row gap-2 justify-evenly p-3 m-4;
+}
+
+/* If not evident - custom bg's are not handled nicely. 
+   Check how we're doing this & find a solution */
+.customParallaxBg {
+  @apply size-[600%] relative right-[50px] top-[100px];
 }

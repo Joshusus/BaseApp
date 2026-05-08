@@ -1,5 +1,48 @@
 @reference "tailwindcss";
 
 .testImage {
-  @apply size-[50%] mx-auto;
+  @apply w-full mx-auto;
+}
+
+/*Note - parallax component seems to be messing with % and calculated values*/
+.parallaxTop {
+  @apply w-full flex flex-col-reverse h-[82vh];
+}
+
+/* If not evident - custom bg's are not handled nicely. 
+   Check how we're doing this & find a solution */
+.customParallaxBg {
+  @apply size-full relative right-[200px] top-[100px];
+}
+
+
+.imageText {
+  @apply bg-(--textPanel);
+}
+
+.sectionHeader {
+  @apply w-full p-10 text-center bg-transparent text-4xl text-(--tertiary);
+}
+
+.titleOverImage {
+  @apply mb-30 mx-10 text-6xl font-semibold text-(--textTitle) text-shadow-lg/30;
+}
+
+.portfolioOptions {
+  @apply flex flex-row gap-3 justify-around my-8;
+}
+
+.portfolioImage {
+@apply size-[300px] object-cover;
+}
+.portfolioImage:hover {
+  @apply blur-sm;
+}
+
+.imageBlend {
+  @apply mask-luminance mask-b-from-white mask-b-from-80% mask-b-to-black;
+}
+
+.bottomPadding {
+  @apply w-full h-80;
 }

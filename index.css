@@ -11,12 +11,30 @@ TW4 suggests this notation, but I couldnt get it to work with @theme utilities
 :root {
   --primary: #BB0000;
   --primaryDark: #990000;
-  --background: #AAAABB;
-  --background-200: #DDDDEE;
+  
+  --textTitle: #DF002D;
+  --textTitle-500: #DF002D;
+  --textTitle-400: #AB0022;
+  --textTitle-300: #810019;
+  --textTitle-200: #580011;
+  --textTitle-100: #300009;
+
+  --background: #263238; /* Dark background */
+  --background-200: #4C565B;
+
+  --textPanel: #F4F4F4; /* Light panel for reading text on */
+  --textPanel-500: #F4F4F4;
+
+  --tertiary: #00D49E; /* Colour for graphics */
+  --tertiary-500: #00D49E;
+  --tertiary-400: #00A97E;
+  --tertiary-300: #007F5F;
+  --tertiary-200: #00543F;
+  --tertiary-100: #002A1F;
 }
 
 #root {
-  @apply flex w-full h-full justify-center overflow-hidden;
+  @apply overflow-hidden;
 }
 
 html {

@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .page {
-  @apply m-4 p-4  bg-(--background) rounded-2xl;
+  @apply  bg-(--background);
 }
 
 .pageTitle {

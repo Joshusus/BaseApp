@@ -1,0 +1,24 @@
+@reference "tailwindcss";
+
+.allowOverflow {
+  @apply w-20 h-10 shrink-0;
+}
+
+.profilePic {
+  @apply relative bottom-5 z-100 w-20 h-20 border-0 rounded-full;
+}
+
+.nameTitle {
+  @apply text-4xl font-semibold text-(--textTitle);
+}
+
+.headerBar {
+  @apply flex items-center gap-2 px-2 bg-(--textPanel);
+}
+
+.navButton {
+  @apply border-0 rounded-sm p-3 bg-(--tertiary);
+}
+.navButton:hover {
+  @apply bg-(--tertiary-200);
+}

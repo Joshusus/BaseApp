@@ -6,7 +6,7 @@ import LoadedImagesState from "../state/LoadedImagesState";
 
 export default function useGetImages({}) {
 
-const cloudName = "dx4aoiw5u";
+const cloudName = "demo"; //"dx4aoiw5u";
 const cld = useMemo(() => new Cloudinary({ cloud: { cloudName: cloudName } }), []);
 
 const getImage = (publicId: string): CloudinaryImage => {

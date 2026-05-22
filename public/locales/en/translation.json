@@ -15,10 +15,14 @@
     "Title": "Portfolio"
   },
   "Contact": {
-    "Title": "Contact"
+    "Title": "Contact",
+    "Send": "Send"
   },
   "Common": {
     "ProfilePic": "Profile Picture",
     "NameTitle": "Marcus Amps-Woodward"
+  },
+  "Contacts": {
+    "ContactForm": "Contact Form"
   }
 }

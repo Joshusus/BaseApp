@@ -3,7 +3,3 @@
 .page {
   @apply  bg-(--background);
 }
-
-.pageTitle {
-  @apply ml-10 my-5 text-2xl;
-}

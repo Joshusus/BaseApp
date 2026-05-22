@@ -3,3 +3,11 @@
 .testImage {
   @apply size-[50%] mx-auto;
 }
+
+.contactPanel {
+  @apply flex flex-col items-center;
+}
+
+.contactFormArea {
+  @apply w-[50%] h-[500px] bg-white;
+}

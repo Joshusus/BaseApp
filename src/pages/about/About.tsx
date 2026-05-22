@@ -4,9 +4,8 @@ import styles from './About.module.css';
 import Button from '~/components/button/Button';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Background, Parallax } from 'react-parallax';
 import PageContent from '~/components/pageContent/PageContent';
-import PortfolioImage from '~/integrations/components/PortfolioImage';
+import NavHeader from '~/components/navHeader/NavHeader';
 
 export default function About() {
   document.title = 'About';
@@ -16,64 +15,19 @@ export default function About() {
 
   return (
     <PageContent pageTitle={t('About.TitleTest', { name: example })}>
-      <div> {t('About.ExampleDisclaimer')}</div>
-
-      <div className={styles.fullRow}>
-        <PortfolioImage publicId='Goggins.webp' className={styles.profilePic} />
-      </div>
-
-      <div className={styles.fullRow}>
-        <Parallax blur={0} strength={300} className={styles.profilePic}>
-          <Background className={styles.customParallaxBg}>
-            <PortfolioImage
-              publicId='Goggins.webp'
-              className={styles.profilePic}
-            />
-          </Background>
-        </Parallax>
-      </div>
-
-      <div className={styles.fullRow}>
-        <Parallax
-          blur={0}
-          bgImage='./photos/ProfilePic.png'
-          bgImageAlt='the frog'
-          strength={600}
+      <NavHeader />
+      <div className={styles.topColumns}>
+        <Panel className={styles.textColumn}>
+          {t('About.ExampleDisclaimer')}
+        </Panel>
+        <img
+          src='./photos/ProfilePic.png'
+          alt={t('Common.ProfilePic')}
           className={styles.profilePic}
         />
       </div>
 
-      <div className={styles.largeRow}>
-        <Panel>
-          <Parallax
-            blur={0}
-            bgImage='./photos/ProfilePic.png'
-            bgImageAlt='the frog'
-            strength={250}
-            className={styles.bigPanel}
-          >
-            {t('About.PanelTest1')}
-            {t('About.PanelTest1')}
-            {t('About.PanelTest1')}
-          </Parallax>
-        </Panel>
-      </div>
-
-      <div className={styles.tabsList}>
-        <Panel>{t('About.PanelTest1')}</Panel>
-        <Panel>{t('About.PanelTest2')}</Panel>
-        <Panel>{t('About.PanelTest3')}</Panel>
-      </div>
-
-      <Panel>
-        <div className={styles.compactTabsList}>
-          <Panel>{t('About.PanelTest1')}</Panel>
-          <Panel>{t('About.PanelTest2')}</Panel>
-          <Panel>{t('About.PanelTest3')}</Panel>
-        </div>
-      </Panel>
-
-      <Button onClick={() => navigate('/')}>Back</Button>
+      <Button onClick={() => navigate('/')}>{t('Home.Title')}</Button>
     </PageContent>
   );
 }

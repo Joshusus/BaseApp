@@ -5,7 +5,7 @@
 }
 
 .profilePic {
-  @apply relative bottom-5 z-100 w-20 h-20 border-0 rounded-full;
+  @apply relative bottom-5 z-100 w-20 h-20 border-0 rounded-full cursor-pointer;
 }
 
 .nameTitle {
@@ -25,4 +25,8 @@
 
 .socialMediaList {
   @apply flex flex-row-reverse gap-2;
+}
+
+.socialMedia {
+  @apply size-[2em] text-(--tertiary);
 }

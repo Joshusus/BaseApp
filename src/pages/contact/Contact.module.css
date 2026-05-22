@@ -1,13 +1,13 @@
 @reference "tailwindcss";
 
-.testImage {
-  @apply size-[50%] mx-auto;
-}
-
 .contactPanel {
-  @apply flex flex-col items-center;
+  @apply flex flex-col items-center my-2 w-[55%] mx-auto;
 }
 
 .contactFormArea {
-  @apply w-[50%] h-[500px] bg-white;
+  @apply w-full h-[400px] bg-white mb-2;
+}
+
+.instaPost {
+  @apply flex flex-row justify-center;
 }

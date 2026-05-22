@@ -90,3 +90,6 @@ Built with ❤️ using React Router.
 
 - Cloudinary Integration for images
 - React Parallax for.. well what do you think?
+- Tabler Icons 
+  https://tabler.io/icons
+- i18next translations

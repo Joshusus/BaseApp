@@ -1,35 +1,13 @@
 @reference "tailwindcss";
 
-.tabsList {
-  @apply w-[50vw] flex flex-row gap-2 justify-evenly mx-auto p-3;
+.topColumns {
+  @apply flex gap-4 p-8 w-full;
 }
 
-.fullRow {
-  @apply w-full flex justify-center my-3;
-}
-
-.largeRow {
-  @apply w-[75%] mx-auto flex justify-center my-3;
+.textColumn {
+  @apply grow;
 }
 
 .profilePic {
-  @apply size-48 rounded-lg;
-}
-
-.bigPanel {
-  @apply w-full h-48;
-}
-
-.tabOfTabs {
-  @apply flex flex-row gap-2;
-}
-
-.compactTabsList {
-  @apply flex flex-row gap-2 justify-evenly p-3 m-4;
-}
-
-/* If not evident - custom bg's are not handled nicely. 
-   Check how we're doing this & find a solution */
-.customParallaxBg {
-  @apply size-[600%] relative right-[50px] top-[100px];
+  @apply size-[30%];
 }

@@ -6,6 +6,7 @@ import PortfolioImage from '~/integrations/components/PortfolioImage';
 import styles from './Contact.module.css';
 import NavHeader from '~/components/navHeader/NavHeader';
 import Panel from '~/components/panel/Panel';
+import EmbeddedPost from '~/integrations/instagram/EmbeddedPost';
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -22,9 +23,9 @@ export default function Contact() {
           {t('Contact.Send')}
         </Button>
       </Panel>
-      <PortfolioImage publicId='cld-sample-3' className={styles.testImage} />
-
-      <Button onClick={() => navigate('/about')}>About</Button>
+      <div className={styles.instaPost}>
+        <EmbeddedPost src='DX7zbmkDBeK' />
+      </div>
     </PageContent>
   );
 }

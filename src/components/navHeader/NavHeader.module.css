@@ -30,3 +30,6 @@
 .socialMedia {
   @apply size-[2em] text-(--tertiary);
 }
+.socialMedia:hover {
+  @apply  text-(--tertiary-200);
+}

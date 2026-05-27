@@ -7,6 +7,8 @@ import {
   IconBrandInstagram,
   IconMail,
 } from '@tabler/icons-react';
+import { AdobeUrl, EmailUrl, InstagramUrl } from '~/config/SocialsConfig';
+import LinkButton from '../linkButton/LinkButton';
 
 export default function NavHeader() {
   const { t } = useTranslation();
@@ -18,9 +20,15 @@ export default function NavHeader() {
   return (
     <>
       <div className={styles.socialMediaList}>
-        <IconBrandInstagram stroke={2} className={styles.socialMedia} />
-        <IconBrandAdobe stroke={2} className={styles.socialMedia} />
-        <IconMail stroke={2} className={styles.socialMedia} />
+        <LinkButton href={InstagramUrl} className=''>
+          <IconBrandInstagram stroke={2} className={styles.socialMedia} />
+        </LinkButton>
+        <LinkButton href={AdobeUrl} className=''>
+          <IconBrandAdobe stroke={2} className={styles.socialMedia} />
+        </LinkButton>
+        <LinkButton href={EmailUrl} className=''>
+          <IconMail stroke={2} className={styles.socialMedia} />
+        </LinkButton>
       </div>
       <div className={styles.headerBar}>
         <div className={styles.allowOverflow}>

@@ -6,3 +6,6 @@
 .button:hover {
   @apply bg-(--primaryDark);
 }
+.disabled {
+  @apply bg-(--primaryDark);
+}

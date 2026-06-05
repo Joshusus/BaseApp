@@ -2,7 +2,6 @@ import PageContent from '~/components/pageContent/PageContent';
 import { useTranslation } from 'react-i18next';
 import Button from '~/components/button/Button';
 import { useNavigate } from 'react-router';
-import PortfolioImage from '~/integrations/components/PortfolioImage';
 import styles from './Contact.module.css';
 import NavHeader from '~/components/navHeader/NavHeader';
 import Panel from '~/components/panel/Panel';

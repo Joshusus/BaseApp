@@ -3,3 +3,7 @@
 .testImage {
   @apply size-[50%] mx-auto;
 }
+
+.gallery {
+  @apply w-full flex flex-wrap justify-around gap-4 my-8; 
+}

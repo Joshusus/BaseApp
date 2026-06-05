@@ -1,9 +1,8 @@
-import PageContent from '~/components/pageContent/PageContent';
 import { useTranslation } from 'react-i18next';
-import Button from '~/components/button/Button';
 import { useNavigate } from 'react-router';
-import PortfolioImage from '~/integrations/components/PortfolioImage';
 import styles from './Portfolio.module.css';
+import NavHeader from '~/components/navHeader/NavHeader';
+import PageContent from '~/components/pageContent/PageContent';
 
 export default function Portfolio() {
   const { t } = useTranslation();
@@ -12,9 +11,18 @@ export default function Portfolio() {
 
   return (
     <PageContent pageTitle={t('Portfolio.Title')}>
-      <PortfolioImage publicId='cld-sample-3' className={styles.testImage} />
-
-      <Button onClick={() => navigate('/about')}>About</Button>
+      <NavHeader />
+      <div className={styles.gallery}>
+        {Array.from({ length: 20 }, (_, x) => (
+          <img
+            src='./photos/ProfilePic.png'
+            alt={t('Common.ProfilePic')}
+            className={styles.profilePic}
+            key={`${x}`}
+          />
+        ))}
+      </div>
+      {/* <PortfolioImage publicId='cld-sample-3' className={styles.testImage} /> */}
     </PageContent>
   );
 }

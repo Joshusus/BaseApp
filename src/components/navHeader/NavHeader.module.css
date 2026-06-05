@@ -1,5 +1,9 @@
 @reference "tailwindcss";
 
+.header {
+  @apply select-none;
+}
+
 .allowOverflow {
   @apply w-20 h-10 shrink-0;
 }
@@ -20,6 +24,9 @@
   @apply border-0 rounded-sm p-3 bg-(--tertiary);
 }
 .navButton:hover {
+  @apply bg-(--tertiary-200);
+}
+.currentRouteButton {
   @apply bg-(--tertiary-200);
 }
 

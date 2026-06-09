@@ -6,10 +6,12 @@ import { Parallax } from 'react-parallax';
 import NavHeader from '~/components/navHeader/NavHeader';
 import Panel from '~/components/panel/Panel';
 import Button from '~/components/button/Button';
+import { useNavigate } from 'react-router';
 
 export default function Home() {
   document.title = 'Homepage';
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const calculateParallax = (strength: number, scrollPercentage: number) =>
     scrollPercentage * strength - strength;
@@ -33,12 +35,14 @@ export default function Home() {
           />
         )}
       >
-        <div className={styles.titleOverImage}>{t('Home.NameWithJob')}</div>
+        <div className={styles.titleOverImage}>
+          <div>{t('Home.Name')}</div>
+          <div>{t('Home.Job')}</div>
+        </div>
       </Parallax>
       <Button
         className={styles.sectionHeader}
-        disabled
-        onClick={() => console.log('todo')}
+        onClick={() => navigate('/portfolio')}
       >
         {t('Home.Highlights')}
       </Button>

@@ -1,10 +1,10 @@
 @reference "tailwindcss";
 
 .button {
-  @apply border-0 rounded-sm p-1 bg-(--primary) cursor-pointer;
+  @apply border-0 rounded-sm p-1 bg-(--primary) cursor-pointer font-sans transition duration-150 ease-in-out;
 }
 .button:hover {
-  @apply bg-(--primaryDark);
+  @apply bg-(--primary-700) shadow-xl/30;
 }
 .disabled {
   @apply bg-(--primaryDark);

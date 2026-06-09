@@ -7,7 +7,6 @@ import type { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { type NavigateFunction, useLocation, useNavigate } from 'react-router';
 import { AdobeUrl, EmailUrl, InstagramUrl } from '~/config/SocialsConfig';
-import classNames from '~/helpers/classnames';
 import Button from '../button/Button';
 import LinkButton from '../linkButton/LinkButton';
 import styles from './NavHeader.module.css';
@@ -42,7 +41,7 @@ export default function NavHeader() {
             onKeyUp={() => navigate('/')}
           />
         </div>
-        <div className={styles.nameTitle}>{t('Common.NameTitle')}</div>{' '}
+        <div className={styles.nameTitle}>{t('Common.NameTitle')}</div>
         <RouteButton route='/' name={t('Home.Title')} navigate={navigate} />
         <RouteButton
           route='/about'
@@ -73,12 +72,9 @@ function RouteButton({ route, name, navigate }: IRouteButton) {
   const { pathname } = useLocation();
   const disabled = route === pathname;
 
-  const classNamesList = [styles.navButton];
-  if (disabled) classNamesList.push(styles.currentRouteButton);
-
   return (
     <Button
-      className={classNames(...classNamesList)}
+      className={disabled ? styles.currentRouteButton : styles.navButton}
       onClick={() => navigate(route)}
       disabled={disabled}
     >

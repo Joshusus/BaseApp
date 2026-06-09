@@ -1,15 +1,12 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
 html,
 body {
-  @apply bg-white dark:bg-(#263238);
+  @apply bg-white dark:bg-(#263238) font-serif;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
 }
+
+// TODO none of this seems to be used. I added it into index.css and it did tho. Index.css seems to acc be imported in index.html too

@@ -11,6 +11,10 @@ TW4 suggests this notation, but I couldnt get it to work with @theme utilities
 :root {
   --primary: #BB0000;
   --primaryDark: #990000;
+  --primary-700: #EB0000;
+  --primary-600: #D40000;
+  --primary-400: #AF0D0D;
+  --primary-300: #A21B1B;
   
   --textTitle: #14ffc4;
   --textTitle-500: #DF002D;
@@ -24,8 +28,14 @@ TW4 suggests this notation, but I couldnt get it to work with @theme utilities
 
   --textPanel: #F4F4F4; /* Light panel for reading text on */
   --textPanel-500: #F4F4F4;
+  --textPanel-400: #E3E3E3;
+  --textPanel-300: #D2D2D2;
+  --textPanel-200: #C0C0C0;
+  --textPanel-100: #AFAFAF;
 
   --tertiary: #00D49E; /* Colour for graphics */
+  --tertiary-700: #01FFC0;
+  --tertiary-600: #00EBB0;
   --tertiary-500: #00D49E;
   --tertiary-400: #00A97E;
   --tertiary-300: #007F5F;
@@ -37,6 +47,28 @@ TW4 suggests this notation, but I couldnt get it to work with @theme utilities
   @apply overflow-hidden;
 }
 
+@font-face {
+  font-family: "ContrailOne";
+  src: url("/src/assets/fonts/ContrailOne-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/src/assets/fonts/RobotoSlab-Medium.woff2") format("woff2");
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: 'ContrailOne', sans-serif;
+  --font-serif: 'Roboto', serif;
+  --font-mono: 'Roboto', monospace;
+}
+
 html {
-  @apply bg-gray-400;
+  @apply bg-(--background) font-serif;
+}
+
+h, h1, h2, h3 {
+  @apply font-sans;
 }

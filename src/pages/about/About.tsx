@@ -1,24 +1,25 @@
-import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import KeyTextBlock from '~/components/keyTextBlock/KeyTextBlock';
+import NavHeader from '~/components/navHeader/NavHeader';
+import PageContent from '~/components/pageContent/PageContent';
 import Panel from '~/components/panel/Panel';
 import styles from './About.module.css';
-import Button from '~/components/button/Button';
-import { useNavigate } from 'react-router';
-import { useTranslation } from 'react-i18next';
-import PageContent from '~/components/pageContent/PageContent';
-import NavHeader from '~/components/navHeader/NavHeader';
 
 export default function About() {
   document.title = 'About';
-  const [example, _setExample] = useState<string>('World');
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   return (
-    <PageContent pageTitle={t('About.TitleTest', { name: example })}>
+    <PageContent>
       <NavHeader />
       <div className={styles.topColumns}>
         <Panel className={styles.textColumn}>
-          {t('About.ExampleDisclaimer')}
+          <div>{t('About.ExampleDisclaimer')}</div>
+          <KeyTextBlock>
+            <p>{t('About.TitleTest', { name: 'Marcus' })}</p>
+            <p>{t('About.ExampleDisclaimer')}</p>
+          </KeyTextBlock>
+          <i>{t('About.PanelTest1')}</i>
         </Panel>
         <img
           src='./photos/ProfilePic.png'
@@ -26,8 +27,6 @@ export default function About() {
           className={styles.profilePic}
         />
       </div>
-
-      <Button onClick={() => navigate('/')}>{t('Home.Title')}</Button>
     </PageContent>
   );
 }

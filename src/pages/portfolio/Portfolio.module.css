@@ -4,6 +4,27 @@
   @apply size-[50%] mx-auto;
 }
 
+.sectionHeader {
+  @apply w-full p-2 text-center bg-transparent text-4xl text-(--tertiary);
+}
+
+.sectionHeaderTop {
+  composes: sectionHeader;
+  @apply pt-8;
+}
+
 .gallery {
   @apply w-full flex flex-wrap justify-around gap-4 my-8; 
+}
+
+.imageContainer {
+  @apply size-96 overflow-clip;
+}
+
+.pfImage {
+  @apply size-full transition duration-400 ease-in-out;
+}
+
+.pfImage:hover {
+ @apply -hue-rotate-15 scale-110;
 }

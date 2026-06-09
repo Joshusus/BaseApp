@@ -21,11 +21,11 @@
 }
 
 .sectionHeader {
-  @apply w-full p-10 text-center bg-transparent text-4xl text-(--tertiary);
+  @apply w-full p-10 text-center bg-transparent text-4xl text-(--tertiary) cursor-pointer;;
 }
 
 .titleOverImage {
-  @apply mb-30 mx-10 text-6xl font-semibold text-(--textTitle) text-shadow-lg/30;
+  @apply mb-30 mx-10 text-6xl text-shadow-lg/60 text-(--textTitle) tracking-widest font-sans;
 }
 
 .portfolioOptions {

@@ -93,3 +93,11 @@ Built with ❤️ using React Router.
 - Tabler Icons 
   https://tabler.io/icons
 - i18next translations
+- To get colour variations & grades (useful for setting up shade-number variants): https://coolors.co/f4f4f4/about
+
+
+
+---
+
+### Inspiration
+- https://www.designrush.com/best-designs/websites/trends/best-sports-websites?utm_source=chatgpt.com

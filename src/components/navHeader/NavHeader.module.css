@@ -13,20 +13,25 @@
 }
 
 .nameTitle {
-  @apply text-4xl font-semibold text-(--textTitle);
+  @apply text-4xl text-(--textTitle) tracking-wider font-sans;
 }
 
 .headerBar {
   @apply flex items-center gap-2 px-2 bg-(--background-200);
 }
 
+.baseNavButton {
+ @apply border-0 rounded-sm p-3 bg-(--tertiary) font-sans tracking-wide;
+}
 .navButton {
-  @apply border-0 rounded-sm p-3 bg-(--tertiary);
+  composes: baseNavButton;
+  @apply transition duration-150 ease-in-out;
 }
 .navButton:hover {
-  @apply bg-(--tertiary-200);
+  @apply bg-(--tertiary-700) shadow-xl/30;
 }
 .currentRouteButton {
+  composes: baseNavButton;
   @apply bg-(--tertiary-200);
 }
 

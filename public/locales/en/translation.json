@@ -9,11 +9,14 @@
   },
   "Home": {
     "Title": "Home",
-    "NameWithJob": "Marcus Amps-Woodward: Sports Photographer",
+    "Name": "Marcus Amps-Woodward",
+    "Job": "Sports Photographer",
     "Highlights": "Highlights"
   },
   "Portfolio": {
-    "Title": "Portfolio"
+    "Title": "Portfolio",
+    "MostRecent": "Recent Highlights",
+    "Aquasports": "Watersports"
   },
   "Contact": {
     "Title": "Contact",

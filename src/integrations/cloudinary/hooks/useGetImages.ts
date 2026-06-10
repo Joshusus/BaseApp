@@ -1,25 +1,44 @@
 import { Cloudinary } from "@cloudinary/url-gen";
-import { CloudinaryImage } from '@cloudinary/url-gen/assets/CloudinaryImage';
-import { useMemo, useRef } from "react";
+import type { CloudinaryImage } from "@cloudinary/url-gen/assets/CloudinaryImage";
+import { useMemo } from "react";
+import CloudinaryApi from "../apis/CloudinaryApi";
 import LoadedImagesState from "../state/LoadedImagesState";
 
+export default function useGetImages() {
+	const cloudName = "demo"; //"dx4aoiw5u";
+	const cld = useMemo(
+		() => new Cloudinary({ cloud: { cloudName: cloudName } }),
+		[],
+	);
 
-export default function useGetImages({}) {
+	const cloudinaryApi = useMemo(() => new CloudinaryApi(cloudName), []);
 
-const cloudName = "demo"; //"dx4aoiw5u";
-const cld = useMemo(() => new Cloudinary({ cloud: { cloudName: cloudName } }), []);
+	const getImage = (publicId: string): CloudinaryImage => {
+		const existingEntry = LoadedImagesState.value[publicId];
+		if (existingEntry) {
+			return existingEntry;
+		}
 
-const getImage = (publicId: string): CloudinaryImage => {
-  
-  const existingEntry = LoadedImagesState.value[publicId];
-  if (existingEntry) {
-    return existingEntry;
-  }
-  
-  const image = cld.image(publicId);
-  LoadedImagesState.value[publicId] = image;
-  return image;
-}
+		const image = cld.image(publicId);
+		LoadedImagesState.value[publicId] = image;
+		return image;
+	};
 
-  return { getImage }
+	const getFolderImages = async (tag: string) => {
+		const assetsResponse: string[] = [];
+
+		cloudinaryApi.GetAssetsList(
+			tag,
+			(response) => {
+				response?.data.resources.forEach((assetMetadata) => {
+					assetsResponse.push(assetMetadata.public_id);
+				});
+			},
+			() => undefined, // TODO
+		);
+
+		return assetsResponse;
+	};
+
+	return { getImage, getFolderImages };
 }

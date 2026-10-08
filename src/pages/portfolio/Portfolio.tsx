@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: <explanation> */
 import { useTranslation } from 'react-i18next';
 import NavHeader from '~/components/navHeader/NavHeader';
 import PageContent from '~/components/pageContent/PageContent';
@@ -13,7 +14,7 @@ export default function Portfolio() {
 
   const exampleImages = (images: number) => {
     return Array.from({ length: images }, (_, x) => (
-      <div className={styles.imageContainer}>
+      <div className={styles.imageContainer} key={x}>
         <img
           src='./photos/ProfilePic.png'
           alt={t('Common.ProfilePic')}

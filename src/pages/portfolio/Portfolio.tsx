@@ -9,7 +9,6 @@ export default function Portfolio() {
   const { t } = useTranslation();
   document.title = t('Portfolio.Title');
 
-  // const { getFolderImages } = useGetImages();
   const { testImageIds } = usePortfolio();
 
   const exampleImages = (images: number) => {
@@ -32,6 +31,8 @@ export default function Portfolio() {
     );
   };
 
+  // https://tailwindcss.com/docs/columns
+  // TODO enforce constant height, but adjust width? Or go pinterest route and find a way to enforce columns?
   const newPortfolioImage = (publicId: string) => (
     <div className={styles.imageContainer}>
       <PortfolioImage

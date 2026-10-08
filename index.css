@@ -54,15 +54,15 @@ TW4 suggests this notation, but I couldnt get it to work with @theme utilities
 }
 
 @font-face {
-  font-family: "Roboto";
-  src: url("/src/assets/fonts/RobotoSlab-Medium.woff2") format("woff2");
+  font-family: "Merriweather";
+  src: url("/src/assets/fonts/Merriweather-VariableFont_opsz,wdth,wght.woff2") format("woff2");
   font-display: swap;
 }
 
 @theme {
   --font-sans: 'ContrailOne', sans-serif;
-  --font-serif: 'Roboto', serif;
-  --font-mono: 'Roboto', monospace;
+  --font-serif: 'Merriweather', serif;
+  --font-mono: 'Merriweather', monospace;
 }
 
 html {

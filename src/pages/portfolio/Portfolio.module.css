@@ -14,15 +14,44 @@
 }
 
 .gallery {
-  @apply w-full flex flex-wrap justify-around gap-4 my-8; 
+  /*300px from imageContainer width*/
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  @apply columns-[300px] gap-4 px-8 mb-6;
 }
+
 
 .imageContainer {
-  @apply size-96 overflow-clip;
+  @apply w-full h-auto overflow-clip px-8 relative bg-black border-y-8;
 }
 
+.imageContainer::before,
+.imageContainer::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    width: 32px;
+    background: black;
+    isolation: isolate;
+
+    background: /* mask */
+        radial-gradient(circle at center,
+            white 0 7px,
+            black 8px)
+        center top / 100% 24px repeat-y;
+
+    -webkit-mask:
+        radial-gradient(circle at center,
+            white 0 7px,
+            black 8px)
+        center top / 100% 24px repeat-y;
+}
+
+.imageContainer::before { left: 0; }
+.imageContainer::after  { right: 0; }
+
+
 .pfImage {
-  @apply size-full transition duration-400 ease-in-out;
+  @apply size-full transition duration-400 ease-in-out rounded-xl bg-gray-300;
 }
 
 .pfImage:hover {

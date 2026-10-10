@@ -1,15 +1,34 @@
-import { AdvancedImage } from '@cloudinary/react';
+import { useState, type ComponentPropsWithoutRef } from 'react';
 import useGetImages from '../cloudinary/hooks/useGetImages';
-import { useMemo } from 'react';
 
-export type IImage = {
+type Props = Omit<ComponentPropsWithoutRef<'img'>, 'src' | 'alt'> & {
   publicId: string;
-  [props: string]: unknown;
+  alt: string;
+  imageWidth?: number;
 };
-export default function PortfolioImage({ publicId, ...props }: IImage) {
-  const { getImage } = useGetImages({});
-
-  const imageData = useMemo(() => getImage(publicId), [publicId]);
-
-  return <AdvancedImage cldImg={imageData} {...props} />;
+export default function PortfolioImage({
+  publicId,
+  alt,
+  imageWidth = 900,
+  loading = 'lazy',
+  ...props
+}: Props) {
+  const { getImage } = useGetImages();
+  const [failedId, setFailedId] = useState<string>();
+  if (failedId === publicId)
+    return (
+      <span className="image-fallback" role="img" aria-label={alt}>
+        Photograph unavailable
+      </span>
+    );
+  return (
+    <img
+      {...props}
+      src={getImage(publicId, imageWidth).toURL()}
+      alt={alt}
+      loading={loading}
+      decoding="async"
+      onError={() => setFailedId(publicId)}
+    />
+  );
 }

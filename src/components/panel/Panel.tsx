@@ -1,4 +1,4 @@
-import classNames from '~/helpers/classnames';
+import classNames from '~/helpers/classNames';
 import styles from './Panel.module.css';
 
 export type IPanel = {

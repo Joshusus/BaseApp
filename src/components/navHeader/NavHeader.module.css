@@ -1,47 +1,98 @@
-@reference "tailwindcss";
-
 .header {
-  @apply select-none;
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
 }
-
-.allowOverflow {
-  @apply w-20 h-10 shrink-0;
+.utility {
+  padding: 0.65rem var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font: 0.65rem var(--font-ui);
+  letter-spacing: 0.16em;
 }
-
-.profilePic {
-  @apply relative bottom-5 z-100 w-20 h-20 border-0 rounded-full cursor-pointer;
+.utility div {
+  display: flex;
+  gap: 1.2rem;
 }
-
-.nameTitle {
-  @apply text-4xl text-(--textTitle) tracking-wider font-sans;
+.utility a {
+  display: flex;
+  color: var(--textPanel);
 }
-
-.headerBar {
-  @apply flex items-center gap-2 px-2 bg-(--background-200);
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.3rem var(--gutter);
+  max-width: 1600px;
+  margin: auto;
 }
-
-.baseNavButton {
- @apply border-0 rounded-sm p-3 bg-(--tertiary) font-sans tracking-wide;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--textPanel);
+  font: 1rem var(--font-ui);
 }
-.navButton {
-  composes: baseNavButton;
-  @apply transition duration-150 ease-in-out;
+.brand small {
+  display: block;
+  color: var(--muted);
+  font: 0.6rem var(--font-body);
+  letter-spacing: 0.16em;
+  margin-top: 0.4rem;
 }
-.navButton:hover {
-  @apply bg-(--tertiary-700) shadow-xl/30;
+.monogram {
+  font: italic 2.3rem var(--font-ui);
+  color: var(--tertiary);
 }
-.currentRouteButton {
-  composes: baseNavButton;
-  @apply bg-(--tertiary-200);
+.monogram span {
+  font-size: 1rem;
 }
-
-.socialMediaList {
-  @apply flex flex-row-reverse gap-2;
+.links {
+  display: flex;
+  gap: 1.8rem;
+  font: 0.85rem var(--font-body);
 }
-
-.socialMedia {
-  @apply size-[2em] text-(--tertiary);
+.link,
+.active {
+  padding: 0.55rem 0;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
 }
-.socialMedia:hover {
-  @apply  text-(--tertiary-200);
+.active {
+  color: var(--textPanel);
+  border-color: var(--tertiary);
+}
+.enquire {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font: 0.8rem var(--font-body);
+  color: var(--textPanel);
+}
+@media (max-width: 760px) {
+  .bar {
+    flex-wrap: wrap;
+    gap: 1.3rem;
+    padding-block: 1rem;
+  }
+  .brand {
+    font-size: 0.85rem;
+  }
+  .links {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+  .enquire {
+    margin-left: auto;
+  }
+}
+@media (max-width: 380px) {
+  .enquire {
+    display: none;
+  }
 }

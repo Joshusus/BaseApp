@@ -1,26 +1,21 @@
-import axios, { type AxiosError, type AxiosResponse } from "axios";
-import type { CloudinaryTagAssetResponse } from "./CloudinaryApi.types";
-
-type SuccessCallback<T> = (response?: AxiosResponse<T>) => void;
-type FailedCallback<T> = (error?: AxiosError<T>) => void;
+import axios from 'axios';
+import type { CloudinaryTagAssetResponse } from './CloudinaryApi.types';
 
 export default class CloudinaryApi {
-	Cloudinary: string;
+  constructor(private readonly cloudName: string) {}
 
-	constructor(cloudinary: string) {
-		this.Cloudinary = cloudinary;
-	}
-
-	GetAssetsList = (
-		tagName: string,
-		successCallback: SuccessCallback<CloudinaryTagAssetResponse>,
-		failCallback: FailedCallback<unknown>,
-	) => {
-		axios
-			.get(
-				`https://res.cloudinary.com/${this.Cloudinary}/image/list/${tagName}.json`,
-			)
-			.then(successCallback)
-			.catch(failCallback);
-	};
+  /** Cloudinary's public tag delivery API. Never put an Admin API secret here. */
+  async getAssetsList(tag: string): Promise<string[]> {
+    const { data } = await axios.get<CloudinaryTagAssetResponse>(
+      `https://res.cloudinary.com/${encodeURIComponent(this.cloudName)}/image/list/${encodeURIComponent(tag)}.json`,
+      { timeout: 15000 },
+    );
+    if (
+      !Array.isArray(data.resources) ||
+      data.resources.some((asset) => typeof asset.public_id !== 'string')
+    ) {
+      throw new Error('The album response was not a valid image list.');
+    }
+    return [...new Set(data.resources.map((asset) => asset.public_id))];
+  }
 }

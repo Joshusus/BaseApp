@@ -3,6 +3,7 @@ import Home from './pages/home/Home';
 import About from './pages/about/About';
 import Contact from './pages/contact/Contact';
 import Portfolio from './pages/portfolio/Portfolio';
+import NotFound from './pages/notFound/NotFound';
 
 const RouterConfig: () => RouteObject[] = () => [
   {
@@ -21,6 +22,7 @@ const RouterConfig: () => RouteObject[] = () => [
     path: '/portfolio',
     element: <Portfolio />,
   },
+  { path: '*', element: <NotFound /> },
 ];
 
 export default RouterConfig;

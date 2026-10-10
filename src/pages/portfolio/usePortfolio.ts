@@ -1,39 +1,58 @@
-import { useEffect, useMemo, useState } from "react";
-import CloudinaryApi from "~/integrations/cloudinary/apis/CloudinaryApi";
+import { useEffect, useRef, useState } from 'react';
+import { albums, cloudName, type AlbumConfig } from '~/config/PortfolioConfig';
+import CloudinaryApi from '~/integrations/cloudinary/apis/CloudinaryApi';
+import { albumCache } from '~/integrations/cloudinary/state/AlbumCache';
 
-type IUsePortfolio = {
-	// getFolderImages: (tag: string) => Promise<string[]>;
+type AlbumState = {
+  images: readonly string[];
+  status: 'loading' | 'ready' | 'error';
+  error?: string;
 };
-// { getFolderImages }: IUsePortfolio
-export default function usePortfolio() {
-	const [testImageIds, setTestImageIds] = useState<string[]>();
+const loading: AlbumState = { images: [], status: 'loading' };
+const api = new CloudinaryApi(cloudName);
 
-	const cloudinaryApi = useMemo(() => new CloudinaryApi("demo"), []);
+export default function usePortfolio(album: AlbumConfig | undefined = albums[0]) {
+  const [result, setResult] = useState<{ album: AlbumConfig | undefined; state: AlbumState }>();
+  const [retryCount, setRetryCount] = useState(0);
+  const refreshRequested = useRef<AlbumConfig | undefined>(undefined);
+  const state = result && result.album === album ? result.state : loading;
 
-	useEffect(() => {
-		cloudinaryApi.GetAssetsList(
-			"logo",
-			(response) => {
-				setTestImageIds(
-					response?.data.resources.map(
-						(assetMetadata) => assetMetadata.public_id,
-					),
-				);
-			},
-			() => undefined, // TODO
-		);
-	}, [cloudinaryApi]);
+  useEffect(() => {
+    let active = true;
+    const refresh = !!album && refreshRequested.current === album;
+    refreshRequested.current = undefined;
+    setResult({ album, state: loading });
+    const request = album?.publicIds
+      ? Promise.resolve([...new Set(album.publicIds)])
+      : album?.tag
+        ? albumCache.load(cloudName, album.tag, () => api.getAssetsList(album.tag!), refresh)
+        : Promise.resolve([]);
+    request
+      .then((images) => {
+        if (active) setResult({ album, state: { images, status: 'ready' } });
+      })
+      .catch(() => {
+        if (active)
+          setResult({
+            album,
+            state: {
+              images: [],
+              status: 'error',
+              error: 'This album could not be loaded. Please try again.',
+            },
+          });
+      });
+    // A departing consumer must not cancel the request shared by other consumers.
+    return () => {
+      active = false;
+    };
+  }, [album, retryCount]);
 
-	// useEffect(() => {
-	// 	console.log(
-	// 		"why is this spam called when I put the function in the dependencies",
-	// 	);
-
-	// 	var promise = getFolderImages("logo"); // TODO not awaiting
-	// 	promise.then((imageAssets) => {
-	// 		setTestImageIds(imageAssets);
-	// 	});
-	// }, []);
-
-	return { testImageIds };
+  return {
+    ...state,
+    retry: () => {
+      refreshRequested.current = album;
+      setRetryCount((count) => count + 1);
+    },
+  };
 }

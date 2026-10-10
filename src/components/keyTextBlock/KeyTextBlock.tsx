@@ -1,4 +1,4 @@
-import classNames from '~/helpers/classnames';
+import classNames from '~/helpers/classNames';
 import styles from './KeyTextBlock.module.css';
 
 export type IKeyTextBlock = {
@@ -6,16 +6,9 @@ export type IKeyTextBlock = {
   children: React.ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export default function KeyTextBlock({
-  className,
-  children,
-  ...props
-}: IKeyTextBlock) {
+export default function KeyTextBlock({ className, children, ...props }: IKeyTextBlock) {
   return (
-    <div
-      className={classNames(styles.keyTextBlock, className ?? '')}
-      {...props}
-    >
+    <div className={classNames(styles.keyTextBlock, className ?? '')} {...props}>
       {children}
     </div>
   );

@@ -1,13 +1,52 @@
-@reference "tailwindcss";
-
-.topColumns {
-  @apply flex gap-4 p-8 w-full;
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
 }
-
-.textColumn {
-  @apply grow;
+.portrait {
+  width: 100%;
+  max-height: 600px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--surface);
 }
-
-.profilePic {
-  @apply size-[30%];
+.layout h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin: 1rem 0;
+}
+.layout p:not(:first-child) {
+  color: var(--muted);
+  line-height: 1.9;
+  font-size: 0.9rem;
+}
+.layout a {
+  margin-top: 1.5rem;
+}
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 4rem;
+  border-top: 1px solid var(--border);
+  gap: 2rem;
+  padding-top: 2rem;
+}
+.services span {
+  color: var(--tertiary);
+  font-size: 0.7rem;
+}
+.services h3 {
+  font-size: 1.5rem;
+}
+@media (max-width: 700px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .portrait {
+    max-height: 450px;
+  }
+  .services {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
 }

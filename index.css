@@ -2,6 +2,10 @@
 
 /* The visual configuration. Adjust these tokens to change the entire site. */
 :root {
+  --header-profile-size: 72px;
+  --gallery-column-width: 300px;
+  --gallery-film-frame-width: 24px;
+  --gallery-film-hole-size: 5px;
   --primary: #bb0000;
   --primaryDark: #990000;
   --background: #101b20;

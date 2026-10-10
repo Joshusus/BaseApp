@@ -3,6 +3,7 @@ export const siteConfig = {
   name: 'Marcus Amps-Woodward',
   role: 'Sports photographer',
   email: import.meta.env.VITE_CONTACT_EMAIL?.trim() || 'marcus@example.com',
+  profilePhotoUrl: import.meta.env.VITE_PROFILE_PHOTO_URL?.trim() || '/photos/MarcusProfile.jpg',
   instagram: 'https://www.instagram.com/marcusawphoto/',
   headline: 'Every second. Everything at stake.',
   introduction:

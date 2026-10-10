@@ -26,9 +26,13 @@ export default function NavHeader() {
       </div>
       <nav className={styles.bar} aria-label="Main navigation">
         <Link to="/" className={styles.brand}>
-          <span className={styles.monogram} aria-hidden="true">
-            M<span>AW</span>
-          </span>
+          <img
+            src={siteConfig.profilePhotoUrl}
+            alt=""
+            className={styles.profilePhoto}
+            width={72}
+            height={72}
+          />
           <span>
             {siteConfig.name}
             <small>SPORTS PHOTOGRAPHY</small>

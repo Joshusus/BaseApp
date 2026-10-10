@@ -18,7 +18,7 @@ export default function About() {
         </div>
         <div className={styles.layout}>
           <img
-            src="/photos/ProfilePic.png"
+            src={siteConfig.profilePhotoUrl}
             alt={`Portrait of ${siteConfig.name}`}
             className={styles.portrait}
             loading="lazy"

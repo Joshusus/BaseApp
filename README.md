@@ -35,7 +35,8 @@ Vite builds a static SPA into `dist/`. This project does not currently use SSR o
 | File | Purpose |
 | --- | --- |
 | `src/config/SiteConfig.ts` | Name, role, headline, introduction, about copy, services, Instagram, email and enquiry starter |
-| `src/config/PortfolioConfig.ts` | Albums, display order, descriptions, tags/public IDs, captions and homepage hero |
+| `src/config/PortfolioConfig.ts` | Albums, display order, descriptions, tags/public IDs and captions |
+| `src/config/PhotographyConfig.ts` | Hero/story photographs, independent cloud names, crop positions and parallax strengths |
 | `index.css` | Colours, fonts, spacing, buttons and other shared visual tokens |
 | `public/locales/en/translation.json` | Existing i18next page/navigation labels |
 
@@ -62,7 +63,9 @@ See [Cloudinary’s public asset-list documentation](https://cloudinary.com/docu
 
 The shared cache keeps immutable image-ID lists for 30 minutes within the current page session. It deduplicates in-flight requests (including React StrictMode), caches empty results and evicts errors. After expiry, the next consumer reloads. Retry explicitly refreshes the current album and still deduplicates simultaneous retries. Reloading the browser starts a new session. This reduces redundant metadata requests; it does **not** eliminate image delivery bandwidth or Cloudinary charges. Generated image URLs are local SDK operations; image bytes use browser/CDN caching.
 
-Replace the preview album with real collections, add descriptive captions, and set `isPreviewPortfolio = false` before launch. Homepage highlights automatically use the first configured album; change `featuredAlbumId` for another choice. A curated first album also supplies the default hero; tagged albums should set `VITE_CLOUDINARY_HERO_ID`.
+Replace the preview album with real collections, add descriptive captions, and set `isPreviewPortfolio = false` before launch. Homepage highlights automatically use the first configured album; change `featuredAlbumId` for another choice. The portfolio shows **all configured albums as large, stacked filmstrip galleries**. The collection links jump to those sections, and clicking a photograph opens its album in the focused carousel. Each gallery shows 24 frames initially with a load-more button.
+
+The preview currently contains one explicit public ID (`Decaprio`), so it displays one photograph. No Cloudinary account change is needed to use this preview or to add curated `publicIds`. Add Marcus’s uploaded IDs to make a larger collection, or configure a tag as described above.
 
 ## Contact/email
 
@@ -74,12 +77,22 @@ There is no email service, API key, backend or enquiry storage. Clipboard and a 
 
 For reliable sending directly from the website, a hosted form/email service or backend would be needed. That is an architectural decision for a separate change. [MDN’s email-link documentation](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Creating_links) describes the mail-handler behavior.
 
+## Homepage parallax and profile photograph
+
+The original basketball example is restored from Cloudinary’s `demo/cld-sample-3`. Its cloud is independent of the `dx4aoiw5u` portfolio cloud, so the example does not produce a missing-image request there. To replace it, set **both** `VITE_CLOUDINARY_HERO_CLOUD_NAME=dx4aoiw5u` and `VITE_CLOUDINARY_HERO_ID=<your public ID>`.
+
+`PhotographyConfig.ts` preserves the original parallax container strength (`300`) and custom photo travel (`700`). The image overscans its container to prevent blank edges, and its travel is capped for short viewports. Desktop and mobile crop positions can be configured separately. The story section uses a quieter grayscale layer with strength `100` and travel `120`; change its photograph or disable its `parallax.enabled` setting there. Both effects become static when visitors request reduced motion.
+
+The previous header thumbnail is now stored at `public/photos/MarcusProfile.jpg`, and the header/about page both use the configurable profile URL. Replace that file with Marcus’s full-resolution portrait, or set `VITE_PROFILE_PHOTO_URL` to a public Cloudinary delivery URL. This removes the dependency on the previous external thumbnail endpoint.
+
 ## Public environment configuration
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `VITE_CLOUDINARY_CLOUD_NAME` | `dx4aoiw5u` | Public Cloudinary cloud name |
-| `VITE_CLOUDINARY_HERO_ID` | First curated photograph | Homepage hero public ID |
+| `VITE_CLOUDINARY_HERO_ID` | `cld-sample-3` | Homepage hero public ID |
+| `VITE_CLOUDINARY_HERO_CLOUD_NAME` | `demo` for the example, portfolio cloud for a custom ID | Independent cloud for the hero image |
+| `VITE_PROFILE_PHOTO_URL` | `/photos/MarcusProfile.jpg` | Local profile photograph or public Cloudinary URL |
 | `VITE_CONTACT_EMAIL` | `marcus@example.com` | Public enquiry address |
 
 All `VITE_` values are embedded in client assets at build time. **Never put Cloudinary API keys/secrets, email provider credentials or other private credentials in them.** Cloudinary’s public cloud name and photograph IDs do not need a secrets service. If private APIs are added later, their credentials belong on a server/platform secrets store.
@@ -102,6 +115,7 @@ See [Vite’s static deployment guide](https://vite.dev/guide/static-deploy.html
 ```sh
 docker build -t marcus-photo \
   --build-arg VITE_CLOUDINARY_CLOUD_NAME=dx4aoiw5u \
+  --build-arg VITE_CLOUDINARY_HERO_CLOUD_NAME=dx4aoiw5u \
   --build-arg VITE_CLOUDINARY_HERO_ID=Decaprio \
   --build-arg VITE_CONTACT_EMAIL=marcus@example.com .
 docker run --rm -p 3000:80 marcus-photo

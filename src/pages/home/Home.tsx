@@ -4,16 +4,12 @@ import { useTranslation } from 'react-i18next';
 import PageContent from '~/components/pageContent/PageContent';
 import NavHeader from '~/components/navHeader/NavHeader';
 import PortfolioImage from '~/integrations/components/PortfolioImage';
-import {
-  albums,
-  featuredAlbumId,
-  heroPublicId,
-  isPreviewPortfolio,
-  previewNote,
-} from '~/config/PortfolioConfig';
+import { albums, featuredAlbumId, isPreviewPortfolio, previewNote } from '~/config/PortfolioConfig';
 import { siteConfig } from '~/config/SiteConfig';
 import usePortfolio from '../portfolio/usePortfolio';
 import styles from './Home.module.css';
+import ParallaxPhoto from '~/components/parallaxPhoto/ParallaxPhoto';
+import { heroPhoto, storyPhoto } from '~/config/PhotographyConfig';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -23,21 +19,12 @@ export default function Home() {
     <PageContent pageTitle={t('Home.Title')}>
       <NavHeader />
       <main id="main-content">
-        <section className={styles.hero}>
-          {heroPublicId && (
-            <PortfolioImage
-              publicId={heroPublicId}
-              alt={
-                isPreviewPortfolio
-                  ? 'Cloudinary image delivery preview'
-                  : 'Featured sports photograph'
-              }
-              loading="eager"
-              fetchPriority="high"
-              imageWidth={1800}
-              className={styles.heroImage}
-            />
-          )}
+        <ParallaxPhoto
+          photo={heroPhoto}
+          className={styles.hero}
+          contentClassName={styles.heroLayout}
+          loading="eager"
+        >
           <div className={styles.heroContent}>
             <p className="eyebrow">
               {siteConfig.name} / {siteConfig.role}
@@ -49,10 +36,14 @@ export default function Home() {
             </Link>
           </div>
           <div className={styles.heroFoot}>
-            <span>THE ACTION. THE ATMOSPHERE. THE STORY.</span>
+            <span>
+              {heroPhoto.isPreview
+                ? 'DEMO HERO PHOTO · REPLACE WITH MARCUS’S WORK'
+                : 'THE ACTION. THE ATMOSPHERE. THE STORY.'}
+            </span>
             <span>SCROLL TO EXPLORE ↓</span>
           </div>
-        </section>
+        </ParallaxPhoto>
         <section className="section">
           <div className="section-heading">
             <div>
@@ -107,7 +98,11 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <section className={styles.statement}>
+        <ParallaxPhoto
+          photo={storyPhoto}
+          className={styles.statementPhoto}
+          contentClassName={styles.statement}
+        >
           <p className="eyebrow">BEYOND THE FINISH LINE</p>
           <h2>
             Great sport deserves
@@ -122,7 +117,7 @@ export default function Home() {
               Meet Marcus <IconArrowRight size={18} />
             </Link>
           </div>
-        </section>
+        </ParallaxPhoto>
         <section className="cta section">
           <div>
             <p className="eyebrow">YOUR NEXT CHAPTER</p>

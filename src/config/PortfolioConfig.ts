@@ -38,5 +38,3 @@ export const previewNote = demoCloud
   ? 'Preview gallery · These are Cloudinary demo photographs, not Marcus’s work.'
   : 'Preview gallery · This test image verifies image delivery. Marcus’s sports photography is coming soon.';
 export const featuredAlbumId = albums[0]?.id;
-export const heroPublicId =
-  import.meta.env.VITE_CLOUDINARY_HERO_ID?.trim() || albums[0]?.publicIds?.[0] || '';

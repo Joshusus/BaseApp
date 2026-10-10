@@ -18,7 +18,7 @@ import styles from './Portfolio.module.css';
 export default function Portfolio() {
   const { t } = useTranslation();
   const [params, setParams] = useSearchParams();
-  const album = albums.find((item) => item.id === params.get('album')) || albums[0];
+  const focusedAlbum = albums.find((item) => item.id === params.get('album')) || albums[0];
   return (
     <PageContent pageTitle={t('Portfolio.Title')}>
       <NavHeader />
@@ -29,30 +29,42 @@ export default function Portfolio() {
           <p>A closer look at the action, the atmosphere and the people who make it happen.</p>
         </div>
         {isPreviewPortfolio && <p className="demo-note">{previewNote}</p>}
-        <nav className={styles.albums} aria-label="Photo albums">
+        <nav className={styles.albums} aria-label="Jump to a photo collection">
           {albums.map((item) => (
             <Link
               key={item.id}
-              to={`?album=${encodeURIComponent(item.id)}`}
-              aria-current={album?.id === item.id ? 'page' : undefined}
+              to={{ search: params.toString(), hash: `#album-${item.id}` }}
+              preventScrollReset
+              onClick={() =>
+                requestAnimationFrame(() => {
+                  const target = document.getElementById(`album-${item.id}`);
+                  target?.scrollIntoView({ block: 'start', behavior: 'instant' });
+                  target?.focus({ preventScroll: true });
+                })
+              }
             >
-              {item.title}
+              {item.title} <span aria-hidden="true">↓</span>
             </Link>
           ))}
         </nav>
-        {album ? (
-          <AlbumGallery
-            key={album.id}
-            album={album}
-            photo={params.get('photo')}
-            changePhoto={(id) => {
-              const next = new URLSearchParams(params);
-              next.set('album', album.id);
-              if (id) next.set('photo', id);
-              else next.delete('photo');
-              setParams(next, { preventScrollReset: true });
-            }}
-          />
+        <p className={styles.galleryHint}>
+          Browse the collections below. Select a photograph to open the focused viewer.
+        </p>
+        {albums.length ? (
+          albums.map((album) => (
+            <AlbumGallery
+              key={album.id}
+              album={album}
+              photo={focusedAlbum?.id === album.id ? params.get('photo') : null}
+              changePhoto={(id) => {
+                const next = new URLSearchParams(params);
+                next.set('album', album.id);
+                if (id) next.set('photo', id);
+                else next.delete('photo');
+                setParams(next, { preventScrollReset: true });
+              }}
+            />
+          ))
         ) : (
           <p className="state-panel">New collections are coming soon.</p>
         )}
@@ -83,14 +95,23 @@ function AlbumGallery({
   const [visible, setVisible] = useState(24);
   const selected = photo ? images.indexOf(photo) : -1;
   return (
-    <section aria-label={album.title}>
+    <section
+      id={`album-${album.id}`}
+      className={styles.albumSection}
+      tabIndex={-1}
+      aria-label={`${album.title} photographs`}
+    >
       <div className={styles.albumHeading}>
         <div>
           <p className="eyebrow">{album.category}</p>
           <h2>{album.title}</h2>
           <p>{album.description}</p>
         </div>
-        {status === 'ready' && <span>{images.length} photographs</span>}
+        {status === 'ready' && (
+          <span>
+            {images.length} {images.length === 1 ? 'photograph' : 'photographs'}
+          </span>
+        )}
       </div>
       {status === 'loading' && (
         <div className={styles.skeleton} role="status" aria-label="Loading photographs">
@@ -129,7 +150,7 @@ function AlbumGallery({
               publicId={id}
               alt={album.captions?.[id] || `${album.title} — photograph ${index + 1}`}
             />
-            <span>
+            <span className={styles.viewFrame}>
               VIEW FRAME <IconArrowUpRight size={18} />
             </span>
           </button>

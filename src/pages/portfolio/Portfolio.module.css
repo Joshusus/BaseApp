@@ -4,18 +4,39 @@
   gap: 0.75rem;
   border-bottom: 1px solid var(--border);
   padding-bottom: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .albums a {
   color: var(--muted);
   padding: 0.8rem 1.2rem;
   border: 1px solid var(--border);
   font-size: 0.8rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
-.albums a[aria-current] {
+.albums a:hover,
+.albums a:focus-visible {
   border-color: var(--tertiary);
   color: var(--tertiary);
   background: var(--tertiary-100);
+}
+.galleryHint {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+}
+.albumSection {
+  margin-block: 3rem;
+  scroll-margin-top: 1.5rem;
+}
+.albumSection:focus {
+  outline: none;
+}
+.albumSection + .albumSection {
+  padding-top: 3rem;
+  border-top: 1px solid var(--border);
 }
 .albumHeading {
   display: flex;
@@ -39,31 +60,54 @@
   white-space: nowrap;
 }
 .gallery {
-  columns: 3;
-  column-gap: 1rem;
+  columns: var(--gallery-column-width);
+  column-gap: 1.5rem;
 }
 .image {
   position: relative;
   display: block;
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   break-inside: avoid;
-  border: none;
-  padding: 0;
+  border: 0;
+  border-block: 8px solid #050809;
+  padding: 0 var(--gallery-film-frame-width);
   overflow: hidden;
-  background: var(--surface);
+  background: #050809;
   cursor: pointer;
   min-height: 140px;
+}
+.image::before,
+.image::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  width: var(--gallery-film-frame-width);
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at center,
+      var(--background) 0 var(--gallery-film-hole-size),
+      #050809 calc(var(--gallery-film-hole-size) + 1px)
+    )
+    center top / 100% 24px repeat-y;
+}
+.image::before {
+  left: 0;
+}
+.image::after {
+  right: 0;
 }
 .image img {
   width: 100%;
   display: block;
   transition: transform 0.3s;
 }
-.image span {
+.viewFrame {
   position: absolute;
   bottom: 0;
-  right: 0;
+  right: var(--gallery-film-frame-width);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -72,6 +116,7 @@
   color: white;
   font: 0.6rem var(--font-body);
   letter-spacing: 0.1em;
+  pointer-events: none;
 }
 .image:hover img {
   transform: scale(1.025);
@@ -84,28 +129,17 @@
 }
 .skeleton {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 1rem;
 }
 .skeleton div {
   height: 280px;
   background: var(--surface);
 }
-@media (max-width: 850px) {
-  .gallery {
-    columns: 2;
-  }
-}
 @media (max-width: 520px) {
-  .gallery {
-    columns: 1;
-  }
   .albumHeading {
     align-items: start;
     flex-direction: column;
     gap: 0.5rem;
-  }
-  .skeleton {
-    grid-template-columns: 1fr;
   }
 }

@@ -1,0 +1,13 @@
+.photo {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: inherit;
+}

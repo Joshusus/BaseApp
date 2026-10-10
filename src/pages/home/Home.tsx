@@ -1,3 +1,4 @@
+import { isLocalNavigation, scrollToSection } from '~/helpers/scrollToSection';
 import { Link } from 'react-router';
 import { IconArrowUpRight, IconArrowRight } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
@@ -41,15 +42,9 @@ export default function Home() {
               className={styles.scrollPrompt}
               href="#selected-work"
               onClick={(event) => {
+                if (!isLocalNavigation(event)) return;
                 event.preventDefault();
-                const target = document.getElementById('selected-work');
-                target?.scrollIntoView({
-                  block: 'start',
-                  behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-                    ? 'instant'
-                    : 'smooth',
-                });
-                target?.focus({ preventScroll: true });
+                scrollToSection('selected-work');
               }}
             >
               {t('Home.Scroll')}

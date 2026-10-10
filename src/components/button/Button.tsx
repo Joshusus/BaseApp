@@ -1,18 +1,23 @@
 import classNames from '~/helpers/classNames';
 import styles from './Button.module.css';
 
-export type IButton = {
-  onClick: () => void;
-  disabled?: boolean;
-} & React.ComponentPropsWithoutRef<'button'>;
+export type IButton = React.ComponentPropsWithoutRef<'button'>;
 
-export default function Button({ onClick, disabled, children, ...props }: IButton) {
+export default function Button({
+  className,
+  type = 'button',
+  onClick,
+  disabled,
+  children,
+  ...props
+}: IButton) {
   const classNamesList = [styles.button];
   if (disabled) classNamesList.push(styles.disabled);
 
   return (
     <button
-      className={classNames(...classNamesList)}
+      className={classNames(...classNamesList, className ?? '')}
+      type={type}
       onClick={onClick}
       disabled={disabled}
       {...props}

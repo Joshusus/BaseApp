@@ -1,3 +1,4 @@
+import { isLocalNavigation, scrollToSection } from '~/helpers/scrollToSection';
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
@@ -31,19 +32,21 @@ export default function AlbumNavigation({
       const heights = links.map((link) => link.offsetHeight);
       const total = heights.reduce((sum, height) => sum + height + gap, -gap);
       const crowded = total > available;
-      node.dataset.crowded = String(crowded);
       let offset = 0;
       let previousBottom = 0;
       let current = -1;
-      headings.forEach((heading, index) => {
-        if (heading && heading.getBoundingClientRect().top <= window.innerHeight * 0.4)
-          current = index;
+      // Read all geometry before writing styles, avoiding forced layout between links.
+      const headingTops = headings.map(
+        (heading) => heading?.getBoundingClientRect().top ?? window.innerHeight,
+      );
+      headingTops.forEach((top, index) => {
+        if (top <= window.innerHeight * 0.4) current = index;
       });
+      node.dataset.crowded = String(crowded);
       links.forEach((link, index) => {
         const topStop = offset;
         const bottomStop = available - total + offset;
-        const headerTop =
-          (headings[index]?.getBoundingClientRect().top ?? window.innerHeight) - inset;
+        const headerTop = headingTops[index] - inset;
         const top = crowded
           ? offset
           : Math.max(topStop, previousBottom, Math.min(bottomStop, headerTop));
@@ -82,18 +85,10 @@ export default function AlbumNavigation({
           key={album.id}
           to={{ search, hash: `#album-${album.id}` }}
           preventScrollReset
-          onClick={() =>
-            requestAnimationFrame(() => {
-              const target = document.getElementById(`album-${album.id}`);
-              target?.scrollIntoView({
-                block: 'start',
-                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-                  ? 'instant'
-                  : 'smooth',
-              });
-              target?.focus({ preventScroll: true });
-            })
-          }
+          onClick={(event) => {
+            if (!isLocalNavigation(event)) return;
+            requestAnimationFrame(() => scrollToSection(`album-${album.id}`));
+          }}
         >
           <span className={styles.albumNumber} aria-hidden="true">
             {String(index + 1).padStart(2, '0')}

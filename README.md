@@ -15,7 +15,7 @@ npm run build
 npm run preview
 ```
 
-Vite builds a static SPA into `dist/`. This project does not currently use SSR or require an application server. The preview command is for checking a build locally; production should use a static host.
+Vite builds a static SPA into `dist/`. This project does not currently use SSR or require an application server. The preview command is for checking a build locally; production should use a static host. TypeScript also checks for unused imports, local variables and parameters.
 
 ## What is included
 

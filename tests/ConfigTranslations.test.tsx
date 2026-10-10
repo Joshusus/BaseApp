@@ -98,6 +98,8 @@ describe('config-backed translations', () => {
     const target = document.getElementById('selected-work')!;
     target.scrollIntoView = vi.fn();
     const prompt = screen.getByRole('link', { name: en.Home.Scroll });
+    fireEvent.click(prompt, { metaKey: true });
+    expect(target.scrollIntoView).not.toHaveBeenCalled();
     fireEvent.click(prompt);
     expect(target.scrollIntoView).toHaveBeenLastCalledWith({ block: 'start', behavior: 'smooth' });
     expect(document.activeElement).toBe(target);

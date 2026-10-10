@@ -1,5 +1,0 @@
-@reference "tailwindcss";
-
-.page {
-  @apply  bg-(--background);
-}

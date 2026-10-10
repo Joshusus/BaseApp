@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen, within, waitFor } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, within, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import AlbumNavigation from '../src/pages/portfolio/AlbumNavigation';
@@ -72,6 +72,11 @@ it('retains direct links, moves focus to the target and makes an oversized list 
   const target = document.getElementById('album-Water')!;
   target.scrollIntoView = vi.fn();
   expect(links[1].getAttribute('href')).toBe('/?photo=test#album-Water');
+  fireEvent.click(links[1], { ctrlKey: true });
+  await act(async () => {
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+  });
+  expect(target.scrollIntoView).not.toHaveBeenCalled();
   fireEvent.click(links[1]);
   await waitFor(() =>
     expect(target.scrollIntoView).toHaveBeenCalledWith({ block: 'start', behavior: 'instant' }),

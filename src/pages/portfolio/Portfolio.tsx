@@ -1,3 +1,4 @@
+import AlbumNavigation from './AlbumNavigation';
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
@@ -22,31 +23,14 @@ export default function Portfolio() {
   return (
     <PageContent pageTitle={t('Portfolio.Title')}>
       <NavHeader />
-      <main id="main-content" className="section">
+      <main id="main-content" className={`section ${albums.length ? styles.withAlbumRail : ''}`}>
         <div className="page-intro">
           <p className="eyebrow">{t('Portfolio.Eyebrow')}</p>
           <h1>{t('Portfolio.Heading')}</h1>
           <p>{t('Portfolio.Introduction')}</p>
         </div>
         {isPreviewPortfolio && <p className="demo-note">{t(previewNote)}</p>}
-        <nav className={styles.albums} aria-label={t('Portfolio.CollectionNavigation')}>
-          {albums.map((item) => (
-            <Link
-              key={item.id}
-              to={{ search: params.toString(), hash: `#album-${item.id}` }}
-              preventScrollReset
-              onClick={() =>
-                requestAnimationFrame(() => {
-                  const target = document.getElementById(`album-${item.id}`);
-                  target?.scrollIntoView({ block: 'start', behavior: 'instant' });
-                  target?.focus({ preventScroll: true });
-                })
-              }
-            >
-              {t(item.title)} <span aria-hidden="true">↓</span>
-            </Link>
-          ))}
-        </nav>
+        <AlbumNavigation albums={albums} search={params.toString()} />
         <p className={styles.galleryHint}>{t('Portfolio.GalleryHint')}</p>
         {albums.length ? (
           albums.map((album) => (
@@ -100,7 +84,7 @@ function AlbumGallery({
       tabIndex={-1}
       aria-label={t('Portfolio.GalleryLabel', { title: t(album.title) })}
     >
-      <div className={styles.albumHeading}>
+      <div className={styles.albumHeading} data-album-heading>
         <div>
           <p className="eyebrow">{t(album.category)}</p>
           <h2>{t(album.title)}</h2>

@@ -37,10 +37,26 @@ export default function Home() {
           </div>
           <div className={styles.heroFoot}>
             <span>{t(heroPhoto.isPreview ? 'Home.HeroPreview' : 'Home.HeroStatement')}</span>
-            <span>{t('Home.Scroll')}</span>
+            <a
+              className={styles.scrollPrompt}
+              href="#selected-work"
+              onClick={(event) => {
+                event.preventDefault();
+                const target = document.getElementById('selected-work');
+                target?.scrollIntoView({
+                  block: 'start',
+                  behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                    ? 'instant'
+                    : 'smooth',
+                });
+                target?.focus({ preventScroll: true });
+              }}
+            >
+              {t('Home.Scroll')}
+            </a>
           </div>
         </ParallaxPhoto>
-        <section className="section">
+        <section id="selected-work" className="section" tabIndex={-1}>
           <div className="section-heading">
             <div>
               <p className="eyebrow">{t('Home.SelectedWork')}</p>

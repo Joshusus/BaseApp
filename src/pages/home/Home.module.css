@@ -113,8 +113,12 @@
     grid-template-columns: 1fr;
     padding-block: 3rem;
   }
-  .heroFoot span:last-child {
-    display: none;
+  .heroFoot {
+    gap: 1rem;
+    align-items: center;
+  }
+  .heroFoot > span {
+    max-width: 55%;
   }
   .hero {
     min-height: 650px;
@@ -132,4 +136,16 @@
 }
 .statementPhoto > img {
   filter: grayscale(1);
+}
+
+.scrollPrompt {
+  color: var(--textPanel);
+  flex-shrink: 0;
+  padding: 0.6rem 0;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.scrollPrompt:hover {
+  color: var(--tertiary);
+  border-color: currentColor;
 }

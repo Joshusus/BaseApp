@@ -36,6 +36,7 @@ const fr = {
     PhotoCount_other: '{{count}} photographies',
     Viewer: { Enquire: 'Parlons de cette photo', Close: 'Fermer la photo' },
     Albums: {
+      Album2: { Title: 'Sélection' },
       Album1: {
         Title: 'Sélection',
         Category: 'Essai',
@@ -75,11 +76,40 @@ beforeEach(() => {
 });
 afterEach(() => {
   cleanup();
+  vi.unstubAllGlobals();
   document.body.style.overflow = '';
   document.head.querySelector('meta[name="description"]')?.remove();
 });
 
 describe('config-backed translations', () => {
+  it('scrolls beyond the hero and focuses the highlights, respecting reduced motion', async () => {
+    const instance = await makeI18n();
+    const motion = vi
+      .fn()
+      .mockReturnValue({ matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() });
+    vi.stubGlobal('matchMedia', motion);
+    render(
+      <I18nextProvider i18n={instance}>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </I18nextProvider>,
+    );
+    const target = document.getElementById('selected-work')!;
+    target.scrollIntoView = vi.fn();
+    const prompt = screen.getByRole('link', { name: en.Home.Scroll });
+    fireEvent.click(prompt);
+    expect(target.scrollIntoView).toHaveBeenLastCalledWith({ block: 'start', behavior: 'smooth' });
+    expect(document.activeElement).toBe(target);
+    motion.mockReturnValue({
+      matches: true,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    });
+    fireEvent.click(prompt);
+    expect(target.scrollIntoView).toHaveBeenLastCalledWith({ block: 'start', behavior: 'instant' });
+  });
+
   it('registers every configured display key, including caption and image alt keys', () => {
     const keys = [
       siteConfig.name,
@@ -132,7 +162,7 @@ describe('config-backed translations', () => {
   it('translates the full gallery and carousel and puts the readable album title in the enquiry URL', async () => {
     const instance = await makeI18n();
     const album = albums[0];
-    const id = album.publicIds![0];
+    const id = Object.keys(album.captions || {})[0] || album.publicIds![0];
     render(
       <I18nextProvider i18n={instance}>
         <MemoryRouter
@@ -148,9 +178,11 @@ describe('config-backed translations', () => {
     });
     const dialog = screen.getByRole('dialog');
     expect(within(dialog).getByRole('heading', { name: 'Sélection' })).toBeTruthy();
-    expect(screen.getByRole('region', { name: 'Photographies : Sélection' })).toBeTruthy();
+    expect(screen.getAllByRole('region', { name: 'Photographies : Sélection' })[0]).toBeTruthy();
     expect(within(dialog).getByRole('button', { name: 'Fermer la photo' })).toBeTruthy();
-    expect(screen.getByText('1 photographie')).toBeTruthy();
+    expect(
+      screen.getByText(instance.t('Portfolio.PhotoCount', { count: album.publicIds!.length })),
+    ).toBeTruthy();
     const translatedCaption = instance.t(album.captions![id]);
     expect(within(dialog).getByText(translatedCaption)).toBeTruthy();
     expect(screen.getAllByAltText(translatedCaption).length).toBeGreaterThan(1);

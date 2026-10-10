@@ -22,6 +22,21 @@ const demoCloud = cloudName === 'demo';
  */
 export const albums: AlbumConfig[] = [
   {
+    id: 'preview-extra',
+    title: 'Portfolio.Albums.Album2.Title',
+    category: 'Portfolio.Albums.Album1.Category',
+    description: 'Portfolio.Albums.Album1.Description',
+    publicIds: demoCloud
+      ? ['cld-sample-3', 'samples/people/bicycle']
+      : ['cld-sample-3', 'samples/people/bicycle', 'Decaprio'],
+    captions: demoCloud
+      ? {
+          'cld-sample-3': 'Portfolio.Albums.Album1.Captions.Basketball',
+          'samples/people/bicycle': 'Portfolio.Albums.Album1.Captions.Bicycle',
+        }
+      : { Decaprio: 'Portfolio.Albums.Album1.Captions.DeliveryTest' },
+  },
+  {
     id: 'preview',
     title: 'Portfolio.Albums.Album1.Title',
     category: 'Portfolio.Albums.Album1.Category',

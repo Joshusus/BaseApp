@@ -6,7 +6,7 @@
     "PanelTest2": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "PanelTest3": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "Title": "About",
-    "Bio": "Marcus Amps-Woodward is a sports photographer with an eye for the action and the stories around it. Explore the portfolio, or get in touch to talk about your next event.",
+    "Bio": "I’m Marcus Amps-Woodward, a sports photographer drawn to the action and the stories around it. Explore my work, or get in touch to talk about your next event.",
     "Services": {
       "EventCoverage": "Event coverage",
       "AthletePortraits": "Athlete portraits",
@@ -15,8 +15,8 @@
     "Eyebrow": "BEHIND THE LENS",
     "Heading": "A feel for the moment.",
     "StoryHeading": "More than the score.",
-    "StoryBody": "Every sport has a rhythm. The build-up, the burst of effort, the reaction afterwards. Those are the moments worth keeping.",
-    "ProjectLink": "Talk about your project",
+    "StoryBody": "Every sport has a rhythm. The build-up, the burst of effort, the reaction afterwards. Those are the moments I look for—and the ones I want to help you keep.",
+    "ProjectLink": "Tell me about your project",
     "ServicesLabel": "Photography enquiries"
   },
   "Home": {
@@ -25,23 +25,23 @@
     "Job": "Sports Photographer",
     "Highlights": "Highlights",
     "Headline": "Every second. Everything at stake.",
-    "Introduction": "The intensity. The anticipation. The moment it all comes together. Sport, seen through Marcus’s lens.",
-    "HeroPreview": "DEMO HERO PHOTO · REPLACE WITH MARCUS’S WORK",
+    "Introduction": "The intensity. The anticipation. The moment it all comes together. This is how I see sport.",
+    "HeroPreview": "DEMO HERO PHOTO · MY OWN WORK IS COMING SOON",
     "HeroStatement": "THE ACTION. THE ATMOSPHERE. THE STORY.",
     "Scroll": "SCROLL TO EXPLORE ↓",
     "SelectedWork": "01 / SELECTED WORK",
     "SelectedHeading": "In the thick of it.",
     "ViewCollection": "View the collection",
     "LoadingHighlights": "Loading highlights…",
-    "EmptyHighlights": "New photographs are on their way. Come back soon.",
+    "EmptyHighlights": "I’ll be sharing new photographs here soon. Come back for another look.",
     "StoryEyebrow": "BEYOND THE FINISH LINE",
     "StoryHeadingFirst": "Great sport deserves",
     "StoryHeadingSecond": "a great story.",
-    "StoryBody": "From the first whistle to the final push. Photography for athletes, clubs and events, with the energy of the day at its heart.",
-    "MeetMarcus": "Meet Marcus",
+    "StoryBody": "From the first whistle to the final push, I capture athletes, clubs and events with the energy of the day at the heart of every frame.",
+    "MeetMarcus": "A little about me",
     "CtaEyebrow": "YOUR NEXT CHAPTER",
     "CtaHeading": "Let’s capture it.",
-    "CtaBody": "Have an event, a team or an idea in mind?"
+    "CtaBody": "Have an event, a team or an idea in mind? I’d love to hear about it."
   },
   "Portfolio": {
     "Title": "Portfolio",
@@ -51,17 +51,20 @@
       "Album1": {
         "Title": "Preview collection",
         "Category": "Test collection",
-        "Description": "A preview of the gallery experience. Marcus’s own photographs are coming soon.",
+        "Description": "A preview of the gallery experience. I’ll be adding my own photographs soon.",
         "Captions": {
           "Basketball": "Basketball in action · demo photograph",
           "Bicycle": "On two wheels · demo photograph",
-          "DeliveryTest": "Cloudinary delivery test · not Marcus’s portfolio work"
+          "DeliveryTest": "Cloudinary delivery test · not my portfolio work"
         }
+      },
+      "Album2": {
+        "Title": "Preview collection 2"
       }
     },
     "Preview": {
-      "Demo": "Preview gallery · These are Cloudinary demo photographs, not Marcus’s work.",
-      "DeliveryTest": "Preview gallery · This test image verifies image delivery. Marcus’s sports photography is coming soon."
+      "Demo": "Preview gallery · These are Cloudinary demo photographs, not my work.",
+      "DeliveryTest": "Preview gallery · This test image verifies image delivery. My sports photography is coming soon."
     },
     "GalleryLabel": "{{title}} photographs",
     "FrameCaption": "{{title}} — photograph {{number}}",
@@ -69,12 +72,12 @@
     "ViewCaption": "View {{caption}}",
     "Eyebrow": "THE PORTFOLIO",
     "Heading": "Sport. In every frame.",
-    "Introduction": "A closer look at the action, the atmosphere and the people who make it happen.",
+    "Introduction": "My view of the action, the atmosphere and the people who make it happen.",
     "CollectionNavigation": "Jump to a photo collection",
     "GalleryHint": "Browse the collections below. Select a photograph to open the focused viewer.",
-    "EmptyCollections": "New collections are coming soon.",
+    "EmptyCollections": "I’m putting together new collections. Check back soon.",
     "CtaHeading": "See something you like?",
-    "CtaBody": "Talk to Marcus about coverage, prints or image licensing.",
+    "CtaBody": "Talk to me about coverage, prints or image licensing.",
     "Loading": "Loading photographs",
     "EmptyAlbum": "This collection is waiting for its first photographs. Check back soon.",
     "MissingPhoto": "That photograph is no longer in this collection. Explore the current photographs below.",
@@ -112,14 +115,14 @@
     },
     "Eyebrow": "LET’S MAKE SOMETHING MEMORABLE",
     "Heading": "What’s your next move?",
-    "Introduction": "An event. A team. A personal best. Tell Marcus what you have in mind.",
+    "Introduction": "An event. A team. A personal best. Tell me what you have in mind.",
     "AsideHeading": "Start a conversation.",
-    "AsideBody": "Share a few details about your project, date and location. Or ask about a photograph you’ve spotted in the portfolio.",
+    "AsideBody": "Share a few details about your project, date and location. Or ask me about a photograph you’ve spotted in my portfolio.",
     "EmailLabel": "EMAIL",
-    "InstagramLink": "Find Marcus on Instagram",
+    "InstagramLink": "Find me on Instagram",
     "DraftNotice": "This form prepares a draft in your email app. You review and send it yourself.",
     "PrivacyNotice": "Your message stays in this page until you open your email app, copy it or download it. The website does not submit or store enquiries.",
-    "PreviewNotice": "Preview contact address · marcus@example.com is a placeholder and cannot receive enquiries. Use Marcus’s Instagram to get in touch for now.",
+    "PreviewNotice": "Preview contact address · marcus@example.com is a placeholder and cannot receive enquiries. You can reach me on Instagram for now.",
     "Fields": {
       "Name": "Your name",
       "Email": "Your email",
@@ -141,7 +144,7 @@
     "Role": "Sports photographer",
     "ProfileAlt": "Portrait of {{name}}",
     "SiteTitle": "Sports photography",
-    "ExplorePortfolio": "Explore the portfolio",
+    "ExplorePortfolio": "Explore my portfolio",
     "TryAgain": "Try again",
     "StartConversation": "Start a conversation",
     "GetInTouch": "Get in touch",
@@ -161,14 +164,14 @@
   },
   "Navigation": {
     "Tagline": "SPORT. IN FOCUS.",
-    "InstagramLabel": "Marcus on Instagram",
-    "EmailLabel": "Email Marcus",
+    "InstagramLabel": "Find me on Instagram",
+    "EmailLabel": "Email me",
     "MainLabel": "Main navigation",
     "Enquire": "Let’s talk"
   },
   "Footer": {
     "Tagline": "For the moments that matter.",
-    "ViewWork": "View the work",
+    "ViewWork": "View my work",
     "Copyright": "© {{year}} {{name}}. Photographs remain the property of their respective owners."
   },
   "NotFound": {

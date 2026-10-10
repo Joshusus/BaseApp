@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { IconChevronLeft, IconChevronRight, IconX, IconLink, IconMail } from '@tabler/icons-react';
 import { Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import PortfolioImage from '~/integrations/components/PortfolioImage';
 import type { AlbumConfig } from '~/config/PortfolioConfig';
 import styles from './Carousel.module.css';
@@ -13,6 +14,7 @@ type Props = {
   onClose: () => void;
 };
 export default function Carousel({ album, images, index, onChange, onClose }: Props) {
+  const { t } = useTranslation();
   const dialog = useRef<HTMLDialogElement>(null);
   const pointerStart = useRef<number | null>(null);
   const [shareStatus, setShareStatus] = useState('');
@@ -24,7 +26,9 @@ export default function Carousel({ album, images, index, onChange, onClose }: Pr
     onChange((index + step + images.length) % images.length);
   };
   const id = images[index];
-  const caption = album.captions?.[id] || `${album.title} — photograph ${index + 1}`;
+  const caption = album.captions?.[id]
+    ? t(album.captions[id])
+    : t('Portfolio.FrameCaption', { title: t(album.title), number: index + 1 });
 
   useEffect(() => {
     const node = dialog.current!;
@@ -42,9 +46,9 @@ export default function Carousel({ album, images, index, onChange, onClose }: Pr
   const copyLink = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      setShareStatus('Photo link copied.');
+      setShareStatus('Portfolio.Viewer.LinkCopied');
     } catch {
-      setShareStatus('Copy the address from your browser to share this photograph.');
+      setShareStatus('Portfolio.Viewer.CopyUnavailable');
     }
   };
   return (
@@ -73,13 +77,13 @@ export default function Carousel({ album, images, index, onChange, onClose }: Pr
       <div className={styles.content}>
         <header>
           <div>
-            <p className="eyebrow">{album.category}</p>
-            <h2 id="carousel-title">{album.title}</h2>
+            <p className="eyebrow">{t(album.category)}</p>
+            <h2 id="carousel-title">{t(album.title)}</h2>
           </div>
           <button
             className="icon-button"
             onClick={onClose}
-            aria-label="Close photograph viewer"
+            aria-label={t('Portfolio.Viewer.Close')}
             autoFocus
           >
             <IconX />
@@ -108,11 +112,15 @@ export default function Carousel({ album, images, index, onChange, onClose }: Pr
               <button
                 className={styles.previous}
                 onClick={() => move(-1)}
-                aria-label="Previous photograph"
+                aria-label={t('Portfolio.Viewer.Previous')}
               >
                 <IconChevronLeft />
               </button>
-              <button className={styles.next} onClick={() => move(1)} aria-label="Next photograph">
+              <button
+                className={styles.next}
+                onClick={() => move(1)}
+                aria-label={t('Portfolio.Viewer.Next')}
+              >
                 <IconChevronRight />
               </button>
             </>
@@ -123,23 +131,27 @@ export default function Carousel({ album, images, index, onChange, onClose }: Pr
             <p>{caption}</p>
             <small>
               {index + 1} / {images.length} ·{' '}
-              {images.length > 1 ? 'Arrow keys or swipe to explore' : 'Selected photograph'}
+              {t(
+                images.length > 1
+                  ? 'Portfolio.Viewer.ExploreHint'
+                  : 'Portfolio.Viewer.SelectedHint',
+              )}
             </small>
           </div>
           <div className={styles.actions}>
             <button className="button" onClick={copyLink}>
-              <IconLink size={18} /> Share photo
+              <IconLink size={18} /> {t('Portfolio.Viewer.Share')}
             </button>
             <Link
               className="button"
-              to={`/contact?photo=${encodeURIComponent(id)}&album=${encodeURIComponent(album.title)}`}
+              to={`/contact?photo=${encodeURIComponent(id)}&album=${encodeURIComponent(t(album.title))}`}
             >
-              <IconMail size={18} /> Ask about this photo
+              <IconMail size={18} /> {t('Portfolio.Viewer.Enquire')}
             </Link>
           </div>
         </div>
         <p className={styles.status} role="status">
-          {shareStatus}
+          {shareStatus && t(shareStatus)}
         </p>
       </div>
     </dialog>

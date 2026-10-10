@@ -1,3 +1,4 @@
+import { englishI18n } from './translationFixture';
 import { describe, expect, it } from 'vitest';
 import { createMailto, draftText } from '../src/integrations/email/EmailDraft';
 describe('email draft composition', () => {
@@ -8,7 +9,7 @@ describe('email draft composition', () => {
       subject: 'Water & sport? #1\r\nBcc: nope',
       message: 'Hi Marcus,\nDéjà vu & 100% effort?',
     };
-    const uri = createMailto('marcus@example.com', enquiry);
+    const uri = createMailto('marcus@example.com', enquiry, englishI18n.t.bind(englishI18n));
     const query = new URLSearchParams(uri.split('?')[1]);
     expect(query.get('subject')).toBe('Water & sport? #1  Bcc: nope');
     expect(query.get('body')).toBe(
@@ -18,12 +19,16 @@ describe('email draft composition', () => {
   });
   it('includes destination, subject and contact details in the portable draft', () => {
     expect(
-      draftText('marcus@example.com', {
-        name: '  Jo  ',
-        replyTo: 'jo@example.com',
-        subject: 'Event coverage',
-        message: '  Next Saturday  ',
-      }),
+      draftText(
+        'marcus@example.com',
+        {
+          name: '  Jo  ',
+          replyTo: 'jo@example.com',
+          subject: 'Event coverage',
+          message: '  Next Saturday  ',
+        },
+        englishI18n.t.bind(englishI18n),
+      ),
     ).toBe(
       'To: marcus@example.com\nSubject: Event coverage\n\nNext Saturday\n\nFrom: Jo\nReply to: jo@example.com',
     );

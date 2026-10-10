@@ -8,7 +8,7 @@ const heroCloud =
 export const heroPhoto = {
   publicId: customHero || 'cld-sample-3',
   cloudName: heroCloud,
-  alt: customHero ? 'Featured sports photograph' : 'Basketball in action · demo photograph',
+  alt: customHero ? 'Photography.Hero.FeaturedAlt' : 'Photography.Hero.DemoAlt',
   objectPosition: 'center 35%',
   mobileObjectPosition: '70% 35%',
   isPreview: heroCloud === 'demo',

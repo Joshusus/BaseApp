@@ -1,5 +1,6 @@
 export type AlbumConfig = {
   id: string;
+  /** Display fields and caption values are translation keys, resolved with t(). */
   title: string;
   category: string;
   description: string;
@@ -13,28 +14,28 @@ export const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME?.trim() || '
 const demoCloud = cloudName === 'demo';
 
 /** Replace the preview with Marcus's collections when they are uploaded.
- * Example: { id: 'watersports', title: 'Watersports', category: 'Sport',
- * description: 'Speed, spray and the moments in between.', tag: 'watersports' }
+ * Example: { id: 'watersports', title: 'Portfolio.Albums.Watersports.Title',
+ * category: 'Portfolio.Albums.Watersports.Category',
+ * description: 'Portfolio.Albums.Watersports.Description', tag: 'watersports' }
+ * Define those display keys in public/locales/en/translation.json.
  * Curated publicIds work without enabling Cloudinary's public Resource list.
  */
 export const albums: AlbumConfig[] = [
   {
     id: 'preview',
-    title: 'Preview collection',
-    category: 'Test collection',
-    description: 'A preview of the gallery experience. Marcus’s own photographs are coming soon.',
+    title: 'Portfolio.Albums.Album1.Title',
+    category: 'Portfolio.Albums.Album1.Category',
+    description: 'Portfolio.Albums.Album1.Description',
     publicIds: demoCloud ? ['cld-sample-3', 'samples/people/bicycle'] : ['Decaprio'],
     captions: demoCloud
       ? {
-          'cld-sample-3': 'Basketball in action · demo photograph',
-          'samples/people/bicycle': 'On two wheels · demo photograph',
+          'cld-sample-3': 'Portfolio.Albums.Album1.Captions.Basketball',
+          'samples/people/bicycle': 'Portfolio.Albums.Album1.Captions.Bicycle',
         }
-      : { Decaprio: 'Cloudinary delivery test · not Marcus’s portfolio work' },
+      : { Decaprio: 'Portfolio.Albums.Album1.Captions.DeliveryTest' },
   },
 ];
 /** Set false when you replace the test collection with Marcus's photographs. */
 export const isPreviewPortfolio = true;
-export const previewNote = demoCloud
-  ? 'Preview gallery · These are Cloudinary demo photographs, not Marcus’s work.'
-  : 'Preview gallery · This test image verifies image delivery. Marcus’s sports photography is coming soon.';
+export const previewNote = demoCloud ? 'Portfolio.Preview.Demo' : 'Portfolio.Preview.DeliveryTest';
 export const featuredAlbumId = albums[0]?.id;

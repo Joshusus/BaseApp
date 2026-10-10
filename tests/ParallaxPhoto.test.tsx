@@ -3,6 +3,11 @@ import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
 import ParallaxPhoto from '../src/components/parallaxPhoto/ParallaxPhoto';
 import PortfolioImage from '../src/integrations/components/PortfolioImage';
 
+vi.mock('react-i18next', async () => {
+  const { englishI18n } = await import('./translationFixture');
+  return { useTranslation: () => ({ t: englishI18n.t.bind(englishI18n), i18n: englishI18n }) };
+});
+
 vi.mock('react-parallax/lib/index.js', () => ({
   Parallax: ({
     disabled,

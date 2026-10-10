@@ -24,12 +24,12 @@ export default function Portfolio() {
       <NavHeader />
       <main id="main-content" className="section">
         <div className="page-intro">
-          <p className="eyebrow">THE PORTFOLIO</p>
-          <h1>Sport. In every frame.</h1>
-          <p>A closer look at the action, the atmosphere and the people who make it happen.</p>
+          <p className="eyebrow">{t('Portfolio.Eyebrow')}</p>
+          <h1>{t('Portfolio.Heading')}</h1>
+          <p>{t('Portfolio.Introduction')}</p>
         </div>
-        {isPreviewPortfolio && <p className="demo-note">{previewNote}</p>}
-        <nav className={styles.albums} aria-label="Jump to a photo collection">
+        {isPreviewPortfolio && <p className="demo-note">{t(previewNote)}</p>}
+        <nav className={styles.albums} aria-label={t('Portfolio.CollectionNavigation')}>
           {albums.map((item) => (
             <Link
               key={item.id}
@@ -43,13 +43,11 @@ export default function Portfolio() {
                 })
               }
             >
-              {item.title} <span aria-hidden="true">↓</span>
+              {t(item.title)} <span aria-hidden="true">↓</span>
             </Link>
           ))}
         </nav>
-        <p className={styles.galleryHint}>
-          Browse the collections below. Select a photograph to open the focused viewer.
-        </p>
+        <p className={styles.galleryHint}>{t('Portfolio.GalleryHint')}</p>
         {albums.length ? (
           albums.map((album) => (
             <AlbumGallery
@@ -66,15 +64,15 @@ export default function Portfolio() {
             />
           ))
         ) : (
-          <p className="state-panel">New collections are coming soon.</p>
+          <p className="state-panel">{t('Portfolio.EmptyCollections')}</p>
         )}
         <div className="cta">
           <div>
-            <h2>See something you like?</h2>
-            <p>Talk to Marcus about coverage, prints or image licensing.</p>
+            <h2>{t('Portfolio.CtaHeading')}</h2>
+            <p>{t('Portfolio.CtaBody')}</p>
           </div>
           <Link className="button button-primary" to="/contact">
-            Get in touch <IconArrowUpRight size={20} />
+            {t('Common.GetInTouch')} <IconArrowUpRight size={20} />
           </Link>
         </div>
       </main>
@@ -91,6 +89,7 @@ function AlbumGallery({
   photo: string | null;
   changePhoto: (id?: string) => void;
 }) {
+  const { t } = useTranslation();
   const { images, status, error, retry } = usePortfolio(album);
   const [visible, setVisible] = useState(24);
   const selected = photo ? images.indexOf(photo) : -1;
@@ -99,22 +98,18 @@ function AlbumGallery({
       id={`album-${album.id}`}
       className={styles.albumSection}
       tabIndex={-1}
-      aria-label={`${album.title} photographs`}
+      aria-label={t('Portfolio.GalleryLabel', { title: t(album.title) })}
     >
       <div className={styles.albumHeading}>
         <div>
-          <p className="eyebrow">{album.category}</p>
-          <h2>{album.title}</h2>
-          <p>{album.description}</p>
+          <p className="eyebrow">{t(album.category)}</p>
+          <h2>{t(album.title)}</h2>
+          <p>{t(album.description)}</p>
         </div>
-        {status === 'ready' && (
-          <span>
-            {images.length} {images.length === 1 ? 'photograph' : 'photographs'}
-          </span>
-        )}
+        {status === 'ready' && <span>{t('Portfolio.PhotoCount', { count: images.length })}</span>}
       </div>
       {status === 'loading' && (
-        <div className={styles.skeleton} role="status" aria-label="Loading photographs">
+        <div className={styles.skeleton} role="status" aria-label={t('Portfolio.Loading')}>
           {[1, 2, 3].map((id) => (
             <div key={id} />
           ))}
@@ -122,20 +117,18 @@ function AlbumGallery({
       )}
       {status === 'error' && (
         <div className="state-panel" role="alert">
-          <p>{error}</p>
+          <p>{t(error || 'Portfolio.LoadError')}</p>
           <button className="button" onClick={retry}>
-            Try again
+            {t('Common.TryAgain')}
           </button>
         </div>
       )}
       {status === 'ready' && images.length === 0 && (
-        <p className="state-panel">
-          This collection is waiting for its first photographs. Check back soon.
-        </p>
+        <p className="state-panel">{t('Portfolio.EmptyAlbum')}</p>
       )}
       {status === 'ready' && photo && selected < 0 && (
         <p role="status" className="demo-note">
-          That photograph is no longer in this collection. Explore the current photographs below.
+          {t('Portfolio.MissingPhoto')}
         </p>
       )}
       <div className={styles.gallery}>
@@ -144,14 +137,22 @@ function AlbumGallery({
             key={id}
             className={styles.image}
             onClick={() => changePhoto(id)}
-            aria-label={`View ${album.captions?.[id] || `${album.title}, photograph ${index + 1}`}`}
+            aria-label={
+              album.captions?.[id]
+                ? t('Portfolio.ViewCaption', { caption: t(album.captions[id]) })
+                : t('Portfolio.ViewFrame', { title: t(album.title), number: index + 1 })
+            }
           >
             <PortfolioImage
               publicId={id}
-              alt={album.captions?.[id] || `${album.title} — photograph ${index + 1}`}
+              alt={
+                album.captions?.[id]
+                  ? t(album.captions[id])
+                  : t('Portfolio.FrameCaption', { title: t(album.title), number: index + 1 })
+              }
             />
             <span className={styles.viewFrame}>
-              VIEW FRAME <IconArrowUpRight size={18} />
+              {t('Portfolio.ViewFrameLabel')} <IconArrowUpRight size={18} />
             </span>
           </button>
         ))}
@@ -159,10 +160,13 @@ function AlbumGallery({
       {visible < images.length && (
         <div className={styles.loadMore}>
           <p>
-            Showing {Math.min(visible, images.length)} of {images.length}
+            {t('Portfolio.Showing', {
+              visible: Math.min(visible, images.length),
+              total: images.length,
+            })}
           </p>
           <button className="button" onClick={() => setVisible((count) => count + 24)}>
-            Load more photographs
+            {t('Portfolio.LoadMore')}
           </button>
         </div>
       )}

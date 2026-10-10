@@ -13,34 +13,31 @@ export default function About() {
       <NavHeader />
       <main id="main-content" className="section">
         <div className="page-intro">
-          <p className="eyebrow">BEHIND THE LENS</p>
-          <h1>A feel for the moment.</h1>
+          <p className="eyebrow">{t('About.Eyebrow')}</p>
+          <h1>{t('About.Heading')}</h1>
         </div>
         <div className={styles.layout}>
           <img
             src={siteConfig.profilePhotoUrl}
-            alt={`Portrait of ${siteConfig.name}`}
+            alt={t('Common.ProfileAlt', { name: t(siteConfig.name) })}
             className={styles.portrait}
             loading="lazy"
           />
           <div>
-            <p className="eyebrow">{siteConfig.name}</p>
-            <h2>More than the score.</h2>
-            <p>{siteConfig.about}</p>
-            <p>
-              Every sport has a rhythm. The build-up, the burst of effort, the reaction afterwards.
-              Those are the moments worth keeping.
-            </p>
+            <p className="eyebrow">{t(siteConfig.name)}</p>
+            <h2>{t('About.StoryHeading')}</h2>
+            <p>{t(siteConfig.about)}</p>
+            <p>{t('About.StoryBody')}</p>
             <Link className="button button-primary" to="/contact">
-              Talk about your project <IconArrowUpRight size={20} />
+              {t('About.ProjectLink')} <IconArrowUpRight size={20} />
             </Link>
           </div>
         </div>
-        <section className={styles.services} aria-label="Photography enquiries">
+        <section className={styles.services} aria-label={t('About.ServicesLabel')}>
           {siteConfig.services.map((service, index) => (
             <div key={service}>
               <span>0{index + 1}</span>
-              <h3>{service}</h3>
+              <h3>{t(service)}</h3>
             </div>
           ))}
         </section>

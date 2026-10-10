@@ -3,7 +3,10 @@ import { cleanup, fireEvent, render, screen, within } from '@testing-library/rea
 import { MemoryRouter } from 'react-router';
 import Portfolio from '../src/pages/portfolio/Portfolio';
 
-vi.mock('react-i18next', () => ({ useTranslation: () => ({ t: (key: string) => key }) }));
+vi.mock('react-i18next', async () => {
+  const { englishI18n } = await import('./translationFixture');
+  return { useTranslation: () => ({ t: englishI18n.t.bind(englishI18n), i18n: englishI18n }) };
+});
 vi.mock('../src/config/PortfolioConfig', () => ({
   cloudName: 'fixture-cloud',
   isPreviewPortfolio: false,

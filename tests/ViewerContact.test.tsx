@@ -5,8 +5,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import Carousel from '../src/components/carousel/Carousel';
 import Contact from '../src/pages/contact/Contact';
 import { siteConfig } from '../src/config/SiteConfig';
+import { englishI18n } from './translationFixture';
 
-vi.mock('react-i18next', () => ({ useTranslation: () => ({ t: (key: string) => key }) }));
+vi.mock('react-i18next', async () => {
+  const { englishI18n } = await import('./translationFixture');
+  return { useTranslation: () => ({ t: englishI18n.t.bind(englishI18n), i18n: englishI18n }) };
+});
 beforeEach(() => {
   HTMLDialogElement.prototype.showModal = function () {
     this.setAttribute('open', '');
@@ -113,7 +117,7 @@ describe('contact composer', () => {
     fireEvent.change(screen.getByLabelText('Your email'), { target: { value: 'jo@example.com' } });
     fireEvent.click(screen.getByRole('button', { name: 'Copy draft' }));
     const draft = (await screen.findByLabelText('Draft to copy')) as HTMLTextAreaElement;
-    expect(draft.value).toContain(siteConfig.enquiryStarter);
+    expect(draft.value).toContain(englishI18n.t(siteConfig.enquiryStarter));
     expect(draft.value).toContain('Reply to: jo@example.com');
     expect(screen.queryByText(/sent successfully/i)).toBeNull();
   });

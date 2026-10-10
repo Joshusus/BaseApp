@@ -5,28 +5,176 @@
     "PanelTest1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     "PanelTest2": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "PanelTest3": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "Title": "About"
+    "Title": "About",
+    "Bio": "Marcus Amps-Woodward is a sports photographer with an eye for the action and the stories around it. Explore the portfolio, or get in touch to talk about your next event.",
+    "Services": {
+      "EventCoverage": "Event coverage",
+      "AthletePortraits": "Athlete portraits",
+      "TeamPhotography": "Team & club photography"
+    },
+    "Eyebrow": "BEHIND THE LENS",
+    "Heading": "A feel for the moment.",
+    "StoryHeading": "More than the score.",
+    "StoryBody": "Every sport has a rhythm. The build-up, the burst of effort, the reaction afterwards. Those are the moments worth keeping.",
+    "ProjectLink": "Talk about your project",
+    "ServicesLabel": "Photography enquiries"
   },
   "Home": {
     "Title": "Home",
     "Name": "Marcus Amps-Woodward",
     "Job": "Sports Photographer",
-    "Highlights": "Highlights"
+    "Highlights": "Highlights",
+    "Headline": "Every second. Everything at stake.",
+    "Introduction": "The intensity. The anticipation. The moment it all comes together. Sport, seen through Marcus’s lens.",
+    "HeroPreview": "DEMO HERO PHOTO · REPLACE WITH MARCUS’S WORK",
+    "HeroStatement": "THE ACTION. THE ATMOSPHERE. THE STORY.",
+    "Scroll": "SCROLL TO EXPLORE ↓",
+    "SelectedWork": "01 / SELECTED WORK",
+    "SelectedHeading": "In the thick of it.",
+    "ViewCollection": "View the collection",
+    "LoadingHighlights": "Loading highlights…",
+    "EmptyHighlights": "New photographs are on their way. Come back soon.",
+    "StoryEyebrow": "BEYOND THE FINISH LINE",
+    "StoryHeadingFirst": "Great sport deserves",
+    "StoryHeadingSecond": "a great story.",
+    "StoryBody": "From the first whistle to the final push. Photography for athletes, clubs and events, with the energy of the day at its heart.",
+    "MeetMarcus": "Meet Marcus",
+    "CtaEyebrow": "YOUR NEXT CHAPTER",
+    "CtaHeading": "Let’s capture it.",
+    "CtaBody": "Have an event, a team or an idea in mind?"
   },
   "Portfolio": {
     "Title": "Portfolio",
     "MostRecent": "Recent Highlights",
-    "Aquasports": "Watersports"
+    "Aquasports": "Watersports",
+    "Albums": {
+      "Album1": {
+        "Title": "Preview collection",
+        "Category": "Test collection",
+        "Description": "A preview of the gallery experience. Marcus’s own photographs are coming soon.",
+        "Captions": {
+          "Basketball": "Basketball in action · demo photograph",
+          "Bicycle": "On two wheels · demo photograph",
+          "DeliveryTest": "Cloudinary delivery test · not Marcus’s portfolio work"
+        }
+      }
+    },
+    "Preview": {
+      "Demo": "Preview gallery · These are Cloudinary demo photographs, not Marcus’s work.",
+      "DeliveryTest": "Preview gallery · This test image verifies image delivery. Marcus’s sports photography is coming soon."
+    },
+    "GalleryLabel": "{{title}} photographs",
+    "FrameCaption": "{{title}} — photograph {{number}}",
+    "ViewFrame": "View {{title}}, photograph {{number}}",
+    "ViewCaption": "View {{caption}}",
+    "Eyebrow": "THE PORTFOLIO",
+    "Heading": "Sport. In every frame.",
+    "Introduction": "A closer look at the action, the atmosphere and the people who make it happen.",
+    "CollectionNavigation": "Jump to a photo collection",
+    "GalleryHint": "Browse the collections below. Select a photograph to open the focused viewer.",
+    "EmptyCollections": "New collections are coming soon.",
+    "CtaHeading": "See something you like?",
+    "CtaBody": "Talk to Marcus about coverage, prints or image licensing.",
+    "Loading": "Loading photographs",
+    "EmptyAlbum": "This collection is waiting for its first photographs. Check back soon.",
+    "MissingPhoto": "That photograph is no longer in this collection. Explore the current photographs below.",
+    "ViewFrameLabel": "VIEW FRAME",
+    "LoadMore": "Load more photographs",
+    "PhotoCount_one": "{{count}} photograph",
+    "PhotoCount_other": "{{count}} photographs",
+    "Showing": "Showing {{visible}} of {{total}}",
+    "LoadError": "This album could not be loaded. Please try again.",
+    "Viewer": {
+      "LinkCopied": "Photo link copied.",
+      "CopyUnavailable": "Copy the address from your browser to share this photograph.",
+      "Close": "Close photograph viewer",
+      "Previous": "Previous photograph",
+      "Next": "Next photograph",
+      "ExploreHint": "Arrow keys or swipe to explore",
+      "SelectedHint": "Selected photograph",
+      "Share": "Share photo",
+      "Enquire": "Ask about this photo"
+    }
   },
   "Contact": {
     "Title": "Contact",
-    "Send": "Send"
+    "Send": "Send",
+    "EnquiryStarter": "Hi Marcus,\n\nI’d love to talk about photography for…\n\nEvent / sport:\nDate and location:\nWhat I’m looking for:\n\nThanks!",
+    "EnquirySubject": "Photography enquiry",
+    "PhotoEnquirySubject": "Photo enquiry: {{album}}",
+    "PhotoEnquiryMessage": "Hi Marcus,\n\nI’m interested in this photograph:\nAlbum: {{album}}\nPhoto reference: {{photo}}\n\nCould you tell me more about prints or licensing?\n\nThanks!",
+    "Feedback": {
+      "TooLong": "This draft is too long for some email apps. Copy or download it below, then paste it into your email.",
+      "Opened": "Your email app was requested. Nothing has been sent by this website. Review the draft and send it there. If no app opened, copy or download your draft below.",
+      "Copied": "Draft copied. Paste it into your email and send it to the address shown.",
+      "CopyUnavailable": "Automatic copying is unavailable. Select and copy the draft below.",
+      "Downloaded": "Draft downloaded. Paste its contents into your email to send it."
+    },
+    "Eyebrow": "LET’S MAKE SOMETHING MEMORABLE",
+    "Heading": "What’s your next move?",
+    "Introduction": "An event. A team. A personal best. Tell Marcus what you have in mind.",
+    "AsideHeading": "Start a conversation.",
+    "AsideBody": "Share a few details about your project, date and location. Or ask about a photograph you’ve spotted in the portfolio.",
+    "EmailLabel": "EMAIL",
+    "InstagramLink": "Find Marcus on Instagram",
+    "DraftNotice": "This form prepares a draft in your email app. You review and send it yourself.",
+    "PrivacyNotice": "Your message stays in this page until you open your email app, copy it or download it. The website does not submit or store enquiries.",
+    "PreviewNotice": "Preview contact address · marcus@example.com is a placeholder and cannot receive enquiries. Use Marcus’s Instagram to get in touch for now.",
+    "Fields": {
+      "Name": "Your name",
+      "Email": "Your email",
+      "Subject": "Subject",
+      "Message": "Your message"
+    },
+    "OpenDraft": "Open email draft",
+    "CopyDraft": "Copy draft",
+    "Download": "Download",
+    "DraftToCopy": "Draft to copy",
+    "Draft": {
+      "Body": "{{message}}\n\nFrom: {{name}}\nReply to: {{replyTo}}",
+      "Text": "To: {{recipient}}\nSubject: {{subject}}\n\n{{body}}"
+    }
   },
   "Common": {
     "ProfilePic": "Profile Picture",
-    "NameTitle": "Marcus Amps-Woodward"
+    "NameTitle": "Marcus Amps-Woodward",
+    "Role": "Sports photographer",
+    "ProfileAlt": "Portrait of {{name}}",
+    "SiteTitle": "Sports photography",
+    "ExplorePortfolio": "Explore the portfolio",
+    "TryAgain": "Try again",
+    "StartConversation": "Start a conversation",
+    "GetInTouch": "Get in touch",
+    "PhotographyLabel": "SPORTS PHOTOGRAPHY",
+    "SkipContent": "Skip to content",
+    "Instagram": "Instagram"
   },
   "Contacts": {
     "ContactForm": "Contact Form"
+  },
+  "Photography": {
+    "Hero": {
+      "FeaturedAlt": "Featured sports photograph",
+      "DemoAlt": "Basketball in action · demo photograph"
+    },
+    "Unavailable": "Photograph unavailable"
+  },
+  "Navigation": {
+    "Tagline": "SPORT. IN FOCUS.",
+    "InstagramLabel": "Marcus on Instagram",
+    "EmailLabel": "Email Marcus",
+    "MainLabel": "Main navigation",
+    "Enquire": "Let’s talk"
+  },
+  "Footer": {
+    "Tagline": "For the moments that matter.",
+    "ViewWork": "View the work",
+    "Copyright": "© {{year}} {{name}}. Photographs remain the property of their respective owners."
+  },
+  "NotFound": {
+    "Title": "Page not found",
+    "Eyebrow": "404 / OFF THE TRACK",
+    "Heading": "Let’s get you back.",
+    "Body": "This page could not be found."
   }
 }

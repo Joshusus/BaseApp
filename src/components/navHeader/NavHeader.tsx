@@ -9,22 +9,22 @@ export default function NavHeader() {
   return (
     <header className={styles.header}>
       <div className={styles.utility}>
-        <span>SPORT. IN FOCUS.</span>
+        <span>{t('Navigation.Tagline')}</span>
         <div>
           <a
             href={siteConfig.instagram}
             target="_blank"
             rel="noreferrer"
-            aria-label="Marcus on Instagram"
+            aria-label={t('Navigation.InstagramLabel')}
           >
             <IconBrandInstagram size={18} />
           </a>
-          <Link to="/contact" aria-label="Email Marcus">
+          <Link to="/contact" aria-label={t('Navigation.EmailLabel')}>
             <IconMail size={18} />
           </Link>
         </div>
       </div>
-      <nav className={styles.bar} aria-label="Main navigation">
+      <nav className={styles.bar} aria-label={t('Navigation.MainLabel')}>
         <Link to="/" className={styles.brand}>
           <img
             src={siteConfig.profilePhotoUrl}
@@ -34,8 +34,8 @@ export default function NavHeader() {
             height={72}
           />
           <span>
-            {siteConfig.name}
-            <small>SPORTS PHOTOGRAPHY</small>
+            {t(siteConfig.name)}
+            <small>{t('Common.PhotographyLabel')}</small>
           </span>
         </Link>
         <div className={styles.links}>
@@ -56,7 +56,7 @@ export default function NavHeader() {
           ))}
         </div>
         <Link className={styles.enquire} to="/contact">
-          Let’s talk <IconArrowUpRight size={18} />
+          {t('Navigation.Enquire')} <IconArrowUpRight size={18} />
         </Link>
       </nav>
     </header>

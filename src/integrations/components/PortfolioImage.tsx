@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useState, type ComponentPropsWithoutRef } from 'react';
 import useGetImages from '../cloudinary/hooks/useGetImages';
 
@@ -15,6 +16,7 @@ export default function PortfolioImage({
   loading = 'lazy',
   ...props
 }: Props) {
+  const { t } = useTranslation();
   const { getImage } = useGetImages();
   const [failedSource, setFailedSource] = useState<string>();
   const source = JSON.stringify([cloudName, publicId]);
@@ -26,7 +28,7 @@ export default function PortfolioImage({
         role="img"
         aria-label={alt}
       >
-        Photograph unavailable
+        {t('Photography.Unavailable')}
       </span>
     );
   return (

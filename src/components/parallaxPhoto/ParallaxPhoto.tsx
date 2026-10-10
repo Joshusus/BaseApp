@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Parallax } from 'react-parallax/lib/index.js';
 import PortfolioImage from '~/integrations/components/PortfolioImage';
 import styles from './ParallaxPhoto.module.css';
@@ -43,6 +44,7 @@ export default function ParallaxPhoto({
   contentClassName,
   loading = 'lazy',
 }: Props) {
+  const { t } = useTranslation();
   const reduced = useReducedMotion();
   const [viewportHeight, setViewportHeight] = useState(() =>
     typeof window === 'undefined' ? photo.parallax.travel : window.innerHeight,
@@ -73,7 +75,7 @@ export default function ParallaxPhoto({
         <PortfolioImage
           publicId={photo.publicId}
           cloudName={photo.cloudName}
-          alt={photo.alt}
+          alt={t(photo.alt)}
           loading={loading}
           fetchPriority={loading === 'eager' ? 'high' : 'auto'}
           imageWidth={1800}

@@ -34,11 +34,15 @@ Vite builds a static SPA into `dist/`. This project does not currently use SSR o
 
 | File | Purpose |
 | --- | --- |
-| `src/config/SiteConfig.ts` | Name, role, headline, introduction, about copy, services, Instagram, email and enquiry starter |
-| `src/config/PortfolioConfig.ts` | Albums, display order, descriptions, tags/public IDs and captions |
+| `src/config/SiteConfig.ts` | Display translation keys, services and enquiry-template keys; public URLs/email |
+| `src/config/PortfolioConfig.ts` | Album IDs/order, display translation keys, tags/public IDs and caption keys |
 | `src/config/PhotographyConfig.ts` | Hero/story photographs, independent cloud names, crop positions and parallax strengths |
 | `index.css` | Colours, fonts, spacing, buttons and other shared visual tokens |
-| `public/locales/en/translation.json` | Existing i18next page/navigation labels |
+| `public/locales/en/translation.json` | All English display copy, captions, accessibility labels, status messages and enquiry templates |
+
+Configured display fields contain **translation keys**, not raw copy. For example, the first album uses `title: "Portfolio.Albums.Album1.Title"`, resolved in the gallery with `t(album.title)`. Edit the corresponding nested values in `translation.json` to change the wording. The same pattern applies to site branding, biography, services, captions, photo alt text and the enquiry starter. Keep album IDs, public image IDs, tags, URLs, crop positions and motion settings in the configs; they are not translated.
+
+Page metadata and visible copy update with the active language. Enquiry text is translated when the form is opened; changing language does not overwrite a visitor’s edited draft. All visitor-facing component copy, accessibility labels, status messages and email draft templates live in the translation file. Photograph counts use i18next plural forms, and dynamic values use interpolation. The current app still supports English; add the new locale resources and update `supportedLngs` when enabling another language.
 
 The cloud name `dx4aoiw5u` is public configuration, not a secret. For now, the supplied `Decaprio` public ID is used in a **labelled preview collection**. It is a delivery test, not Marcus’s sports photography. You can set the cloud to `demo` to preview the viewer with two sample photographs.
 
@@ -49,11 +53,22 @@ A curated album works without Cloudinary Resource list access:
 ```ts
 {
   id: 'race-day',
-  title: 'Race day',
-  category: 'Athletics',
-  description: 'The action, the crowd and the finish.',
+  title: 'Portfolio.Albums.RaceDay.Title',
+  category: 'Portfolio.Albums.RaceDay.Category',
+  description: 'Portfolio.Albums.RaceDay.Description',
   publicIds: ['events/race/start', 'events/race/finish'],
-  captions: { 'events/race/finish': 'The final push, race day' }
+  captions: { 'events/race/finish': 'Portfolio.Albums.RaceDay.Captions.Finish' }
+}
+```
+
+Define the matching copy under `Portfolio.Albums.RaceDay` in `translation.json`:
+
+```json
+{
+  "Title": "Race day",
+  "Category": "Athletics",
+  "Description": "The action, the crowd and the finish.",
+  "Captions": { "Finish": "The final push, race day" }
 }
 ```
 

@@ -38,7 +38,7 @@ export default function usePortfolio(album: AlbumConfig | undefined = albums[0])
             state: {
               images: [],
               status: 'error',
-              error: 'This album could not be loaded. Please try again.',
+              error: 'Portfolio.LoadError',
             },
           });
       });

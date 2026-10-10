@@ -27,52 +27,48 @@ export default function Home() {
         >
           <div className={styles.heroContent}>
             <p className="eyebrow">
-              {siteConfig.name} / {siteConfig.role}
+              {t(siteConfig.name)} / {t(siteConfig.role)}
             </p>
-            <h1>{siteConfig.headline}</h1>
-            <p className={styles.intro}>{siteConfig.introduction}</p>
+            <h1>{t(siteConfig.headline)}</h1>
+            <p className={styles.intro}>{t(siteConfig.introduction)}</p>
             <Link className="button button-primary" to="/portfolio">
-              Explore the portfolio <IconArrowUpRight size={20} />
+              {t('Common.ExplorePortfolio')} <IconArrowUpRight size={20} />
             </Link>
           </div>
           <div className={styles.heroFoot}>
-            <span>
-              {heroPhoto.isPreview
-                ? 'DEMO HERO PHOTO · REPLACE WITH MARCUS’S WORK'
-                : 'THE ACTION. THE ATMOSPHERE. THE STORY.'}
-            </span>
-            <span>SCROLL TO EXPLORE ↓</span>
+            <span>{t(heroPhoto.isPreview ? 'Home.HeroPreview' : 'Home.HeroStatement')}</span>
+            <span>{t('Home.Scroll')}</span>
           </div>
         </ParallaxPhoto>
         <section className="section">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">01 / SELECTED WORK</p>
-              <h2>In the thick of it.</h2>
+              <p className="eyebrow">{t('Home.SelectedWork')}</p>
+              <h2>{t('Home.SelectedHeading')}</h2>
             </div>
             <Link
               className="text-link"
               to={`/portfolio?album=${encodeURIComponent(album?.id || '')}`}
             >
-              View the collection <IconArrowRight size={18} />
+              {t('Home.ViewCollection')} <IconArrowRight size={18} />
             </Link>
           </div>
-          {isPreviewPortfolio && <p className="demo-note">{previewNote}</p>}
+          {isPreviewPortfolio && <p className="demo-note">{t(previewNote)}</p>}
           {status === 'loading' && (
             <p role="status" className="state-panel">
-              Loading highlights…
+              {t('Home.LoadingHighlights')}
             </p>
           )}
           {status === 'error' && (
             <div role="alert" className="state-panel">
-              <p>{error}</p>
+              <p>{t(error || 'Portfolio.LoadError')}</p>
               <button className="button" onClick={retry}>
-                Try again
+                {t('Common.TryAgain')}
               </button>
             </div>
           )}
           {status === 'ready' && images.length === 0 && (
-            <p className="state-panel">New photographs are on their way. Come back soon.</p>
+            <p className="state-panel">{t('Home.EmptyHighlights')}</p>
           )}
           <div className={styles.highlights}>
             {images.slice(0, 3).map((id, index) => (
@@ -83,14 +79,21 @@ export default function Home() {
               >
                 <PortfolioImage
                   publicId={id}
-                  alt={album?.captions?.[id] || `${album?.title} — photograph ${index + 1}`}
+                  alt={
+                    album?.captions?.[id]
+                      ? t(album.captions[id])
+                      : t('Portfolio.FrameCaption', {
+                          title: album ? t(album.title) : '',
+                          number: index + 1,
+                        })
+                  }
                 />
                 <div>
                   <span>
-                    0{index + 1} / {album?.category}
+                    0{index + 1} / {album && t(album.category)}
                   </span>
                   <h3>
-                    {album?.title}
+                    {album && t(album.title)}
                     <IconArrowUpRight size={24} />
                   </h3>
                 </div>
@@ -103,29 +106,27 @@ export default function Home() {
           className={styles.statementPhoto}
           contentClassName={styles.statement}
         >
-          <p className="eyebrow">BEYOND THE FINISH LINE</p>
+          <p className="eyebrow">{t('Home.StoryEyebrow')}</p>
           <h2>
-            Great sport deserves
-            <br />a great story.
+            {t('Home.StoryHeadingFirst')}
+            <br />
+            {t('Home.StoryHeadingSecond')}
           </h2>
           <div>
-            <p>
-              From the first whistle to the final push. Photography for athletes, clubs and events,
-              with the energy of the day at its heart.
-            </p>
+            <p>{t('Home.StoryBody')}</p>
             <Link className="text-link" to="/about">
-              Meet Marcus <IconArrowRight size={18} />
+              {t('Home.MeetMarcus')} <IconArrowRight size={18} />
             </Link>
           </div>
         </ParallaxPhoto>
         <section className="cta section">
           <div>
-            <p className="eyebrow">YOUR NEXT CHAPTER</p>
-            <h2>Let’s capture it.</h2>
-            <p>Have an event, a team or an idea in mind?</p>
+            <p className="eyebrow">{t('Home.CtaEyebrow')}</p>
+            <h2>{t('Home.CtaHeading')}</h2>
+            <p>{t('Home.CtaBody')}</p>
           </div>
           <Link className="button button-primary" to="/contact">
-            Start a conversation <IconArrowUpRight size={20} />
+            {t('Common.StartConversation')} <IconArrowUpRight size={20} />
           </Link>
         </section>
       </main>

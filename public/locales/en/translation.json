@@ -39,7 +39,7 @@
     "Title": "Portfolio",
     "Albums": {
       "Album1": {
-        "Title": "Preview collection",
+        "Title": "First Preview collection",
         "Category": "Test collection",
         "Description": "A preview of the gallery experience. I’ll be adding my own photographs soon.",
         "Captions": {
@@ -49,7 +49,18 @@
         }
       },
       "Album2": {
-        "Title": "Preview collection 2"
+        "Title": "Decaprio Montage",
+        "Category": "Test collection",
+        "Description": "What a movie tbf."
+      },
+      "Album3": {
+        "Title": "Some Extra Stuff",
+        "Category": "Randoms",
+        "Description": "Some extra content to demonstrate how you can have multiple albums on display. Nice.",
+        "Captions": {
+          "Bike": "Idek who this person is. Lol.",
+          "Shoe": "You would not believe how bad they smelled. Shouldn't have taken this job."
+        }
       }
     },
     "Preview": {

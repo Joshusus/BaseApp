@@ -23,7 +23,7 @@ const demoCloud = cloudName === 'demo';
 export const albums: AlbumConfig[] = [
   {
     id: 'preview-extra',
-    title: 'Portfolio.Albums.Album2.Title',
+    title: 'Portfolio.Albums.Album1.Title',
     category: 'Portfolio.Albums.Album1.Category',
     description: 'Portfolio.Albums.Album1.Description',
     publicIds: demoCloud
@@ -38,9 +38,9 @@ export const albums: AlbumConfig[] = [
   },
   {
     id: 'preview',
-    title: 'Portfolio.Albums.Album1.Title',
-    category: 'Portfolio.Albums.Album1.Category',
-    description: 'Portfolio.Albums.Album1.Description',
+    title: 'Portfolio.Albums.Album2.Title',
+    category: 'Portfolio.Albums.Album2.Category',
+    description: 'Portfolio.Albums.Album2.Description',
     publicIds: demoCloud ? ['cld-sample-3', 'samples/people/bicycle'] : ['Decaprio'],
     captions: demoCloud
       ? {
@@ -48,6 +48,18 @@ export const albums: AlbumConfig[] = [
           'samples/people/bicycle': 'Portfolio.Albums.Album1.Captions.Bicycle',
         }
       : { Decaprio: 'Portfolio.Albums.Album1.Captions.DeliveryTest' },
+  },
+  {
+    id: 'preview-extra',
+    title: 'Portfolio.Albums.Album3.Title',
+    category: 'Portfolio.Albums.Album3.Category',
+    description: 'Portfolio.Albums.Album3.Description',
+    publicIds:  ['samples/bike', 'samples/shoe'],
+    captions: {
+          'samples/bike': 'Portfolio.Albums.Album3.Captions.Bike',
+          'samples/shoe': 'Portfolio.Albums.Album3.Captions.Shoe',
+        }
+      
   },
 ];
 /** Set false when you replace the test collection with Marcus's photographs. */

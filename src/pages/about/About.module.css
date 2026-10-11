@@ -1,13 +1,69 @@
-@reference "tailwindcss";
+@reference "../../../index.css";
 
-.topColumns {
-  @apply flex gap-4 p-8 w-full;
+.section {
+  @apply site-section;
 }
 
-.textColumn {
-  @apply grow;
+.pageIntro {
+  @apply site-page-intro;
 }
 
-.profilePic {
-  @apply size-[30%];
+.eyebrow {
+  @apply site-eyebrow;
+}
+
+.primaryButton {
+  @apply site-primary-button;
+}
+
+.layout {
+  @apply grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  @apply items-center;
+}
+.portrait {
+  @apply w-full;
+  max-height: 600px;
+  aspect-ratio: 4 / 5;
+  @apply object-cover bg-[var(--surface)];
+}
+.layout h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin: 1rem 0;
+}
+.layout p:not(:first-child) {
+  @apply text-[color:var(--muted)];
+  line-height: 1.9;
+  font-size: 0.9rem;
+}
+.layout a {
+  margin-top: 1.5rem;
+}
+.services {
+  @apply grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 4rem;
+  border-top: 1px solid var(--border);
+  @apply gap-8;
+  padding-top: 2rem;
+}
+.services span {
+  @apply text-[color:var(--tertiary)];
+  font-size: 0.7rem;
+}
+.services h3 {
+  font-size: 1.5rem;
+}
+@media (max-width: 700px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .portrait {
+    max-height: 450px;
+  }
+  .services {
+    grid-template-columns: 1fr;
+    @apply gap-2;
+  }
 }

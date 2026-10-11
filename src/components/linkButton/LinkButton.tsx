@@ -1,12 +1,13 @@
+import classNames from '~/helpers/classNames';
 import styles from './LinkButton.module.css';
 
 export type ILinkButton = {
   href: string;
 } & React.ComponentPropsWithoutRef<'a'>;
 
-export default function LinkButton({ href, children, ...props }: ILinkButton) {
+export default function LinkButton({ href, className, children, ...props }: ILinkButton) {
   return (
-    <a className={styles.button} href={href} {...props}>
+    <a className={classNames(styles.button, className ?? '')} href={href} {...props}>
       {children}
     </a>
   );

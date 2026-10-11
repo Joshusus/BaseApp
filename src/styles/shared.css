@@ -1,0 +1,119 @@
+/* Reusable patterns; consumers @apply them inside their own CSS modules. */
+@utility site-section {
+  padding: 4.5rem var(--gutter);
+  max-width: 1600px;
+  margin: auto;
+  @media (max-width: 650px) {
+    padding-block: 3rem;
+  }
+}
+
+@utility site-eyebrow {
+  @apply text-[color:var(--tertiary)];
+  font: 0.68rem var(--font-body);
+  letter-spacing: 0.13em;
+  line-height: 1.8;
+  @apply m-0 uppercase;
+}
+
+@utility site-section-heading {
+  @apply flex justify-between gap-8;
+  align-items: end;
+  margin-bottom: 2rem;
+  & h2 {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    margin: 0.8rem 0 0;
+  }
+  @media (max-width: 650px) {
+    @apply items-start flex-col;
+  }
+}
+
+@utility site-text-link {
+  @apply inline-flex items-center;
+  gap: 0.6rem;
+  @apply text-[color:var(--textPanel)];
+  font-size: 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--tertiary);
+}
+
+@utility site-button {
+  @apply inline-flex justify-center items-center gap-3;
+  border: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+  @apply text-[color:var(--textPanel)] bg-transparent;
+  font: 0.85rem var(--font-body);
+  transition: background 0.15s;
+  &:hover {
+    @apply bg-[var(--background-200)] text-white;
+  }
+}
+
+@utility site-primary-button {
+  @apply site-button;
+  @apply bg-[var(--primary)];
+  border-color: var(--primary);
+  @apply text-white;
+  &:hover {
+    @apply bg-[var(--primaryDark)];
+  }
+}
+
+@utility site-icon-button {
+  @apply bg-transparent;
+  border: 1px solid var(--border);
+  @apply text-[color:var(--textPanel)];
+  padding: 0.6rem;
+  @apply flex;
+}
+
+@utility site-page-intro {
+  max-width: 850px;
+  margin-bottom: 3rem;
+  & h1 {
+    font-size: clamp(2.7rem, 6vw, 5.5rem);
+    margin: 1rem 0;
+    line-height: 1.05;
+  }
+  & > p:last-child {
+    @apply text-[color:var(--muted)];
+    font-size: 0.95rem;
+    line-height: 1.9;
+    max-width: 650px;
+  }
+}
+
+@utility site-demo-note {
+  @apply text-[color:var(--textPanel-300)] bg-[var(--surface)];
+  border-left: 2px solid var(--tertiary);
+  padding: 1rem;
+  font-size: 0.75rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+@utility site-state-panel {
+  padding: 3rem 1rem;
+  border: 1px solid var(--border);
+  @apply text-center text-[color:var(--muted)];
+}
+
+@utility site-cta {
+  @apply flex items-center justify-between gap-8;
+  padding-block: 4rem;
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+  & h2 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    margin: 0.75rem 0;
+  }
+  & p {
+    @apply text-[color:var(--muted)];
+    line-height: 1.8;
+    font-size: 0.9rem;
+  }
+  @media (max-width: 650px) {
+    @apply items-start flex-col;
+  }
+}

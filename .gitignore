@@ -47,3 +47,7 @@ out/
 
 # TypeScript build outputs
 *.tsbuildinfo
+
+# Ignore every local environment variant; keep the public configuration example.
+.env.*
+!.env.example

@@ -1,3 +1,4 @@
-export const InstagramUrl = "https://www.instagram.com/marcusawphoto/";
-export const AdobeUrl = "";
-export const EmailUrl = "";
+import { siteConfig } from './SiteConfig';
+export const InstagramUrl = siteConfig.instagram;
+export const AdobeUrl = '';
+export const EmailUrl = `mailto:${siteConfig.email}`;

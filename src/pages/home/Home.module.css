@@ -1,48 +1,181 @@
-@reference "tailwindcss";
+@reference "../../../index.css";
 
-.testImage {
-  @apply w-full mx-auto;
+.eyebrow {
+  @apply site-eyebrow;
 }
 
-/*Note - parallax component seems to be messing with % and calculated values*/
-.parallaxTop {
-  @apply w-full flex flex-col-reverse h-[82vh];
+.primaryButton {
+  @apply site-primary-button;
 }
 
-/* If not evident - custom bg's are not handled nicely. 
-   Check how we're doing this & find a solution */
-.customParallaxBg {
-  @apply size-full relative right-[200px] top-[100px];
+.section {
+  @apply site-section;
 }
 
-
-.imageText {
-  @apply bg-(--textPanel);
+.sectionHeading {
+  @apply site-section-heading;
 }
 
-.sectionHeader {
-  @apply w-full p-10 text-center bg-transparent text-4xl text-(--tertiary) cursor-pointer;;
+.textLink {
+  @apply site-text-link;
 }
 
-.titleOverImage {
-  @apply mb-30 mx-10 text-6xl text-shadow-lg/60 text-(--textTitle) tracking-widest font-sans;
+.demoNote {
+  @apply site-demo-note;
 }
 
-.portfolioOptions {
-  @apply flex flex-row gap-3 justify-around my-8;
+.statePanel {
+  @apply site-state-panel;
 }
 
-.portfolioImage {
-@apply size-[300px] object-cover;
-}
-.portfolioImage:hover {
-  @apply blur-sm;
+.button {
+  @apply site-button;
 }
 
-.imageBlend {
-  @apply mask-luminance mask-b-from-white mask-b-from-80% mask-b-to-black;
+.cta {
+  @apply site-section;
+  @apply site-cta;
+  @media (max-width: 650px) {
+    padding-block: 3rem;
+  }
 }
 
-.bottomPadding {
-  @apply w-full h-80;
+.hero {
+  @apply relative;
+  min-height: min(800px, 85svh);
+  @apply flex items-center overflow-hidden bg-[var(--surface)];
+}
+.heroLayout {
+  @apply flex items-center;
+}
+.hero::after {
+  content: "";
+  @apply absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(10, 18, 21, 0.93),
+      rgba(10, 18, 21, 0.5) 60%,
+      rgba(10, 18, 21, 0.12)
+    ),
+    linear-gradient(0deg, rgba(10, 18, 21, 0.85), transparent 40%);
+}
+.heroContent {
+  @apply relative;
+  z-index: 1;
+  padding: 5rem var(--gutter) 7rem;
+  max-width: 980px;
+}
+.heroContent h1 {
+  font-size: clamp(3rem, 7.5vw, 7rem);
+  line-height: 0.98;
+  @apply uppercase;
+  letter-spacing: -0.04em;
+  margin: 1.8rem 0;
+}
+.intro {
+  @apply text-[color:var(--textPanel-300)];
+  max-width: 450px;
+  line-height: 1.8;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+.heroFoot {
+  @apply absolute;
+  z-index: 1;
+  @apply bottom-0 left-0 right-0 flex justify-between;
+  padding: 1.5rem var(--gutter);
+  border-top: 1px solid var(--border);
+  font: 0.65rem var(--font-body);
+  letter-spacing: 0.12em;
+  @apply text-[color:var(--muted)];
+}
+.highlights {
+  @apply grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  @apply gap-6;
+}
+.highlight {
+  @apply overflow-hidden block;
+}
+.highlight img {
+  @apply w-full;
+  aspect-ratio: 4 / 3;
+  @apply object-cover;
+  transition: transform 0.3s;
+}
+.highlight:hover img {
+  transform: scale(1.025);
+}
+.highlight > div {
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.highlight span {
+  font-size: 0.7rem;
+  @apply text-[color:var(--muted)];
+}
+.highlight h3 {
+  @apply flex justify-between;
+  font-size: 1.6rem;
+  margin: 0.6rem 0 0;
+}
+.statement {
+  padding: 5rem var(--gutter);
+  @apply grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 5rem;
+}
+.statement > p {
+  grid-column: 1 / -1;
+}
+.statement h2 {
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  @apply m-0;
+  line-height: 1.1;
+}
+.statement > div {
+  @apply text-[color:var(--muted)];
+  max-width: 500px;
+  line-height: 1.9;
+}
+@media (max-width: 650px) {
+  .statement {
+    grid-template-columns: 1fr;
+    padding-block: 3rem;
+  }
+  .heroFoot {
+    @apply gap-4 items-center;
+  }
+  .heroFoot > span {
+    max-width: 55%;
+  }
+  .hero {
+    min-height: 650px;
+  }
+}
+
+.statementPhoto {
+  @apply bg-[var(--surface)];
+}
+.statementPhoto::after {
+  content: "";
+  @apply absolute;
+  inset: 0;
+  background: rgba(10, 18, 21, 0.88);
+}
+.statementPhoto > img {
+  filter: grayscale(1);
+}
+
+.scrollPrompt {
+  @apply text-[color:var(--textPanel)] shrink-0;
+  padding: 0.6rem 0;
+  @apply no-underline;
+  border-bottom: 1px solid transparent;
+}
+.scrollPrompt:hover {
+  @apply text-[color:var(--tertiary)];
+  border-color: currentColor;
 }

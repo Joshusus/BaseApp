@@ -1,74 +1,102 @@
 @import "tailwindcss";
-/* 
-TODO only defines it as a variable, won't let you use TW properties in normal style
-EG "text-primary" will not work. You will need to do text-[var(--primary)] 
-TW4 suggests this notation, but I couldnt get it to work with @theme utilities
-@theme {
-  --color-primary: #777722;
-}
-*/
+@import "./src/styles/shared.css";
 
+/* The visual configuration. Adjust these tokens to change the entire site. */
 :root {
-  --primary: #BB0000;
-  --primaryDark: #990000;
-  --primary-700: #EB0000;
-  --primary-600: #D40000;
-  --primary-400: #AF0D0D;
-  --primary-300: #A21B1B;
-  
-  --textTitle: #14ffc4;
-  --textTitle-500: #DF002D;
-  --textTitle-400: #AB0022;
-  --textTitle-300: #810019;
-  --textTitle-200: #580011;
-  --textTitle-100: #300009;
-
-  --background: #263238; /* Dark background */
-  --background-200: #4C565B;
-
-  --textPanel: #F4F4F4; /* Light panel for reading text on */
-  --textPanel-500: #F4F4F4;
-  --textPanel-400: #E3E3E3;
-  --textPanel-300: #D2D2D2;
-  --textPanel-200: #C0C0C0;
-  --textPanel-100: #AFAFAF;
-
-  --tertiary: #00D49E; /* Colour for graphics */
-  --tertiary-700: #01FFC0;
-  --tertiary-600: #00EBB0;
-  --tertiary-500: #00D49E;
-  --tertiary-400: #00A97E;
-  --tertiary-300: #007F5F;
-  --tertiary-200: #00543F;
-  --tertiary-100: #002A1F;
+  --header-profile-size: 72px;
+  --gallery-column-width: 300px;
+  --gallery-film-frame-width: 24px;
+  --gallery-film-hole-size: 5px;
+  --primary: #bb0055;
+  --primaryDark: #990044;
+  --background: #101b20;
+  --surface: #1b292f;
+  --background-200: #34454c;
+  --textPanel: #f4f4f4;
+  --textPanel-300: #d2d2d2;
+  --muted: #aebbc0;
+  --border: #3a4b52;
+  --tertiary: #40e0b8;
+  --tertiary-100: #183d36;
+  --tertiary-200: #00543f;
+  --tertiary-700: #75f5d4;
+  --textTitle: var(--textPanel);
+  --gutter: clamp(1.25rem, 5vw, 6rem);
+  --font-ui: "ContrailOne", sans-serif;
+  --font-body: "Merriweather", Georgia, serif;
 }
-
-#root {
-  @apply overflow-hidden;
-}
-
 @font-face {
   font-family: "ContrailOne";
   src: url("/src/assets/fonts/ContrailOne-Regular.woff2") format("woff2");
   font-display: swap;
 }
-
 @font-face {
   font-family: "Merriweather";
   src: url("/src/assets/fonts/Merriweather-VariableFont_opsz,wdth,wght.woff2") format("woff2");
   font-display: swap;
 }
-
 @theme {
-  --font-sans: 'ContrailOne', sans-serif;
-  --font-serif: 'Merriweather', serif;
-  --font-mono: 'Merriweather', monospace;
+  --font-sans: "ContrailOne", sans-serif;
+  --font-serif: "Merriweather", serif;
 }
-
+* {
+  box-sizing: border-box;
+}
 html {
-  @apply bg-(--background) font-serif;
+  background: var(--background);
+  color: var(--textPanel);
+  font-family: var(--font-body);
+}
+body {
+  margin: 0;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--font-ui);
+  font-weight: 400;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+img {
+  max-width: 100%;
+}
+a:hover {
+  color: var(--tertiary);
+}
+:focus-visible {
+  outline: 3px solid var(--tertiary);
+  outline-offset: 4px;
+}
+::selection {
+  color: var(--background);
+  background: var(--tertiary);
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-h, h1, h2, h3 {
-  @apply font-sans;
+/* Route landing focus is announced without framing the entire page. */
+main:focus {
+  outline: none;
 }

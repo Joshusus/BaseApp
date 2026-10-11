@@ -1,0 +1,9 @@
+@reference "../../../index.css";
+
+.fallback {
+  @apply flex items-center justify-center w-full;
+  min-height: 180px;
+  padding: 2rem;
+  @apply text-[color:var(--muted)] bg-[var(--surface)];
+  font-size: 0.8rem;
+}

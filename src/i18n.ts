@@ -9,7 +9,9 @@ i18next
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
-    debug: true,
+    supportedLngs: ['en'],
+    load: 'languageOnly',
+    debug: import.meta.env.DEV,
     interpolation: { escapeValue: false },
   });
 

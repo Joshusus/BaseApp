@@ -1,44 +1,20 @@
-import { Cloudinary } from "@cloudinary/url-gen";
-import type { CloudinaryImage } from "@cloudinary/url-gen/assets/CloudinaryImage";
-import { useMemo } from "react";
-import CloudinaryApi from "../apis/CloudinaryApi";
-import LoadedImagesState from "../state/LoadedImagesState";
+import { Cloudinary } from '@cloudinary/url-gen';
+import { scale } from '@cloudinary/url-gen/actions/resize';
+import { useCallback } from 'react';
+import { cloudName } from '~/config/PortfolioConfig';
+
+const clouds = new Map<string, Cloudinary>();
 
 export default function useGetImages() {
-	const cloudName = "demo"; //"dx4aoiw5u";
-	const cld = useMemo(
-		() => new Cloudinary({ cloud: { cloudName: cloudName } }),
-		[],
-	);
-
-	const cloudinaryApi = useMemo(() => new CloudinaryApi(cloudName), []);
-
-	const getImage = (publicId: string): CloudinaryImage => {
-		const existingEntry = LoadedImagesState.value[publicId];
-		if (existingEntry) {
-			return existingEntry;
-		}
-
-		const image = cld.image(publicId);
-		LoadedImagesState.value[publicId] = image;
-		return image;
-	};
-
-	const getFolderImages = async (tag: string) => {
-		const assetsResponse: string[] = [];
-
-		cloudinaryApi.GetAssetsList(
-			tag,
-			(response) => {
-				response?.data.resources.forEach((assetMetadata) => {
-					assetsResponse.push(assetMetadata.public_id);
-				});
-			},
-			() => undefined, // TODO
-		);
-
-		return assetsResponse;
-	};
-
-	return { getImage, getFolderImages };
+  const getImage = useCallback((publicId: string, width = 900, sourceCloud = cloudName) => {
+    let cloudinary = clouds.get(sourceCloud);
+    if (!cloudinary) {
+      cloudinary = new Cloudinary({ cloud: { cloudName: sourceCloud } });
+      clouds.set(sourceCloud, cloudinary);
+    }
+    // Fresh mutable SDK instances prevent transformations leaking between consumers.
+    // URL generation is local; the browser/CDN caches actual image requests.
+    return cloudinary.image(publicId).resize(scale().width(width)).format('auto').quality('auto');
+  }, []);
+  return { getImage };
 }

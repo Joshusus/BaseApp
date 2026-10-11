@@ -1,4 +1,4 @@
-@reference "tailwindcss";
+@reference "../../../index.css";
 
 .button {
   @apply border-0 rounded-sm p-1 bg-(--tertiary) cursor-pointer;

@@ -1,47 +1,96 @@
-@reference "tailwindcss";
+@reference "../../../index.css";
 
 .header {
-  @apply select-none;
+  @apply bg-[var(--background)];
+  border-bottom: 1px solid var(--border);
+}
+.utility {
+  padding: 0.65rem var(--gutter);
+  @apply flex justify-between items-center;
+  border-bottom: 1px solid var(--border);
+  @apply text-[color:var(--muted)];
+  font: 0.65rem var(--font-ui);
+  letter-spacing: 0.16em;
+}
+.utility div {
+  @apply flex;
+  gap: 1.2rem;
+}
+.utility a {
+  @apply flex text-[color:var(--textPanel)];
+}
+.bar {
+  @apply flex items-center justify-between gap-8;
+  padding: 1.3rem var(--gutter);
+  max-width: 1600px;
+  margin: auto;
+}
+.brand {
+  @apply flex items-center;
+  gap: 0.8rem;
+  @apply text-[color:var(--textPanel)];
+  font: 1rem var(--font-ui);
+}
+.brand small {
+  @apply block text-[color:var(--muted)];
+  font: 0.6rem var(--font-body);
+  letter-spacing: 0.16em;
+  margin-top: 0.4rem;
+}
+.profilePhoto {
+  width: var(--header-profile-size);
+  height: var(--header-profile-size);
+  border-radius: 50%;
+  border: 2px solid var(--tertiary);
+  @apply object-cover shrink-0;
+}
+.links {
+  @apply flex;
+  gap: 1.8rem;
+  font: 0.85rem var(--font-body);
+}
+.link,
+.active {
+  padding: 0.55rem 0;
+  @apply text-[color:var(--muted)];
+  border-bottom: 2px solid transparent;
+}
+.active {
+  @apply text-[color:var(--textPanel)];
+  border-color: var(--tertiary);
+}
+.enquire {
+  @apply flex items-center;
+  gap: 0.7rem;
+  font: 0.8rem var(--font-body);
+  @apply text-[color:var(--textPanel)];
+}
+@media (max-width: 760px) {
+  .bar {
+    @apply flex-wrap;
+    gap: 1.3rem;
+    padding-block: 1rem;
+  }
+  .brand {
+    font-size: 0.85rem;
+  }
+  .links {
+    order: 3;
+    @apply w-full justify-between gap-3;
+  }
+  .enquire {
+    margin-left: auto;
+  }
+}
+@media (max-width: 380px) {
+  .enquire {
+    @apply hidden;
+  }
 }
 
-.allowOverflow {
-  @apply w-20 h-10 shrink-0;
-}
-
-.profilePic {
-  @apply relative bottom-5 z-100 w-20 h-20 border-0 rounded-full cursor-pointer;
-}
-
-.nameTitle {
-  @apply text-4xl text-(--textTitle) tracking-wider font-sans;
-}
-
-.headerBar {
-  @apply flex items-center gap-2 px-2 bg-(--background-200);
-}
-
-.baseNavButton {
- @apply border-0 rounded-sm p-3 bg-(--tertiary) font-sans tracking-wide;
-}
-.navButton {
-  composes: baseNavButton;
-  @apply transition duration-150 ease-in-out;
-}
-.navButton:hover {
-  @apply bg-(--tertiary-700) shadow-xl/30;
-}
-.currentRouteButton {
-  composes: baseNavButton;
-  @apply bg-(--tertiary-200);
-}
-
-.socialMediaList {
-  @apply flex flex-row-reverse gap-2;
-}
-
-.socialMedia {
-  @apply size-[2em] text-(--tertiary);
-}
-.socialMedia:hover {
-  @apply  text-(--tertiary-200);
+@media (max-width: 760px) {
+  .profilePhoto {
+    width: 56px;
+    height: 56px;
+  }
 }

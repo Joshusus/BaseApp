@@ -1,0 +1,94 @@
+@reference "../../../index.css";
+
+.eyebrow {
+  @apply site-eyebrow;
+}
+
+.iconButton {
+  @apply site-icon-button;
+}
+
+.button {
+  @apply site-button;
+}
+
+.dialog {
+  border: 1px solid var(--border);
+  @apply bg-[var(--background)] text-[color:var(--textPanel)];
+  width: min(1200px, 96vw);
+  max-width: 96vw;
+  max-height: 94svh;
+  @apply p-0;
+  margin: auto;
+}
+.dialog::backdrop {
+  background: rgba(0, 0, 0, 0.9);
+}
+.content {
+  padding: clamp(1rem, 3vw, 2rem);
+}
+.content header {
+  @apply flex justify-between gap-4 items-center;
+  margin-bottom: 1rem;
+}
+.content h2 {
+  margin: 0.4rem 0 0;
+  font-size: 1.5rem;
+}
+.stage {
+  @apply relative;
+  background: #060a0b;
+  height: min(60svh, 700px);
+  @apply flex items-center justify-center;
+  touch-action: pan-y;
+}
+.stage img {
+  @apply w-full h-full object-contain;
+}
+.previous,
+.next {
+  @apply absolute;
+  top: 45%;
+  padding: 0.8rem;
+  border: 1px solid var(--border);
+  background: rgba(10, 18, 21, 0.85);
+  @apply text-white cursor-pointer;
+}
+.previous {
+  left: 0.5rem;
+}
+.next {
+  right: 0.5rem;
+}
+.details {
+  @apply flex justify-between gap-6 items-center;
+  margin-top: 1rem;
+}
+.details p {
+  margin: 0.5rem 0;
+}
+.details small {
+  @apply text-[color:var(--muted)];
+  font-size: 0.7rem;
+}
+.actions {
+  @apply flex;
+  gap: 0.6rem;
+  @apply flex-wrap;
+}
+.actions .button {
+  font-size: 0.75rem;
+}
+.status {
+  min-height: 1em;
+  font-size: 0.75rem;
+  @apply text-[color:var(--tertiary)];
+}
+@media (max-width: 700px) {
+  .details {
+    @apply items-start flex-col gap-3;
+  }
+  .stage {
+    height: 48svh;
+  }
+}

@@ -1,32 +1,47 @@
+import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import KeyTextBlock from '~/components/keyTextBlock/KeyTextBlock';
+import { IconArrowUpRight } from '@tabler/icons-react';
 import NavHeader from '~/components/navHeader/NavHeader';
 import PageContent from '~/components/pageContent/PageContent';
-import Panel from '~/components/panel/Panel';
+import { siteConfig } from '~/config/SiteConfig';
 import styles from './About.module.css';
 
 export default function About() {
-  document.title = 'About';
   const { t } = useTranslation();
-
   return (
-    <PageContent>
+    <PageContent pageTitle={t('About.Title')}>
       <NavHeader />
-      <div className={styles.topColumns}>
-        <Panel className={styles.textColumn}>
-          <div>{t('About.ExampleDisclaimer')}</div>
-          <KeyTextBlock>
-            <p>{t('About.TitleTest', { name: 'Marcus' })}</p>
-            <p>{t('About.ExampleDisclaimer')}</p>
-          </KeyTextBlock>
-          <i>{t('About.PanelTest1')}</i>
-        </Panel>
-        <img
-          src='./photos/ProfilePic.png'
-          alt={t('Common.ProfilePic')}
-          className={styles.profilePic}
-        />
-      </div>
+      <main id="main-content" className={styles.section}>
+        <div className={styles.pageIntro}>
+          <p className={styles.eyebrow}>{t('About.Eyebrow')}</p>
+          <h1>{t('About.Heading')}</h1>
+        </div>
+        <div className={styles.layout}>
+          <img
+            src={siteConfig.profilePhotoUrl}
+            alt={t('Common.ProfileAlt', { name: t(siteConfig.name) })}
+            className={styles.portrait}
+            loading="lazy"
+          />
+          <div>
+            <p className={styles.eyebrow}>{t(siteConfig.name)}</p>
+            <h2>{t('About.StoryHeading')}</h2>
+            <p>{t(siteConfig.about)}</p>
+            <p>{t('About.StoryBody')}</p>
+            <Link className={styles.primaryButton} to="/contact">
+              {t('About.ProjectLink')} <IconArrowUpRight size={20} />
+            </Link>
+          </div>
+        </div>
+        <section className={styles.services} aria-label={t('About.ServicesLabel')}>
+          {siteConfig.services.map((service, index) => (
+            <div key={service}>
+              <span>0{index + 1}</span>
+              <h3>{t(service)}</h3>
+            </div>
+          ))}
+        </section>
+      </main>
     </PageContent>
   );
 }

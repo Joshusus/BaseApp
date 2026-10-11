@@ -1,13 +1,118 @@
-@reference "tailwindcss";
+@reference "../../../index.css";
 
-.contactPanel {
-  @apply flex flex-col items-center my-2 w-[55%] mx-auto;
+.section {
+  @apply site-section;
 }
 
-.contactFormArea {
-  @apply w-full h-[400px] bg-white mb-2;
+.pageIntro {
+  @apply site-page-intro;
 }
 
-.instaPost {
-  @apply flex flex-row justify-center;
+.eyebrow {
+  @apply site-eyebrow;
+}
+
+.textLink {
+  @apply site-text-link;
+}
+
+.demoNote {
+  @apply site-demo-note;
+}
+
+.primaryButton {
+  @apply site-primary-button;
+}
+
+.button {
+  @apply site-button;
+}
+
+.layout {
+  @apply grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: clamp(2rem, 6vw, 6rem);
+}
+.layout aside h2 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+.layout aside > p {
+  @apply text-[color:var(--muted)];
+  line-height: 1.9;
+  font-size: 0.9rem;
+}
+.contactDetail {
+  margin: 2rem 0;
+}
+.contactDetail span {
+  @apply block text-[color:var(--tertiary)];
+  font: 0.65rem var(--font-body);
+  letter-spacing: 0.14em;
+  margin-bottom: 0.75rem;
+}
+.contactDetail a {
+  overflow-wrap: anywhere;
+}
+.note {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  @apply text-[color:var(--muted)];
+  font-size: 0.75rem;
+  line-height: 1.9;
+}
+.form {
+  @apply bg-[var(--surface)];
+  padding: clamp(1.2rem, 3vw, 2.5rem);
+  border-top: 3px solid var(--tertiary);
+}
+.form label {
+  @apply flex flex-col;
+  gap: 0.7rem;
+  font-size: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+.form input,
+.form textarea {
+  @apply w-full;
+  padding: 0.9rem;
+  @apply bg-[var(--background)];
+  border: 1px solid var(--border);
+  @apply text-[color:var(--textPanel)] rounded-none;
+  line-height: 1.7;
+  font: 0.85rem var(--font-body);
+}
+.form textarea {
+  @apply resize-y;
+  min-height: 220px;
+  line-height: 1.8;
+}
+.fields {
+  @apply grid;
+  grid-template-columns: 1fr 1fr;
+  @apply gap-4;
+}
+.actions {
+  @apply flex flex-wrap gap-3;
+}
+.actions button {
+  font-size: 0.75rem;
+}
+.feedback {
+  min-height: 1.5rem;
+  @apply text-[color:var(--tertiary)];
+  font-size: 0.8rem;
+  line-height: 1.8;
+}
+@media (max-width: 850px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .fields {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
 }

@@ -1,122 +1,181 @@
-# Base Webapp
+# Marcus Amps-Woodward — sports photography
 
-A basic webapp I can copy for various projects 😎
+A configurable sports photography portfolio built with React 19, TypeScript, Vite, React Router and Cloudinary. The existing `RouterConfig` browser routing, CSS modules and integration folders are retained.
 
-## Features
+## Development and checks
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+Use Node 22.22.2+ (or Node 24.15+) and npm:
 
-## Getting Started
-
-### Installation
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-### Development
-
-Start the development server with HMR:
-
-```bash
+```sh
+npm ci
 npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
+npm run typecheck
+npm test
 npm run build
+npm run preview
 ```
 
-## Deployment
+Vite builds a static SPA into `dist/`. This project does not currently use SSR or require an application server. The preview command is for checking a build locally; production should use a static host. TypeScript also checks for unused imports, local variables and parameters.
 
-### Docker Deployment
+## What is included
 
-To build and run using Docker:
+- Album loading with a shared, cloud/tag-keyed promise cache; concurrent consumers and navigation reuse requests.
+- Loading, empty and error states with an explicit retry. A failed request is removed from the cache.
+- Configurable albums; curated public IDs or public Cloudinary tags.
+- Homepage highlights taken from the same featured album as the portfolio.
+- Native lazy image loading, optimized Cloudinary image delivery, and 24-at-a-time gallery rendering.
+- A homemade photo viewer: native modal dialog, focus containment/restoration, Escape, arrow keys, swipe, wrapping navigation and captions.
+- Album/photo URLs that can be shared or opened directly. Photo enquiries carry the image reference into the contact form.
+- A client-only enquiry composer with validated fields, a prefilled starter message, email draft, clipboard and text download.
+- Responsive sports styling using central CSS tokens, reduced-motion support, keyboard focus indicators, a skip link and a 404 page.
+- Static-host configuration and a corrected Docker build.
 
-```bash
-docker build -t my-app .
+## Edit the content
 
-# Run the container
-docker run -p 3000:3000 my-app
+| File | Purpose |
+| --- | --- |
+| `src/config/SiteConfig.ts` | Display translation keys, services and enquiry-template keys; public URLs/email |
+| `src/config/PortfolioConfig.ts` | Album IDs/order, display translation keys, tags/public IDs and caption keys |
+| `src/config/PhotographyConfig.ts` | Hero/story photographs, independent cloud names, crop positions and parallax strengths |
+| `index.css` | Colours, fonts, global defaults and accessibility rules |
+| `src/styles/shared.css` | Shared Tailwind patterns applied in corresponding CSS modules |
+| `public/locales/en/translation.json` | All English display copy, captions, accessibility labels, status messages and enquiry templates |
+
+Configured display fields contain **translation keys**, not raw copy. For example, the first album uses `title: "Portfolio.Albums.Album1.Title"`, resolved in the gallery with `t(album.title)`. Edit the corresponding nested values in `translation.json` to change the wording. The same pattern applies to site branding, biography, services, captions, photo alt text and the enquiry starter. Keep album IDs, public image IDs, tags, URLs, crop positions and motion settings in the configs; they are not translated.
+
+Page metadata and visible copy update with the active language. Enquiry text is translated when the form is opened; changing language does not overwrite a visitor’s edited draft. All visitor-facing component copy, accessibility labels, status messages and email draft templates live in the translation file. Photograph counts use i18next plural forms, and dynamic values use interpolation. The current app still supports English; add the new locale resources and update `supportedLngs` when enabling another language.
+
+The cloud name `dx4aoiw5u` is public configuration, not a secret. For now, the supplied `Decaprio` public ID is used in a **labelled preview collection**. It is a delivery test, not Marcus’s sports photography. You can set the cloud to `demo` to preview the viewer with two sample photographs.
+
+
+### CSS modules and Tailwind
+
+Each page or component imports its corresponding CSS module and uses semantic local names, for example `className={styles.primaryButton}`. Keep utility lists in CSS rather than JSX:
+
+```css
+@reference "../../../index.css";
+
+.primaryButton {
+  @apply site-primary-button;
+}
+.layout {
+  @apply grid items-center gap-8;
+}
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+`index.css` contains the global tokens, fonts, element defaults and accessibility rules. Reusable patterns are defined once as Tailwind `@utility` rules in `src/styles/shared.css`; corresponding CSS modules apply these patterns alongside their own styling. Reference the main stylesheet so Tailwind v4 can resolve both its built-in utilities and these shared patterns without duplicating global CSS. Keep custom gradients, filmstrip framing, parallax geometry and configurable values as regular CSS where that is clearer.
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
+### Albums and Cloudinary
 
-### DIY Deployment
+A curated album works without Cloudinary Resource list access:
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+```ts
+{
+  id: 'race-day',
+  title: 'Portfolio.Albums.RaceDay.Title',
+  category: 'Portfolio.Albums.RaceDay.Category',
+  description: 'Portfolio.Albums.RaceDay.Description',
+  publicIds: ['events/race/start', 'events/race/finish'],
+  captions: { 'events/race/finish': 'Portfolio.Albums.RaceDay.Captions.Finish' }
+}
 ```
 
-## Styling
+Define the matching copy under `Portfolio.Albums.RaceDay` in `translation.json`:
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+```json
+{
+  "Title": "Race day",
+  "Category": "Athletics",
+  "Description": "The action, the crowd and the finish.",
+  "Captions": { "Finish": "The final push, race day" }
+}
+```
 
----
+Alternatively, use `tag: 'race-day'` instead of `publicIds`. Tags are **not folder names**. Apply that tag to images in Cloudinary, and enable public Resource list delivery only for images intended for public display. The supplied cloud currently returns 401 for list delivery, so the preview deliberately uses a curated list.
 
-Built with ❤️ using React Router.
+See [Cloudinary’s public asset-list documentation](https://cloudinary.com/documentation/list_assets). Tag lists are public delivery endpoints, not the authenticated Admin API. Cloudinary also caches its tag-list JSON on its CDN, so newly tagged photographs may not appear immediately.
 
+The shared cache keeps immutable image-ID lists for 30 minutes within the current page session. It deduplicates in-flight requests (including React StrictMode), caches empty results and evicts errors. After expiry, the next consumer reloads. Retry explicitly refreshes the current album and still deduplicates simultaneous retries. Reloading the browser starts a new session. This reduces redundant metadata requests; it does **not** eliminate image delivery bandwidth or Cloudinary charges. Generated image URLs are local SDK operations; image bytes use browser/CDN caching.
 
----
+Replace the preview album with real collections, add descriptive captions, and set `isPreviewPortfolio = false` before launch. Homepage highlights automatically use the first configured album; change `featuredAlbumId` for another choice. The portfolio shows **all configured albums as large, stacked filmstrip galleries**. The collection links live in a persistent left rail. Upcoming albums collect at the bottom; each link follows its section heading upwards and stops in an ordered stack at the top. Scrolling back reverses the movement. The current section is highlighted, and each link smoothly jumps to its gallery. A compact rail is used on mobile, with a scrollable list when there are too many albums to fit. Album IDs must be unique. Clicking a photograph opens its album in the focused carousel. Each gallery shows 24 frames initially with a load-more button.
 
+The preview currently contains one explicit public ID (`Decaprio`), so it displays one photograph. No Cloudinary account change is needed to use this preview or to add curated `publicIds`. Add Marcus’s uploaded IDs to make a larger collection, or configure a tag as described above.
 
-- Cloudinary Integration for images
-- React Parallax for.. well what do you think?
-- Tabler Icons 
-  https://tabler.io/icons
-- i18next translations
-- To get colour variations & grades (useful for setting up shade-number variants): https://coolors.co/f4f4f4/about
+## Contact/email
 
-### Feature List
-- A carousel component for viewing images
-Make this as homemade as reasonably possible, ideally no external library. 
-The carousel is to be used for the Portfolio page, where there are collections of images to go through
-Perhaps you go into a carousel layout if you click on an image
-- Bring the 3 example images on the homepage in line with the portfolio page
-I initially made that section as as proof of concept. It should try and tease the person visiting the website to go onto the portfolio page. Currently it's isolated from the portfolio though - see if we can bring it in line. Perhaps it shows a few photos from the first album in portfolio / something like that
-- Maybe make a config file to store the names of all the albums etc. This will make it easy for non-technical people to change the website content, and provides a single source for this. (similar purpose behing I18N translation files)
-- Slicken the UI, make it more consistent and more professional
-In this vein of thought, try and bring the styling into more of a "config area" and then things reference that. You can see this has already been started by how I have the colours in index.css
-- I was WIP in usePortfolio by the looks of it. Is this working or not? Identify purpose and fix. Suspect it was to load an album of images.
-Main issue is that cloudinary will start billing / restricting requests on repeat calls, so I'm trying to load images once.
-- Can I bring lazy loading into the portfolio page? Lower priority this - not sure how many photos we'll end up having
-- Have all of this ready for hosting somewhere. Should be easy to build for production. Look out if we've put any keys / credentials etc. in the codebase and set this up for prod too. Assume it should be kept in a secrets pattern?
-- Ability to send an email:
-In the top left there is a mail contact option. There's also the "Contact" section, where I wanted to have a textarea for someone to type an email, then they could click send. I'm not sure how to implement this:
-I don't want to host any kind of emailing system / backend to manage this. IMO it should be entirely client side.
-I'd prefer it to be cross platform, so shouldnt rely on a specific email client.
-I'd prefer people to type their content in the website. Maybe I can prefill the textarea with some starter text this way.
-Perhaps people modify this text area, then upon clicking "send" it asks to connect to their local email app? Open to solutions.
-- Look for any extra features a photographer might appreciate on their portfolio website
----
+Copy `.env.example` to `.env.local` and set `VITE_CONTACT_EMAIL`. The default `marcus@example.com` is a visibly labelled **non-deliverable test address**.
 
-### Inspiration
-- https://www.designrush.com/best-designs/websites/trends/best-sports-websites?utm_source=chatgpt.com
+Visitors write on the website. **Open email draft** uses a standards-based `mailto:` link to ask their configured desktop/mobile/webmail handler to open a draft. They must review and send it from there. The website cannot detect whether the handler opened or the message was sent. It never claims successful delivery.
+
+There is no email service, API key, backend or enquiry storage. Clipboard and a downloadable plain-text draft provide alternatives when no handler is configured; clipboard failures show a selectable draft. Long messages are directed to those alternatives rather than relying on email-app URL limits. Nothing is sent while composing. Drafts are not persisted after reload/navigation.
+
+For reliable sending directly from the website, a hosted form/email service or backend would be needed. That is an architectural decision for a separate change. [MDN’s email-link documentation](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Creating_links) describes the mail-handler behavior.
+
+## Homepage parallax and profile photograph
+
+The original basketball example is restored from Cloudinary’s `demo/cld-sample-3`. Its cloud is independent of the `dx4aoiw5u` portfolio cloud, so the example does not produce a missing-image request there. To replace it, set **both** `VITE_CLOUDINARY_HERO_CLOUD_NAME=dx4aoiw5u` and `VITE_CLOUDINARY_HERO_ID=<your public ID>`.
+
+`PhotographyConfig.ts` preserves the original parallax container strength (`300`) and custom photo travel (`700`). The image overscans its container to prevent blank edges, and its travel is capped for short viewports. Desktop and mobile crop positions can be configured separately. The story section uses a quieter grayscale layer with strength `100` and travel `120`; change its photograph or disable its `parallax.enabled` setting there. Both effects become static when visitors request reduced motion. The homepage’s “Scroll to explore” link reveals the section immediately below the hero, moving the prompt out of view; this uses smooth scrolling unless reduced motion is requested.
+
+The previous header thumbnail is now stored at `public/photos/Profile.jpg`, and the header/about page both use the configurable profile URL. Replace that file with Marcus’s full-resolution portrait, or set `VITE_PROFILE_PHOTO_URL` to a public Cloudinary delivery URL. This removes the dependency on the previous external thumbnail endpoint.
+
+## Public environment configuration
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `VITE_CLOUDINARY_CLOUD_NAME` | `dx4aoiw5u` | Public Cloudinary cloud name |
+| `VITE_CLOUDINARY_HERO_ID` | `cld-sample-3` | Homepage hero public ID |
+| `VITE_CLOUDINARY_HERO_CLOUD_NAME` | `demo` for the example, portfolio cloud for a custom ID | Independent cloud for the hero image |
+| `VITE_PROFILE_PHOTO_URL` | `/photos/Profile.jpg` | Local profile photograph or public Cloudinary URL |
+| `VITE_CONTACT_EMAIL` | `marcus@example.com` | Public enquiry address |
+
+All `VITE_` values are embedded in client assets at build time. **Never put Cloudinary API keys/secrets, email provider credentials or other private credentials in them.** Cloudinary’s public cloud name and photograph IDs do not need a secrets service. If private APIs are added later, their credentials belong on a server/platform secrets store.
+
+Local environment files are ignored by Git and excluded from Docker’s context. A source scan found no embedded private credentials in the current integration. Public photographs and recipient email addresses are inherently visible to visitors.
+
+## Hosting
+
+Build command: `npm run build`. Output directory: `dist`. Set the public environment variables in your hosting provider **before building**. Every non-file application URL must fall back to `index.html` so refreshing `/portfolio`, `/contact` or a shared photo link works.
+
+- Netlify/Cloudflare Pages: `public/_redirects` is copied to `dist` and provides the SPA fallback.
+- Vercel: `vercel.json` provides the application-route rewrite.
+- Other static hosts: configure the same fallback and serve existing assets normally.
+- GitHub Pages needs a subpath/base and routing strategy change; do not deploy this root-path SPA there unchanged.
+
+See [Vite’s static deployment guide](https://vite.dev/guide/static-deploy.html).
+
+### Docker
+
+```sh
+docker build -t marcus-photo \
+  --build-arg VITE_CLOUDINARY_CLOUD_NAME=dx4aoiw5u \
+  --build-arg VITE_CLOUDINARY_HERO_CLOUD_NAME=dx4aoiw5u \
+  --build-arg VITE_CLOUDINARY_HERO_ID=Decaprio \
+  --build-arg VITE_CONTACT_EMAIL=marcus@example.com .
+docker run --rm -p 3000:80 marcus-photo
+```
+
+This builds `dist` in Node and serves it with nginx. `nginx.conf` supplies the SPA fallback and immutable caching for hashed assets. Public configuration is baked into the build; runtime environment changes do not rewrite the generated assets.
+
+## Before launching Marcus’s real site
+
+1. Upload Marcus’s photographs and replace the labelled test collection/hero with the actual public IDs or tags.
+2. If using tags, verify public Resource list delivery and that every intended album loads.
+3. Replace the test email, review the marketing copy/services and verify the profile photograph.
+4. Set descriptive captions, remove the preview flag and rebuild with the real public environment values.
+5. Configure HTTPS and confirm direct-route refreshes, shared photo links, mobile layout, and an actual email draft on the target devices.
+6. Review usage and delivery settings in Cloudinary; the client cache reduces repeated requests but is not a billing cap.
+
+## Original feature list
+
+- [x] Homemade image carousel for portfolio collections.
+- [x] Homepage highlights connected to the portfolio.
+- [x] Configurable album/content definitions.
+- [x] Consistent, configurable sports UI.
+- [x] Repair `usePortfolio` and avoid redundant list requests.
+- [x] Lazy portfolio images and incremental gallery rendering.
+- [x] Production build, static hosting and public/private credential guidance.
+- [x] Client-side contact drafting with portable fallbacks.
+- [x] Photographer additions: shareable photo links, captions and image-specific print/licensing enquiries.
+
+Design reference: [sports website inspiration](https://www.designrush.com/best-designs/websites/trends/best-sports-websites).

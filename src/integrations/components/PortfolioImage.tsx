@@ -1,15 +1,46 @@
-import { AdvancedImage } from '@cloudinary/react';
+import styles from './PortfolioImage.module.css';
+import classNames from '~/helpers/classNames';
+import { useTranslation } from 'react-i18next';
+import { useState, type ComponentPropsWithoutRef } from 'react';
 import useGetImages from '../cloudinary/hooks/useGetImages';
-import { useMemo } from 'react';
 
-export type IImage = {
+type Props = Omit<ComponentPropsWithoutRef<'img'>, 'src' | 'alt'> & {
   publicId: string;
-  [props: string]: unknown;
+  alt: string;
+  imageWidth?: number;
+  cloudName?: string;
 };
-export default function PortfolioImage({ publicId, ...props }: IImage) {
-  const { getImage } = useGetImages({});
-
-  const imageData = useMemo(() => getImage(publicId), [publicId]);
-
-  return <AdvancedImage cldImg={imageData} {...props} />;
+export default function PortfolioImage({
+  publicId,
+  alt,
+  imageWidth = 900,
+  cloudName,
+  loading = 'lazy',
+  ...props
+}: Props) {
+  const { t } = useTranslation();
+  const { getImage } = useGetImages();
+  const [failedSource, setFailedSource] = useState<string>();
+  const source = JSON.stringify([cloudName, publicId]);
+  if (failedSource === source)
+    return (
+      <span
+        className={classNames(styles.fallback, props.className || '')}
+        style={props.style}
+        role="img"
+        aria-label={alt}
+      >
+        {t('Photography.Unavailable')}
+      </span>
+    );
+  return (
+    <img
+      {...props}
+      src={getImage(publicId, imageWidth, cloudName).toURL()}
+      alt={alt}
+      loading={loading}
+      decoding="async"
+      onError={() => setFailedSource(source)}
+    />
+  );
 }

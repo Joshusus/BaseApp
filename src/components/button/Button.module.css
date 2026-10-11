@@ -1,4 +1,4 @@
-@reference "tailwindcss";
+@reference "../../../index.css";
 
 .button {
   @apply border-0 rounded-sm p-1 bg-(--primary) cursor-pointer font-sans transition duration-150 ease-in-out;

@@ -98,7 +98,7 @@ The original basketball example is restored from Cloudinary’s `demo/cld-sample
 
 `PhotographyConfig.ts` preserves the original parallax container strength (`300`) and custom photo travel (`700`). The image overscans its container to prevent blank edges, and its travel is capped for short viewports. Desktop and mobile crop positions can be configured separately. The story section uses a quieter grayscale layer with strength `100` and travel `120`; change its photograph or disable its `parallax.enabled` setting there. Both effects become static when visitors request reduced motion. The homepage’s “Scroll to explore” link reveals the section immediately below the hero, moving the prompt out of view; this uses smooth scrolling unless reduced motion is requested.
 
-The previous header thumbnail is now stored at `public/photos/MarcusProfile.jpg`, and the header/about page both use the configurable profile URL. Replace that file with Marcus’s full-resolution portrait, or set `VITE_PROFILE_PHOTO_URL` to a public Cloudinary delivery URL. This removes the dependency on the previous external thumbnail endpoint.
+The previous header thumbnail is now stored at `public/photos/Profile.jpg`, and the header/about page both use the configurable profile URL. Replace that file with Marcus’s full-resolution portrait, or set `VITE_PROFILE_PHOTO_URL` to a public Cloudinary delivery URL. This removes the dependency on the previous external thumbnail endpoint.
 
 ## Public environment configuration
 
@@ -107,7 +107,7 @@ The previous header thumbnail is now stored at `public/photos/MarcusProfile.jpg`
 | `VITE_CLOUDINARY_CLOUD_NAME` | `dx4aoiw5u` | Public Cloudinary cloud name |
 | `VITE_CLOUDINARY_HERO_ID` | `cld-sample-3` | Homepage hero public ID |
 | `VITE_CLOUDINARY_HERO_CLOUD_NAME` | `demo` for the example, portfolio cloud for a custom ID | Independent cloud for the hero image |
-| `VITE_PROFILE_PHOTO_URL` | `/photos/MarcusProfile.jpg` | Local profile photograph or public Cloudinary URL |
+| `VITE_PROFILE_PHOTO_URL` | `/photos/Profile.jpg` | Local profile photograph or public Cloudinary URL |
 | `VITE_CONTACT_EMAIL` | `marcus@example.com` | Public enquiry address |
 
 All `VITE_` values are embedded in client assets at build time. **Never put Cloudinary API keys/secrets, email provider credentials or other private credentials in them.** Cloudinary’s public cloud name and photograph IDs do not need a secrets service. If private APIs are added later, their credentials belong on a server/platform secrets store.

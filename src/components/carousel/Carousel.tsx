@@ -77,11 +77,11 @@ export default function Carousel({ album, images, index, onChange, onClose }: Pr
       <div className={styles.content}>
         <header>
           <div>
-            <p className="eyebrow">{t(album.category)}</p>
+            <p className={styles.eyebrow}>{t(album.category)}</p>
             <h2 id="carousel-title">{t(album.title)}</h2>
           </div>
           <button
-            className="icon-button"
+            className={styles.iconButton}
             onClick={onClose}
             aria-label={t('Portfolio.Viewer.Close')}
             autoFocus
@@ -139,11 +139,11 @@ export default function Carousel({ album, images, index, onChange, onClose }: Pr
             </small>
           </div>
           <div className={styles.actions}>
-            <button className="button" onClick={copyLink}>
+            <button className={styles.button} onClick={copyLink}>
               <IconLink size={18} /> {t('Portfolio.Viewer.Share')}
             </button>
             <Link
-              className="button"
+              className={styles.button}
               to={`/contact?photo=${encodeURIComponent(id)}&album=${encodeURIComponent(t(album.title))}`}
             >
               <IconMail size={18} /> {t('Portfolio.Viewer.Enquire')}

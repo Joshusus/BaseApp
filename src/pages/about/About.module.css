@@ -1,22 +1,39 @@
+@reference "../../../index.css";
+
+.section {
+  @apply site-section;
+}
+
+.pageIntro {
+  @apply site-page-intro;
+}
+
+.eyebrow {
+  @apply site-eyebrow;
+}
+
+.primaryButton {
+  @apply site-primary-button;
+}
+
 .layout {
-  display: grid;
+  @apply grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(2rem, 6vw, 6rem);
-  align-items: center;
+  @apply items-center;
 }
 .portrait {
-  width: 100%;
+  @apply w-full;
   max-height: 600px;
   aspect-ratio: 4 / 5;
-  object-fit: cover;
-  background: var(--surface);
+  @apply object-cover bg-[var(--surface)];
 }
 .layout h2 {
   font-size: clamp(2.5rem, 5vw, 4rem);
   margin: 1rem 0;
 }
 .layout p:not(:first-child) {
-  color: var(--muted);
+  @apply text-[color:var(--muted)];
   line-height: 1.9;
   font-size: 0.9rem;
 }
@@ -24,15 +41,15 @@
   margin-top: 1.5rem;
 }
 .services {
-  display: grid;
+  @apply grid;
   grid-template-columns: repeat(3, 1fr);
   margin-top: 4rem;
   border-top: 1px solid var(--border);
-  gap: 2rem;
+  @apply gap-8;
   padding-top: 2rem;
 }
 .services span {
-  color: var(--tertiary);
+  @apply text-[color:var(--tertiary)];
   font-size: 0.7rem;
 }
 .services h3 {
@@ -47,6 +64,6 @@
   }
   .services {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
+    @apply gap-2;
   }
 }

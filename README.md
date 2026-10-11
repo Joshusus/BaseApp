@@ -37,7 +37,8 @@ Vite builds a static SPA into `dist/`. This project does not currently use SSR o
 | `src/config/SiteConfig.ts` | Display translation keys, services and enquiry-template keys; public URLs/email |
 | `src/config/PortfolioConfig.ts` | Album IDs/order, display translation keys, tags/public IDs and caption keys |
 | `src/config/PhotographyConfig.ts` | Hero/story photographs, independent cloud names, crop positions and parallax strengths |
-| `index.css` | Colours, fonts, spacing, buttons and other shared visual tokens |
+| `index.css` | Colours, fonts, global defaults and accessibility rules |
+| `src/styles/shared.css` | Shared Tailwind patterns applied in corresponding CSS modules |
 | `public/locales/en/translation.json` | All English display copy, captions, accessibility labels, status messages and enquiry templates |
 
 Configured display fields contain **translation keys**, not raw copy. For example, the first album uses `title: "Portfolio.Albums.Album1.Title"`, resolved in the gallery with `t(album.title)`. Edit the corresponding nested values in `translation.json` to change the wording. The same pattern applies to site branding, biography, services, captions, photo alt text and the enquiry starter. Keep album IDs, public image IDs, tags, URLs, crop positions and motion settings in the configs; they are not translated.
@@ -45,6 +46,24 @@ Configured display fields contain **translation keys**, not raw copy. For exampl
 Page metadata and visible copy update with the active language. Enquiry text is translated when the form is opened; changing language does not overwrite a visitor’s edited draft. All visitor-facing component copy, accessibility labels, status messages and email draft templates live in the translation file. Photograph counts use i18next plural forms, and dynamic values use interpolation. The current app still supports English; add the new locale resources and update `supportedLngs` when enabling another language.
 
 The cloud name `dx4aoiw5u` is public configuration, not a secret. For now, the supplied `Decaprio` public ID is used in a **labelled preview collection**. It is a delivery test, not Marcus’s sports photography. You can set the cloud to `demo` to preview the viewer with two sample photographs.
+
+
+### CSS modules and Tailwind
+
+Each page or component imports its corresponding CSS module and uses semantic local names, for example `className={styles.primaryButton}`. Keep utility lists in CSS rather than JSX:
+
+```css
+@reference "../../../index.css";
+
+.primaryButton {
+  @apply site-primary-button;
+}
+.layout {
+  @apply grid items-center gap-8;
+}
+```
+
+`index.css` contains the global tokens, fonts, element defaults and accessibility rules. Reusable patterns are defined once as Tailwind `@utility` rules in `src/styles/shared.css`; corresponding CSS modules apply these patterns alongside their own styling. Reference the main stylesheet so Tailwind v4 can resolve both its built-in utilities and these shared patterns without duplicating global CSS. Keep custom gradients, filmstrip framing, parallax geometry and configurable values as regular CSS where that is clearer.
 
 ### Albums and Cloudinary
 

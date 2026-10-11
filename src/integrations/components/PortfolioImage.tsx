@@ -1,3 +1,5 @@
+import styles from './PortfolioImage.module.css';
+import classNames from '~/helpers/classNames';
 import { useTranslation } from 'react-i18next';
 import { useState, type ComponentPropsWithoutRef } from 'react';
 import useGetImages from '../cloudinary/hooks/useGetImages';
@@ -23,7 +25,7 @@ export default function PortfolioImage({
   if (failedSource === source)
     return (
       <span
-        className={`image-fallback ${props.className || ''}`}
+        className={classNames(styles.fallback, props.className || '')}
         style={props.style}
         role="img"
         aria-label={alt}

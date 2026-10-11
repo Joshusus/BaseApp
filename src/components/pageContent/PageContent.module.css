@@ -1,0 +1,60 @@
+@reference "../../../index.css";
+
+.sitePage {
+  min-height: 100svh;
+}
+.footer {
+  padding: 3rem var(--gutter) 2rem;
+  background: #0b1317;
+  border-top: 1px solid var(--border);
+  @apply grid;
+  grid-template-columns: 1fr 1fr;
+  @apply gap-6;
+}
+.footerBrand {
+  font: 1.2rem var(--font-ui);
+}
+.footerBrand span {
+  @apply block text-[color:var(--tertiary)];
+  font: 0.6rem var(--font-body);
+  letter-spacing: 0.14em;
+  margin-top: 0.7rem;
+}
+.footer p {
+  @apply text-right text-[color:var(--muted)] m-0;
+  font-size: 0.8rem;
+}
+.footer > div {
+  @apply flex gap-6;
+  font-size: 0.75rem;
+}
+.footer small {
+  grid-column: 1 / -1;
+  @apply text-[color:var(--muted)];
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  font-size: 0.65rem;
+  line-height: 1.8;
+}
+.skipLink {
+  @apply fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  @apply bg-[var(--tertiary)] text-[color:var(--background)];
+  padding: 1rem;
+}
+.skipLink:focus {
+  transform: none;
+  @apply text-[color:var(--background)];
+}
+
+@media (max-width: 650px) {
+  .footer {
+    grid-template-columns: 1fr;
+  }
+  .footer p {
+    text-align: left;
+  }
+}

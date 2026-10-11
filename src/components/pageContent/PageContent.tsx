@@ -1,3 +1,4 @@
+import styles from './PageContent.module.css';
 import { useEffect, type ReactNode } from 'react';
 import { Link, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
@@ -19,13 +20,13 @@ export default function PageContent({ pageTitle, description, children }: IPageC
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname]);
   return (
-    <div className="site-page">
-      <a className="skip-link" href="#main-content">
+    <div className={styles.sitePage}>
+      <a className={styles.skipLink} href="#main-content">
         {t('Common.SkipContent')}
       </a>
       {children}
-      <footer className="site-footer">
-        <Link to="/" className="footer-brand">
+      <footer className={styles.footer}>
+        <Link to="/" className={styles.footerBrand}>
           {t(siteConfig.name)}
           <span>{t('Common.PhotographyLabel')}</span>
         </Link>

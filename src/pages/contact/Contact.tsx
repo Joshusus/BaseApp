@@ -55,9 +55,9 @@ export default function Contact() {
   return (
     <PageContent pageTitle={t('Contact.Title')}>
       <NavHeader />
-      <main id="main-content" className="section">
-        <div className="page-intro">
-          <p className="eyebrow">{t('Contact.Eyebrow')}</p>
+      <main id="main-content" className={styles.section}>
+        <div className={styles.pageIntro}>
+          <p className={styles.eyebrow}>{t('Contact.Eyebrow')}</p>
           <h1>{t('Contact.Heading')}</h1>
           <p>{t('Contact.Introduction')}</p>
         </div>
@@ -69,7 +69,12 @@ export default function Contact() {
               <span>{t('Contact.EmailLabel')}</span>
               <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
             </div>
-            <a className="text-link" href={siteConfig.instagram} target="_blank" rel="noreferrer">
+            <a
+              className={styles.textLink}
+              href={siteConfig.instagram}
+              target="_blank"
+              rel="noreferrer"
+            >
               <IconBrandInstagram size={20} /> {t('Contact.InstagramLink')}
             </a>
             <div className={styles.note}>
@@ -78,7 +83,7 @@ export default function Contact() {
             </div>
           </aside>
           <form className={styles.form} onSubmit={submit}>
-            {isTestEmail && <p className="demo-note">{t('Contact.PreviewNotice')}</p>}
+            {isTestEmail && <p className={styles.demoNote}>{t('Contact.PreviewNotice')}</p>}
             <div className={styles.fields}>
               <label>
                 {t('Contact.Fields.Name')}
@@ -126,11 +131,11 @@ export default function Contact() {
               />
             </label>
             <div className={styles.actions}>
-              <button className="button button-primary" type="submit">
+              <button className={styles.primaryButton} type="submit">
                 {t('Contact.OpenDraft')} <IconArrowUpRight size={20} />
               </button>
               <button
-                className="button"
+                className={styles.button}
                 type="button"
                 onClick={(event) => {
                   void copy(event.currentTarget.form!);
@@ -139,7 +144,7 @@ export default function Contact() {
                 <IconCopy size={18} /> {t('Contact.CopyDraft')}
               </button>
               <button
-                className="button"
+                className={styles.button}
                 type="button"
                 onClick={(event) => {
                   if (valid(event.currentTarget.form!)) {

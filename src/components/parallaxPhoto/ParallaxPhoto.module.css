@@ -1,13 +1,11 @@
+@reference "../../../index.css";
+
 .photo {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  object-fit: cover;
-  pointer-events: none;
+  @apply absolute left-0 w-full object-cover pointer-events-none;
 }
 .content {
-  position: relative;
+  @apply relative;
   z-index: 1;
-  width: 100%;
+  @apply w-full;
   min-height: inherit;
 }

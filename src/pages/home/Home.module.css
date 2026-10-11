@@ -1,18 +1,56 @@
+@reference "../../../index.css";
+
+.eyebrow {
+  @apply site-eyebrow;
+}
+
+.primaryButton {
+  @apply site-primary-button;
+}
+
+.section {
+  @apply site-section;
+}
+
+.sectionHeading {
+  @apply site-section-heading;
+}
+
+.textLink {
+  @apply site-text-link;
+}
+
+.demoNote {
+  @apply site-demo-note;
+}
+
+.statePanel {
+  @apply site-state-panel;
+}
+
+.button {
+  @apply site-button;
+}
+
+.cta {
+  @apply site-section;
+  @apply site-cta;
+  @media (max-width: 650px) {
+    padding-block: 3rem;
+  }
+}
+
 .hero {
-  position: relative;
+  @apply relative;
   min-height: min(800px, 85svh);
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  background: var(--surface);
+  @apply flex items-center overflow-hidden bg-[var(--surface)];
 }
 .heroLayout {
-  display: flex;
-  align-items: center;
+  @apply flex items-center;
 }
 .hero::after {
   content: "";
-  position: absolute;
+  @apply absolute;
   inset: 0;
   background:
     linear-gradient(
@@ -24,7 +62,7 @@
     linear-gradient(0deg, rgba(10, 18, 21, 0.85), transparent 40%);
 }
 .heroContent {
-  position: relative;
+  @apply relative;
   z-index: 1;
   padding: 5rem var(--gutter) 7rem;
   max-width: 980px;
@@ -32,44 +70,39 @@
 .heroContent h1 {
   font-size: clamp(3rem, 7.5vw, 7rem);
   line-height: 0.98;
-  text-transform: uppercase;
+  @apply uppercase;
   letter-spacing: -0.04em;
   margin: 1.8rem 0;
 }
 .intro {
-  color: var(--textPanel-300);
+  @apply text-[color:var(--textPanel-300)];
   max-width: 450px;
   line-height: 1.8;
   font-size: 0.95rem;
   margin-bottom: 2rem;
 }
 .heroFoot {
-  position: absolute;
+  @apply absolute;
   z-index: 1;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
+  @apply bottom-0 left-0 right-0 flex justify-between;
   padding: 1.5rem var(--gutter);
   border-top: 1px solid var(--border);
   font: 0.65rem var(--font-body);
   letter-spacing: 0.12em;
-  color: var(--muted);
+  @apply text-[color:var(--muted)];
 }
 .highlights {
-  display: grid;
+  @apply grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-  gap: 1.5rem;
+  @apply gap-6;
 }
 .highlight {
-  overflow: hidden;
-  display: block;
+  @apply overflow-hidden block;
 }
 .highlight img {
-  width: 100%;
+  @apply w-full;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
+  @apply object-cover;
   transition: transform 0.3s;
 }
 .highlight:hover img {
@@ -81,17 +114,16 @@
 }
 .highlight span {
   font-size: 0.7rem;
-  color: var(--muted);
+  @apply text-[color:var(--muted)];
 }
 .highlight h3 {
-  display: flex;
-  justify-content: space-between;
+  @apply flex justify-between;
   font-size: 1.6rem;
   margin: 0.6rem 0 0;
 }
 .statement {
   padding: 5rem var(--gutter);
-  display: grid;
+  @apply grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem 5rem;
 }
@@ -100,11 +132,11 @@
 }
 .statement h2 {
   font-size: clamp(2.4rem, 5vw, 4.5rem);
-  margin: 0;
+  @apply m-0;
   line-height: 1.1;
 }
 .statement > div {
-  color: var(--muted);
+  @apply text-[color:var(--muted)];
   max-width: 500px;
   line-height: 1.9;
 }
@@ -114,8 +146,7 @@
     padding-block: 3rem;
   }
   .heroFoot {
-    gap: 1rem;
-    align-items: center;
+    @apply gap-4 items-center;
   }
   .heroFoot > span {
     max-width: 55%;
@@ -126,11 +157,11 @@
 }
 
 .statementPhoto {
-  background: var(--surface);
+  @apply bg-[var(--surface)];
 }
 .statementPhoto::after {
   content: "";
-  position: absolute;
+  @apply absolute;
   inset: 0;
   background: rgba(10, 18, 21, 0.88);
 }
@@ -139,13 +170,12 @@
 }
 
 .scrollPrompt {
-  color: var(--textPanel);
-  flex-shrink: 0;
+  @apply text-[color:var(--textPanel)] shrink-0;
   padding: 0.6rem 0;
-  text-decoration: none;
+  @apply no-underline;
   border-bottom: 1px solid transparent;
 }
 .scrollPrompt:hover {
-  color: var(--tertiary);
+  @apply text-[color:var(--tertiary)];
   border-color: currentColor;
 }

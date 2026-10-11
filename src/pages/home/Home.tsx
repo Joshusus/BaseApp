@@ -27,12 +27,12 @@ export default function Home() {
           loading="eager"
         >
           <div className={styles.heroContent}>
-            <p className="eyebrow">
+            <p className={styles.eyebrow}>
               {t(siteConfig.name)} / {t(siteConfig.role)}
             </p>
             <h1>{t(siteConfig.headline)}</h1>
             <p className={styles.intro}>{t(siteConfig.introduction)}</p>
-            <Link className="button button-primary" to="/portfolio">
+            <Link className={styles.primaryButton} to="/portfolio">
               {t('Common.ExplorePortfolio')} <IconArrowUpRight size={20} />
             </Link>
           </div>
@@ -51,35 +51,35 @@ export default function Home() {
             </a>
           </div>
         </ParallaxPhoto>
-        <section id="selected-work" className="section" tabIndex={-1}>
-          <div className="section-heading">
+        <section id="selected-work" className={styles.section} tabIndex={-1}>
+          <div className={styles.sectionHeading}>
             <div>
-              <p className="eyebrow">{t('Home.SelectedWork')}</p>
+              <p className={styles.eyebrow}>{t('Home.SelectedWork')}</p>
               <h2>{t('Home.SelectedHeading')}</h2>
             </div>
             <Link
-              className="text-link"
+              className={styles.textLink}
               to={`/portfolio?album=${encodeURIComponent(album?.id || '')}`}
             >
               {t('Home.ViewCollection')} <IconArrowRight size={18} />
             </Link>
           </div>
-          {isPreviewPortfolio && <p className="demo-note">{t(previewNote)}</p>}
+          {isPreviewPortfolio && <p className={styles.demoNote}>{t(previewNote)}</p>}
           {status === 'loading' && (
-            <p role="status" className="state-panel">
+            <p role="status" className={styles.statePanel}>
               {t('Home.LoadingHighlights')}
             </p>
           )}
           {status === 'error' && (
-            <div role="alert" className="state-panel">
+            <div role="alert" className={styles.statePanel}>
               <p>{t(error || 'Portfolio.LoadError')}</p>
-              <button className="button" onClick={retry}>
+              <button className={styles.button} onClick={retry}>
                 {t('Common.TryAgain')}
               </button>
             </div>
           )}
           {status === 'ready' && images.length === 0 && (
-            <p className="state-panel">{t('Home.EmptyHighlights')}</p>
+            <p className={styles.statePanel}>{t('Home.EmptyHighlights')}</p>
           )}
           <div className={styles.highlights}>
             {images.slice(0, 3).map((id, index) => (
@@ -117,7 +117,7 @@ export default function Home() {
           className={styles.statementPhoto}
           contentClassName={styles.statement}
         >
-          <p className="eyebrow">{t('Home.StoryEyebrow')}</p>
+          <p className={styles.eyebrow}>{t('Home.StoryEyebrow')}</p>
           <h2>
             {t('Home.StoryHeadingFirst')}
             <br />
@@ -125,18 +125,18 @@ export default function Home() {
           </h2>
           <div>
             <p>{t('Home.StoryBody')}</p>
-            <Link className="text-link" to="/about">
+            <Link className={styles.textLink} to="/about">
               {t('Home.MeetMarcus')} <IconArrowRight size={18} />
             </Link>
           </div>
         </ParallaxPhoto>
-        <section className="cta section">
+        <section className={styles.cta}>
           <div>
-            <p className="eyebrow">{t('Home.CtaEyebrow')}</p>
+            <p className={styles.eyebrow}>{t('Home.CtaEyebrow')}</p>
             <h2>{t('Home.CtaHeading')}</h2>
             <p>{t('Home.CtaBody')}</p>
           </div>
-          <Link className="button button-primary" to="/contact">
+          <Link className={styles.primaryButton} to="/contact">
             {t('Common.StartConversation')} <IconArrowUpRight size={20} />
           </Link>
         </section>

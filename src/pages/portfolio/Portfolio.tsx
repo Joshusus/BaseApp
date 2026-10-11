@@ -23,13 +23,13 @@ export default function Portfolio() {
   return (
     <PageContent pageTitle={t('Portfolio.Title')}>
       <NavHeader />
-      <main id="main-content" className={`section ${albums.length ? styles.withAlbumRail : ''}`}>
-        <div className="page-intro">
-          <p className="eyebrow">{t('Portfolio.Eyebrow')}</p>
+      <main id="main-content" className={albums.length ? styles.withAlbumRail : styles.section}>
+        <div className={styles.pageIntro}>
+          <p className={styles.eyebrow}>{t('Portfolio.Eyebrow')}</p>
           <h1>{t('Portfolio.Heading')}</h1>
           <p>{t('Portfolio.Introduction')}</p>
         </div>
-        {isPreviewPortfolio && <p className="demo-note">{t(previewNote)}</p>}
+        {isPreviewPortfolio && <p className={styles.demoNote}>{t(previewNote)}</p>}
         <AlbumNavigation albums={albums} search={params.toString()} />
         <p className={styles.galleryHint}>{t('Portfolio.GalleryHint')}</p>
         {albums.length ? (
@@ -48,14 +48,14 @@ export default function Portfolio() {
             />
           ))
         ) : (
-          <p className="state-panel">{t('Portfolio.EmptyCollections')}</p>
+          <p className={styles.statePanel}>{t('Portfolio.EmptyCollections')}</p>
         )}
-        <div className="cta">
+        <div className={styles.cta}>
           <div>
             <h2>{t('Portfolio.CtaHeading')}</h2>
             <p>{t('Portfolio.CtaBody')}</p>
           </div>
-          <Link className="button button-primary" to="/contact">
+          <Link className={styles.primaryButton} to="/contact">
             {t('Common.GetInTouch')} <IconArrowUpRight size={20} />
           </Link>
         </div>
@@ -86,7 +86,7 @@ function AlbumGallery({
     >
       <div className={styles.albumHeading} data-album-heading>
         <div>
-          <p className="eyebrow">{t(album.category)}</p>
+          <p className={styles.eyebrow}>{t(album.category)}</p>
           <h2>{t(album.title)}</h2>
           <p>{t(album.description)}</p>
         </div>
@@ -100,18 +100,18 @@ function AlbumGallery({
         </div>
       )}
       {status === 'error' && (
-        <div className="state-panel" role="alert">
+        <div className={styles.statePanel} role="alert">
           <p>{t(error || 'Portfolio.LoadError')}</p>
-          <button className="button" onClick={retry}>
+          <button className={styles.button} onClick={retry}>
             {t('Common.TryAgain')}
           </button>
         </div>
       )}
       {status === 'ready' && images.length === 0 && (
-        <p className="state-panel">{t('Portfolio.EmptyAlbum')}</p>
+        <p className={styles.statePanel}>{t('Portfolio.EmptyAlbum')}</p>
       )}
       {status === 'ready' && photo && selected < 0 && (
-        <p role="status" className="demo-note">
+        <p role="status" className={styles.demoNote}>
           {t('Portfolio.MissingPhoto')}
         </p>
       )}
@@ -149,7 +149,7 @@ function AlbumGallery({
               total: images.length,
             })}
           </p>
-          <button className="button" onClick={() => setVisible((count) => count + 24)}>
+          <button className={styles.button} onClick={() => setVisible((count) => count + 24)}>
             {t('Portfolio.LoadMore')}
           </button>
         </div>

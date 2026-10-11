@@ -1,5 +1,35 @@
+@reference "../../../index.css";
+
+.section {
+  @apply site-section;
+}
+
+.pageIntro {
+  @apply site-page-intro;
+}
+
+.eyebrow {
+  @apply site-eyebrow;
+}
+
+.textLink {
+  @apply site-text-link;
+}
+
+.demoNote {
+  @apply site-demo-note;
+}
+
+.primaryButton {
+  @apply site-primary-button;
+}
+
+.button {
+  @apply site-button;
+}
+
 .layout {
-  display: grid;
+  @apply grid;
   grid-template-columns: 1fr 1.6fr;
   gap: clamp(2rem, 6vw, 6rem);
 }
@@ -8,7 +38,7 @@
   margin-top: 0;
 }
 .layout aside > p {
-  color: var(--muted);
+  @apply text-[color:var(--muted)];
   line-height: 1.9;
   font-size: 0.9rem;
 }
@@ -16,8 +46,7 @@
   margin: 2rem 0;
 }
 .contactDetail span {
-  display: block;
-  color: var(--tertiary);
+  @apply block text-[color:var(--tertiary)];
   font: 0.65rem var(--font-body);
   letter-spacing: 0.14em;
   margin-bottom: 0.75rem;
@@ -29,54 +58,50 @@
   margin-top: 2.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);
-  color: var(--muted);
+  @apply text-[color:var(--muted)];
   font-size: 0.75rem;
   line-height: 1.9;
 }
 .form {
-  background: var(--surface);
+  @apply bg-[var(--surface)];
   padding: clamp(1.2rem, 3vw, 2.5rem);
   border-top: 3px solid var(--tertiary);
 }
 .form label {
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col;
   gap: 0.7rem;
   font-size: 0.8rem;
   margin-bottom: 1.5rem;
 }
 .form input,
 .form textarea {
-  width: 100%;
+  @apply w-full;
   padding: 0.9rem;
-  background: var(--background);
+  @apply bg-[var(--background)];
   border: 1px solid var(--border);
-  color: var(--textPanel);
-  border-radius: 0;
+  @apply text-[color:var(--textPanel)] rounded-none;
   line-height: 1.7;
   font: 0.85rem var(--font-body);
 }
 .form textarea {
-  resize: vertical;
+  @apply resize-y;
   min-height: 220px;
   line-height: 1.8;
 }
 .fields {
-  display: grid;
+  @apply grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  @apply gap-4;
 }
 .actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+  @apply flex flex-wrap gap-3;
 }
 .actions button {
   font-size: 0.75rem;
 }
 .feedback {
   min-height: 1.5rem;
-  color: var(--tertiary);
+  @apply text-[color:var(--tertiary)];
   font-size: 0.8rem;
   line-height: 1.8;
 }

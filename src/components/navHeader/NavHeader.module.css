@@ -1,44 +1,38 @@
+@reference "../../../index.css";
+
 .header {
-  background: var(--background);
+  @apply bg-[var(--background)];
   border-bottom: 1px solid var(--border);
 }
 .utility {
   padding: 0.65rem var(--gutter);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @apply flex justify-between items-center;
   border-bottom: 1px solid var(--border);
-  color: var(--muted);
+  @apply text-[color:var(--muted)];
   font: 0.65rem var(--font-ui);
   letter-spacing: 0.16em;
 }
 .utility div {
-  display: flex;
+  @apply flex;
   gap: 1.2rem;
 }
 .utility a {
-  display: flex;
-  color: var(--textPanel);
+  @apply flex text-[color:var(--textPanel)];
 }
 .bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
+  @apply flex items-center justify-between gap-8;
   padding: 1.3rem var(--gutter);
   max-width: 1600px;
   margin: auto;
 }
 .brand {
-  display: flex;
-  align-items: center;
+  @apply flex items-center;
   gap: 0.8rem;
-  color: var(--textPanel);
+  @apply text-[color:var(--textPanel)];
   font: 1rem var(--font-ui);
 }
 .brand small {
-  display: block;
-  color: var(--muted);
+  @apply block text-[color:var(--muted)];
   font: 0.6rem var(--font-body);
   letter-spacing: 0.16em;
   margin-top: 0.4rem;
@@ -48,34 +42,32 @@
   height: var(--header-profile-size);
   border-radius: 50%;
   border: 2px solid var(--tertiary);
-  object-fit: cover;
-  flex-shrink: 0;
+  @apply object-cover shrink-0;
 }
 .links {
-  display: flex;
+  @apply flex;
   gap: 1.8rem;
   font: 0.85rem var(--font-body);
 }
 .link,
 .active {
   padding: 0.55rem 0;
-  color: var(--muted);
+  @apply text-[color:var(--muted)];
   border-bottom: 2px solid transparent;
 }
 .active {
-  color: var(--textPanel);
+  @apply text-[color:var(--textPanel)];
   border-color: var(--tertiary);
 }
 .enquire {
-  display: flex;
-  align-items: center;
+  @apply flex items-center;
   gap: 0.7rem;
   font: 0.8rem var(--font-body);
-  color: var(--textPanel);
+  @apply text-[color:var(--textPanel)];
 }
 @media (max-width: 760px) {
   .bar {
-    flex-wrap: wrap;
+    @apply flex-wrap;
     gap: 1.3rem;
     padding-block: 1rem;
   }
@@ -84,9 +76,7 @@
   }
   .links {
     order: 3;
-    width: 100%;
-    justify-content: space-between;
-    gap: 0.75rem;
+    @apply w-full justify-between gap-3;
   }
   .enquire {
     margin-left: auto;
@@ -94,7 +84,7 @@
 }
 @media (max-width: 380px) {
   .enquire {
-    display: none;
+    @apply hidden;
   }
 }
 

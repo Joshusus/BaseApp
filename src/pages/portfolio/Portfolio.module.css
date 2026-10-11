@@ -1,39 +1,69 @@
+@reference "../../../index.css";
+
+.pageIntro {
+  @apply site-page-intro;
+}
+
+.eyebrow {
+  @apply site-eyebrow;
+}
+
+.demoNote {
+  @apply site-demo-note;
+}
+
+.statePanel {
+  @apply site-state-panel;
+}
+
+.cta {
+  @apply site-cta;
+}
+
+.primaryButton {
+  @apply site-primary-button;
+}
+
+.button {
+  @apply site-button;
+}
+
+.section {
+  @apply site-section;
+}
+
 .withAlbumRail {
+  @apply site-section;
   --album-rail-width: 190px;
   padding-left: calc(var(--album-rail-width) + 3rem);
 }
 .albums {
-  position: fixed;
+  @apply fixed;
   inset: 16px auto 16px 16px;
   width: 190px;
   z-index: 5;
-  pointer-events: none;
+  @apply pointer-events-none;
 }
 .albums a {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  @apply absolute top-0 left-0 w-full;
   min-height: 48px;
   box-sizing: border-box;
-  color: var(--muted);
+  @apply text-[color:var(--muted)];
   padding: 0.75rem;
   border: 1px solid var(--border);
-  background: var(--background);
+  @apply bg-[var(--background)];
   font-size: 0.75rem;
-  display: flex;
+  @apply flex;
   gap: 0.6rem;
-  align-items: center;
-  pointer-events: auto;
+  @apply items-center pointer-events-auto;
   overflow-wrap: anywhere;
-  text-decoration: none;
+  @apply no-underline;
 }
 .albums a:hover,
 .albums a:focus-visible,
 .albums a[aria-current="location"] {
   border-color: var(--tertiary);
-  color: var(--tertiary);
-  background: var(--tertiary-100);
+  @apply text-[color:var(--tertiary)] bg-[var(--tertiary-100)];
 }
 .albumNumber {
   font-size: 0.6rem;
@@ -43,8 +73,7 @@
   margin-left: auto;
 }
 .albums[data-crowded="true"] {
-  overflow-y: auto;
-  pointer-events: auto;
+  @apply overflow-y-auto pointer-events-auto;
 }
 @media (max-width: 760px) {
   .withAlbumRail {
@@ -63,14 +92,14 @@
   }
   .albumNumber,
   .albumArrow {
-    display: none;
+    @apply hidden;
   }
   .withAlbumRail .albumHeading h2 {
     font-size: 1.6rem;
   }
 }
 .galleryHint {
-  color: var(--muted);
+  @apply text-[color:var(--muted)];
   font-size: 0.8rem;
   line-height: 1.8;
   margin-bottom: 3rem;
@@ -87,10 +116,8 @@
   border-top: 1px solid var(--border);
 }
 .albumHeading {
-  display: flex;
-  justify-content: space-between;
+  @apply flex justify-between gap-8;
   align-items: end;
-  gap: 2rem;
   margin-bottom: 2rem;
 }
 .albumHeading h2 {
@@ -98,41 +125,38 @@
   margin: 0.6rem 0;
 }
 .albumHeading p:not(:first-child) {
-  color: var(--muted);
+  @apply text-[color:var(--muted)];
   font-size: 0.85rem;
   line-height: 1.8;
 }
 .albumHeading > span {
   font-size: 0.7rem;
-  color: var(--muted);
-  white-space: nowrap;
+  @apply text-[color:var(--muted)] whitespace-nowrap;
 }
 .gallery {
   columns: var(--gallery-column-width);
   column-gap: 1.5rem;
 }
 .image {
-  position: relative;
-  display: block;
-  width: 100%;
+  @apply relative block w-full;
   margin-bottom: 1.5rem;
   break-inside: avoid;
   border: 0;
   border-block: 8px solid #050809;
   padding: 0 var(--gallery-film-frame-width);
-  overflow: hidden;
+  @apply overflow-hidden;
   background: #050809;
-  cursor: pointer;
+  @apply cursor-pointer;
   min-height: 140px;
 }
 .image::before,
 .image::after {
   content: "";
-  position: absolute;
+  @apply absolute;
   inset-block: 0;
   width: var(--gallery-film-frame-width);
   z-index: 1;
-  pointer-events: none;
+  @apply pointer-events-none;
   background:
     radial-gradient(
       circle at center,
@@ -142,52 +166,47 @@
     center top / 100% 24px repeat-y;
 }
 .image::before {
-  left: 0;
+  @apply left-0;
 }
 .image::after {
-  right: 0;
+  @apply right-0;
 }
 .image img {
-  width: 100%;
-  display: block;
+  @apply w-full block;
   transition: transform 0.3s;
 }
 .viewFrame {
-  position: absolute;
-  bottom: 0;
+  @apply absolute bottom-0;
   right: var(--gallery-film-frame-width);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  @apply flex items-center gap-2;
   padding: 0.7rem;
   background: rgba(10, 18, 21, 0.8);
-  color: white;
+  @apply text-white;
   font: 0.6rem var(--font-body);
   letter-spacing: 0.1em;
-  pointer-events: none;
+  @apply pointer-events-none;
 }
 .image:hover img {
   transform: scale(1.025);
 }
 .loadMore {
-  text-align: center;
+  @apply text-center;
   padding: 2rem;
-  color: var(--muted);
+  @apply text-[color:var(--muted)];
   font-size: 0.8rem;
 }
 .skeleton {
-  display: grid;
+  @apply grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-  gap: 1rem;
+  @apply gap-4;
 }
 .skeleton div {
   height: 280px;
-  background: var(--surface);
+  @apply bg-[var(--surface)];
 }
 @media (max-width: 520px) {
   .albumHeading {
     align-items: start;
-    flex-direction: column;
-    gap: 0.5rem;
+    @apply flex-col gap-2;
   }
 }

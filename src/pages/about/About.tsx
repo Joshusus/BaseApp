@@ -11,9 +11,9 @@ export default function About() {
   return (
     <PageContent pageTitle={t('About.Title')}>
       <NavHeader />
-      <main id="main-content" className="section">
-        <div className="page-intro">
-          <p className="eyebrow">{t('About.Eyebrow')}</p>
+      <main id="main-content" className={styles.section}>
+        <div className={styles.pageIntro}>
+          <p className={styles.eyebrow}>{t('About.Eyebrow')}</p>
           <h1>{t('About.Heading')}</h1>
         </div>
         <div className={styles.layout}>
@@ -24,11 +24,11 @@ export default function About() {
             loading="lazy"
           />
           <div>
-            <p className="eyebrow">{t(siteConfig.name)}</p>
+            <p className={styles.eyebrow}>{t(siteConfig.name)}</p>
             <h2>{t('About.StoryHeading')}</h2>
             <p>{t(siteConfig.about)}</p>
             <p>{t('About.StoryBody')}</p>
-            <Link className="button button-primary" to="/contact">
+            <Link className={styles.primaryButton} to="/contact">
               {t('About.ProjectLink')} <IconArrowUpRight size={20} />
             </Link>
           </div>
